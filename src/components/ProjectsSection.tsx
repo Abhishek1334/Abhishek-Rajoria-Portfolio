@@ -141,7 +141,7 @@ const ProjectsSection = () => {
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                className={`grid lg:grid-cols-2 gap-12 items-center ${
+                className={`grid lg:grid-cols-2 gap-8 items-center ${
                   index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
                 }`}
                 variants={itemVariants}
@@ -228,17 +228,17 @@ const ProjectsSection = () => {
                 >
                   <div className="relative group">
                     <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient} rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-300`}></div>
-                    <div className="relative glass-card p-6 rounded-2xl overflow-hidden">
+                    <div className="relative glass-card p-4 rounded-2xl overflow-hidden">
                       {/* Live Project Preview */}
-                      <div className="aspect-video bg-white rounded-lg overflow-hidden relative border border-white/10">
+                      <div className="aspect-[4/3] bg-white rounded-lg overflow-hidden relative border border-white/10 max-h-80">
                         {/* Browser Chrome */}
-                        <div className="flex items-center gap-2 p-3 bg-gray-100 border-b border-gray-200">
-                          <div className="flex gap-2">
-                            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div className="flex items-center gap-2 p-2 bg-gray-100 border-b border-gray-200">
+                          <div className="flex gap-1.5">
+                            <div className="w-2.5 h-2.5 bg-red-500 rounded-full"></div>
+                            <div className="w-2.5 h-2.5 bg-yellow-500 rounded-full"></div>
+                            <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
                           </div>
-                          <div className="flex-1 bg-white rounded-md px-3 py-1 text-xs text-gray-600 ml-4 border border-gray-200">
+                          <div className="flex-1 bg-white rounded-md px-2 py-1 text-xs text-gray-600 ml-3 border border-gray-200 truncate">
                             {project.liveUrl}
                           </div>
                         </div>
