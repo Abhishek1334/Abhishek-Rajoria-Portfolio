@@ -6,6 +6,7 @@ import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
+import { Toaster } from '@/components/ui/sonner';
 
 const Index = () => {
   const handleHireMe = () => {
@@ -147,6 +148,9 @@ const Index = () => {
           </div>
         </div>
       </motion.footer>
+      
+      {/* Toast notifications */}
+      <Toaster />
     </div>
   );
 };

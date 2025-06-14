@@ -1,9 +1,10 @@
-
 'use client';
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, CheckCircle } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,19 +39,25 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // TODO: Integrate with EmailJS
-      // Replace this with actual EmailJS implementation
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-        to_email: 'AbhishekRajoria24@gmail.com'
-      };
-
-      // Simulate email sending (replace with actual EmailJS implementation)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log('Sending contact form:', formData);
       
-      console.log('Email sent:', templateParams);
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        }
+      });
+
+      if (error) {
+        console.error('Error sending email:', error);
+        toast.error('Failed to send message. Please try again.');
+        return;
+      }
+
+      console.log('Email sent successfully:', data);
+      toast.success('Message sent successfully! I\'ll get back to you soon.');
+      
       setIsSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
       
@@ -60,6 +67,7 @@ const ContactSection = () => {
       }, 5000);
     } catch (error) {
       console.error('Error sending email:', error);
+      toast.error('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
