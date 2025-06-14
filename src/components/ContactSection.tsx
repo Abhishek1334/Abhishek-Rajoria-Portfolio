@@ -1,4 +1,3 @@
-
 'use client';
 
 import { motion } from 'framer-motion';
@@ -6,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
-const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY"; // <- Replace with your key
+const WEB3FORMS_ACCESS_KEY = "bbc2460d-9b5c-47f6-aac0-82bdad208e36"; // <- Updated with your key
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -346,4 +345,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-
