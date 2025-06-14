@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { ExternalLink, Github, Server, Smartphone, BarChart3 } from 'lucide-react';
+import { ExternalLink, Github, Server, Smartphone, BarChart3, Calendar, TrendingUp, Users, Shield } from 'lucide-react';
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,13 +33,18 @@ const ProjectsSection = () => {
       subtitle: 'IoT Event Management Platform',
       description: 'Revolutionary event management platform powered by IoT and QR code technology, featuring RFID integration for seamless real-time check-ins and comprehensive event analytics.',
       icon: Smartphone,
-      image: '/api/placeholder/600/400',
       technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'TailwindCSS', 'JWT', 'IoT', 'RFID'],
       highlights: ['Real-time Check-ins', 'IoT Integration', 'QR Code System', 'Admin Dashboard'],
       gradient: 'from-amber-500 to-orange-600',
       glowColor: 'amber',
       liveUrl: 'https://festify-tau.vercel.app/',
-      githubUrl: 'https://github.com/Abhishek1334/Festify'
+      githubUrl: 'https://github.com/Abhishek1334/Festify',
+      features: [
+        { icon: Calendar, label: 'Event Management' },
+        { icon: Users, label: 'User Registration' },
+        { icon: Shield, label: 'RFID Security' },
+        { icon: BarChart3, label: 'Analytics' }
+      ]
     },
     {
       id: 2,
@@ -47,13 +52,18 @@ const ProjectsSection = () => {
       subtitle: 'Stock Analytics Dashboard',
       description: 'Comprehensive stock market analytics platform featuring real-time data visualization, advanced charting, and intelligent insights for informed trading decisions.',
       icon: BarChart3,
-      image: '/api/placeholder/600/400',
       technologies: ['React.js', 'Zustand', 'Chart.js', 'React Query', 'REST APIs', 'TailwindCSS'],
       highlights: ['Real-time Data', 'Advanced Charts', 'Market Analytics', 'Performance Tracking'],
       gradient: 'from-purple-500 to-pink-600',
       glowColor: 'purple',
       liveUrl: 'https://market-pulse-two.vercel.app/',
-      githubUrl: 'https://github.com/Abhishek1334/MarketPulse'
+      githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
+      features: [
+        { icon: TrendingUp, label: 'Live Charts' },
+        { icon: BarChart3, label: 'Data Visualization' },
+        { icon: Server, label: 'Real-time API' },
+        { icon: Users, label: 'Portfolio Tracking' }
+      ]
     }
   ];
 
@@ -195,7 +205,7 @@ const ProjectsSection = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Github className="w-4 h-4 mr-2" />
+                      <Github className="w-4 h-4" />
                       View Code
                     </motion.a>
                     <motion.a
@@ -206,13 +216,13 @@ const ProjectsSection = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <ExternalLink className="w-4 h-4 mr-2" />
+                      <ExternalLink className="w-4 h-4" />
                       Live Demo
                     </motion.a>
                   </div>
                 </div>
 
-                {/* Project Visual */}
+                {/* Project Visual - Enhanced */}
                 <motion.div
                   className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}
                   whileHover={{ scale: 1.02 }}
@@ -220,21 +230,47 @@ const ProjectsSection = () => {
                 >
                   <div className="relative group">
                     <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient} rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-300`}></div>
-                    <div className="relative glass-card p-8 rounded-2xl overflow-hidden">
-                      {/* Mockup Content */}
-                      <div className="aspect-video bg-gradient-to-br from-gray-900 to-black rounded-lg overflow-hidden relative">
-                        <div className="absolute inset-0 bg-grid opacity-20"></div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <project.icon className={`w-16 h-16 text-transparent bg-gradient-to-r ${project.gradient} bg-clip-text`} />
-                        </div>
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="flex gap-2 mb-2">
+                    <div className="relative glass-card p-6 rounded-2xl overflow-hidden">
+                      {/* Enhanced Project Preview */}
+                      <div className="aspect-video bg-gradient-to-br from-gray-900 to-black rounded-lg overflow-hidden relative border border-white/10">
+                        {/* Browser Chrome */}
+                        <div className="flex items-center gap-2 p-3 bg-gray-800 border-b border-white/10">
+                          <div className="flex gap-2">
                             <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                           </div>
-                          <div className="text-xs text-foreground-muted">
-                            {project.title.toLowerCase()}.app
+                          <div className="flex-1 bg-gray-700 rounded-md px-3 py-1 text-xs text-gray-400 ml-4">
+                            {project.liveUrl}
+                          </div>
+                        </div>
+                        
+                        {/* Project Content */}
+                        <div className="p-6 h-full flex flex-col justify-between">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-3">
+                              <project.icon className={`w-8 h-8 text-transparent bg-gradient-to-r ${project.gradient} bg-clip-text`} />
+                              <div>
+                                <h4 className="text-white font-semibold">{project.title}</h4>
+                                <p className="text-xs text-gray-400">{project.subtitle}</p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Feature Grid */}
+                          <div className="grid grid-cols-2 gap-3">
+                            {project.features.map((feature, fIndex) => (
+                              <motion.div
+                                key={feature.label}
+                                className="flex items-center gap-2 p-2 bg-white/5 rounded-lg"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                                transition={{ delay: 1 + fIndex * 0.1 }}
+                              >
+                                <feature.icon className={`w-4 h-4 text-transparent bg-gradient-to-r ${project.gradient} bg-clip-text`} />
+                                <span className="text-xs text-gray-300">{feature.label}</span>
+                              </motion.div>
+                            ))}
                           </div>
                         </div>
                       </div>

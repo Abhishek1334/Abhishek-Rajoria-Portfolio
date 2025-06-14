@@ -69,12 +69,13 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   
-  /* Sophisticated Buttons */
+  /* Sophisticated Buttons - Fixed alignment */
   .btn-primary {
     @apply px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold rounded-lg;
     @apply hover:from-amber-400 hover:to-amber-500 transition-all duration-300;
     @apply shadow-lg hover:shadow-xl hover:shadow-amber-500/25;
     @apply focus:outline-none focus:ring-2 focus:ring-amber-500/50;
+    @apply flex items-center justify-center gap-2;
   }
   
   .btn-secondary {
@@ -82,12 +83,14 @@
     @apply hover:from-purple-500 hover:to-purple-600 transition-all duration-300;
     @apply shadow-lg hover:shadow-xl hover:shadow-purple-500/25;
     @apply focus:outline-none focus:ring-2 focus:ring-purple-500/50;
+    @apply flex items-center justify-center gap-2;
   }
   
   .btn-ghost {
     @apply px-6 py-3 border border-white/20 text-white font-medium rounded-lg;
     @apply hover:bg-white/5 hover:border-white/30 transition-all duration-300;
     @apply focus:outline-none focus:ring-2 focus:ring-white/20;
+    @apply flex items-center justify-center gap-2;
   }
   
   /* Interactive Elements */
