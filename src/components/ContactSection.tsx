@@ -4,8 +4,9 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, CheckCircle } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+
+const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY"; // <- Replace with your key
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,40 +41,32 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      console.log('Sending contact form:', formData);
-      
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message
-        }
+      const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        name: formData.name,
+        email: formData.email,
+        message: formData.message
+      };
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
       });
 
-      if (error) {
-        console.error('Error sending email:', error);
-        toast.error('Failed to send message. Please try again later.');
-        return;
-      }
+      const data = await response.json();
 
-      if (!data.success) {
-        console.error('Email service error:', data.error);
-        toast.error(data.error || 'Failed to send message. Please try again later.');
-        return;
+      if (data.success) {
+        toast.success("Message sent successfully! I'll get back to you soon.");
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        toast.error(data.message || 'Failed to send message. Please try again later.');
       }
-
-      console.log('Email sent successfully:', data);
-      toast.success('Message sent successfully! I\'ll get back to you soon.');
-      
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Reset success state after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
     } catch (error) {
-      console.error('Error sending email:', error);
       toast.error('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
@@ -223,6 +216,7 @@ const ContactSection = () => {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
                   <div className="relative">
                     <input
                       type="text"
@@ -352,3 +346,4 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+
