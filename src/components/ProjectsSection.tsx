@@ -100,8 +100,7 @@ const ProjectsSection = () => {
           }}
           transition={{
             duration: 20,
-            repeat: Infinity,
-            ease: "linear"
+            repeat: Infinity
           }}
         />
         <motion.div
@@ -112,8 +111,7 @@ const ProjectsSection = () => {
           }}
           transition={{
             duration: 15,
-            repeat: Infinity,
-            ease: "linear"
+            repeat: Infinity
           }}
         />
       </div>
@@ -222,7 +220,7 @@ const ProjectsSection = () => {
                   </div>
                 </div>
 
-                {/* Project Visual - Enhanced */}
+                {/* Project Preview - Live Website */}
                 <motion.div
                   className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}
                   whileHover={{ scale: 1.02 }}
@@ -231,48 +229,30 @@ const ProjectsSection = () => {
                   <div className="relative group">
                     <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient} rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-300`}></div>
                     <div className="relative glass-card p-6 rounded-2xl overflow-hidden">
-                      {/* Enhanced Project Preview */}
-                      <div className="aspect-video bg-gradient-to-br from-gray-900 to-black rounded-lg overflow-hidden relative border border-white/10">
+                      {/* Live Project Preview */}
+                      <div className="aspect-video bg-white rounded-lg overflow-hidden relative border border-white/10">
                         {/* Browser Chrome */}
-                        <div className="flex items-center gap-2 p-3 bg-gray-800 border-b border-white/10">
+                        <div className="flex items-center gap-2 p-3 bg-gray-100 border-b border-gray-200">
                           <div className="flex gap-2">
                             <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                           </div>
-                          <div className="flex-1 bg-gray-700 rounded-md px-3 py-1 text-xs text-gray-400 ml-4">
+                          <div className="flex-1 bg-white rounded-md px-3 py-1 text-xs text-gray-600 ml-4 border border-gray-200">
                             {project.liveUrl}
                           </div>
                         </div>
                         
-                        {/* Project Content */}
-                        <div className="p-6 h-full flex flex-col justify-between">
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center gap-3">
-                              <project.icon className={`w-8 h-8 text-transparent bg-gradient-to-r ${project.gradient} bg-clip-text`} />
-                              <div>
-                                <h4 className="text-white font-semibold">{project.title}</h4>
-                                <p className="text-xs text-gray-400">{project.subtitle}</p>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          {/* Feature Grid */}
-                          <div className="grid grid-cols-2 gap-3">
-                            {project.features.map((feature, fIndex) => (
-                              <motion.div
-                                key={feature.label}
-                                className="flex items-center gap-2 p-2 bg-white/5 rounded-lg"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                                transition={{ delay: 1 + fIndex * 0.1 }}
-                              >
-                                <feature.icon className={`w-4 h-4 text-transparent bg-gradient-to-r ${project.gradient} bg-clip-text`} />
-                                <span className="text-xs text-gray-300">{feature.label}</span>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
+                        {/* Live Website Iframe */}
+                        <iframe
+                          src={project.liveUrl}
+                          className="w-full h-full"
+                          frameBorder="0"
+                          scrolling="no"
+                          loading="lazy"
+                          sandbox="allow-scripts allow-same-origin"
+                          title={`${project.title} - Live Preview`}
+                        />
                       </div>
                     </div>
                   </div>
