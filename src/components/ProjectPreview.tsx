@@ -8,10 +8,12 @@ interface ProjectPreviewProps {
     title: string;
     liveUrl: string;
     gradient: string;
+    previewImage: string;
   };
+  onReadMore: () => void;
 }
 
-const ProjectPreview = ({ project }: ProjectPreviewProps) => {
+const ProjectPreview = ({ project, onReadMore }: ProjectPreviewProps) => {
   return (
     <motion.div
       className="relative group"
@@ -44,6 +46,7 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
           {/* Action Buttons */}
           <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <motion.button
+              onClick={onReadMore}
               className="p-1.5 bg-white/10 hover:bg-white/20 rounded-md transition-colors"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -63,32 +66,31 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
           </div>
         </div>
         
-        {/* Iframe Container */}
+        {/* Preview Image Container */}
         <div className="relative bg-gray-900 h-64 overflow-hidden">
-          {/* Loading Placeholder */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-            <div className="text-gray-500 text-sm">Loading preview...</div>
+          {/* Project Screenshot */}
+          <div 
+            className="w-full h-full bg-cover bg-center bg-no-repeat cursor-pointer"
+            style={{
+              backgroundImage: `url(${project.previewImage})`,
+            }}
+            onClick={() => window.open(project.liveUrl, '_blank')}
+          >
+            {/* Overlay for Better Text Readability */}
+            <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors duration-300"></div>
           </div>
           
-          {/* Actual Iframe */}
-          <iframe
-            src={project.liveUrl}
-            className="absolute inset-0 w-full h-full transform scale-75 origin-top-left border-0"
-            style={{
-              width: '133.33%',
-              height: '133.33%',
-              background: 'transparent'
-            }}
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-forms"
-            title={`${project.title} - Live Preview`}
-          />
-          
-          {/* Overlay for Interactions */}
-          <div 
-            className="absolute inset-0 bg-transparent cursor-pointer"
-            onClick={() => window.open(project.liveUrl, '_blank')}
-          />
+          {/* Read More Button Overlay */}
+          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+            <motion.button
+              onClick={onReadMore}
+              className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg border border-white/30 hover:bg-white/30 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Read More
+            </motion.button>
+          </div>
         </div>
         
         {/* Bottom Bar */}

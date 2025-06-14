@@ -5,9 +5,12 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ExternalLink, Github, Server, Smartphone, BarChart3, Calendar, TrendingUp, Users, Shield } from 'lucide-react';
 import ProjectPreview from './ProjectPreview';
+import ProjectModal from './ProjectModal';
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,12 +43,57 @@ const ProjectsSection = () => {
       glowColor: 'amber',
       liveUrl: 'https://festify-tau.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/Festify',
+      previewImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop',
       features: [
         { icon: Calendar, label: 'Event Management' },
         { icon: Users, label: 'User Registration' },
         { icon: Shield, label: 'RFID Security' },
         { icon: BarChart3, label: 'Analytics' }
-      ]
+      ],
+      detailedContent: {
+        overview: 'Festify is a local event aggregator platform where users can discover, create, RSVP, and manage events. It supports QR code-based ticketing, a complete check-in system for organizers, and a clean, modern user interface.',
+        features: [
+          'JWT Authentication for secure login/signup',
+          'Event Management: Create, Edit, Delete Events (Organizers)',
+          'Ticketing System with QR Code Generation',
+          'Image Uploads via Multer + Cloudinary',
+          'Event Search & Filter by category',
+          'Organizer Dashboard with check-ins details',
+          'QR Code Scanner using Html5Qrcode for attendee verification',
+          'RSVP Management in user profile',
+          'RFID-Based Ticket Verification using ESP8266'
+        ],
+        techStack: [
+          {
+            category: 'Frontend',
+            technologies: ['React.js', 'Vite', 'Context API', 'TailwindCSS']
+          },
+          {
+            category: 'Backend',
+            technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose']
+          },
+          {
+            category: 'Authentication & Security',
+            technologies: ['JWT', 'Bcrypt.js']
+          },
+          {
+            category: 'Media & Storage',
+            technologies: ['Multer', 'Cloudinary']
+          },
+          {
+            category: 'IoT & Hardware',
+            technologies: ['ESP8266', 'RFID Reader 522', 'Html5Qrcode Scanner']
+          }
+        ],
+        highlights: [
+          'Complete MERN Stack Implementation',
+          'Real-time QR Code Generation & Scanning',
+          'IoT Integration with RFID Technology',
+          'Comprehensive Event Management System',
+          'Mobile-Responsive Design',
+          'Cloud-based Image Storage'
+        ]
+      }
     },
     {
       id: 2,
@@ -59,14 +107,68 @@ const ProjectsSection = () => {
       glowColor: 'purple',
       liveUrl: 'https://market-pulse-two.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
+      previewImage: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop',
       features: [
         { icon: TrendingUp, label: 'Live Charts' },
         { icon: BarChart3, label: 'Data Visualization' },
         { icon: Server, label: 'Real-time API' },
         { icon: Users, label: 'Portfolio Tracking' }
-      ]
+      ],
+      detailedContent: {
+        overview: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools. Built specifically for traders, investors, and financial enthusiasts.',
+        features: [
+          'Real-time Stock Charting with Interactive Interface',
+          'Customizable Timeframe Filters (1D, 1M, 1Y, ALL)',
+          'Toggle Metrics: Open, Close, High, Low, Volume',
+          'Modular & Scalable Component Architecture',
+          'Global State Management with Zustand',
+          'Optimized Data Fetching & Rate-Limiting',
+          'Start/End Date Range Selector',
+          'Responsive, Mobile-Friendly Design',
+          'Light/Dark Mode Support'
+        ],
+        techStack: [
+          {
+            category: 'Frontend',
+            technologies: ['React.js', 'Vite', 'TailwindCSS']
+          },
+          {
+            category: 'State Management',
+            technologies: ['Zustand', 'React Query']
+          },
+          {
+            category: 'Data Visualization',
+            technologies: ['Chart.js', 'Interactive Charts']
+          },
+          {
+            category: 'APIs',
+            technologies: ['Yahoo Finance API', 'Twelve Data API']
+          },
+          {
+            category: 'Backend',
+            technologies: ['Node.js', 'Express.js', 'JWT Authentication']
+          },
+          {
+            category: 'Deployment',
+            technologies: ['Vercel (Frontend)', 'Railway (Backend)']
+          }
+        ],
+        highlights: [
+          'Real-time Financial Data Integration',
+          'Advanced Charting with Multiple Timeframes',
+          'Optimized Performance with Rate Limiting',
+          'Professional Trading Interface',
+          'Scalable Architecture for Growth',
+          'Mobile-First Responsive Design'
+        ]
+      }
     }
   ];
+
+  const handleReadMore = (project: any) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -196,6 +298,14 @@ const ProjectsSection = () => {
 
                   {/* Action Buttons */}
                   <div className="flex gap-4 pt-4">
+                    <motion.button
+                      onClick={() => handleReadMore(project)}
+                      className={`btn-ghost group ${project.glowColor === 'amber' ? 'hover:glow-amber' : 'hover:glow-purple'}`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Read More
+                    </motion.button>
                     <motion.a
                       href={project.githubUrl}
                       target="_blank"
@@ -223,13 +333,23 @@ const ProjectsSection = () => {
 
                 {/* Project Preview */}
                 <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                  <ProjectPreview project={project} />
+                  <ProjectPreview 
+                    project={project} 
+                    onReadMore={() => handleReadMore(project)}
+                  />
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        project={selectedProject}
+      />
     </section>
   );
 };
