@@ -1,4 +1,3 @@
-
 'use client';
 
 import { motion } from 'framer-motion';
@@ -106,7 +105,7 @@ const ContactSection = () => {
       opacity: 1,
       transition: {
         duration: 0.8,
-        ease: "easeOut"
+        ease: [0.25, 0.1, 0.25, 1]
       }
     }
   };
@@ -158,7 +157,6 @@ const ContactSection = () => {
               <h3 className="text-2xl font-bold mb-6 text-gradient-purple">Send a Message</h3>
               
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Name Field */}
                 <div>
                   <label className="block text-sm font-medium text-foreground-muted mb-2">
                     Full Name
@@ -174,7 +172,6 @@ const ContactSection = () => {
                   )}
                 </div>
 
-                {/* Email Field */}
                 <div>
                   <label className="block text-sm font-medium text-foreground-muted mb-2">
                     Email Address
@@ -196,7 +193,6 @@ const ContactSection = () => {
                   )}
                 </div>
 
-                {/* Subject Field */}
                 <div>
                   <label className="block text-sm font-medium text-foreground-muted mb-2">
                     Subject
@@ -212,7 +208,6 @@ const ContactSection = () => {
                   )}
                 </div>
 
-                {/* Message Field */}
                 <div>
                   <label className="block text-sm font-medium text-foreground-muted mb-2">
                     Message
