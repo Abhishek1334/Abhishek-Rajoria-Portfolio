@@ -1,3 +1,4 @@
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -105,7 +106,7 @@ const ContactSection = () => {
       opacity: 1,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1]
+        ease: "easeOut"
       }
     }
   };
