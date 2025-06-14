@@ -4,6 +4,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ExternalLink, Github, Server, Smartphone, BarChart3, Calendar, TrendingUp, Users, Shield } from 'lucide-react';
+import ProjectPreview from './ProjectPreview';
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -220,50 +221,10 @@ const ProjectsSection = () => {
                   </div>
                 </div>
 
-                {/* Project Preview - Live Website */}
-                <motion.div
-                  className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="relative group">
-                    <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient} rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-300`}></div>
-                    <div className="relative glass-card p-3 rounded-2xl overflow-hidden">
-                      {/* Live Project Preview */}
-                      <div className="aspect-[16/10] bg-gray-900 rounded-lg overflow-hidden relative border border-white/10 h-64">
-                        {/* Browser Chrome */}
-                        <div className="flex items-center gap-2 p-1.5 bg-gray-800 border-b border-gray-700">
-                          <div className="flex gap-1">
-                            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          </div>
-                          <div className="flex-1 bg-gray-700 rounded-md px-2 py-0.5 text-xs text-gray-300 ml-2 border border-gray-600 truncate">
-                            {project.liveUrl}
-                          </div>
-                        </div>
-                        
-                        {/* Live Website Iframe */}
-                        <div className="w-full h-full overflow-hidden bg-gray-900">
-                          <iframe
-                            src={project.liveUrl}
-                            className="w-full h-full transform scale-75 origin-top-left"
-                            style={{
-                              width: '133.33%',
-                              height: '133.33%',
-                              backgroundColor: '#111827'
-                            }}
-                            frameBorder="0"
-                            scrolling="no"
-                            loading="lazy"
-                            sandbox="allow-scripts allow-same-origin"
-                            title={`${project.title} - Live Preview`}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+                {/* Project Preview */}
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                  <ProjectPreview project={project} />
+                </div>
               </motion.div>
             ))}
           </div>

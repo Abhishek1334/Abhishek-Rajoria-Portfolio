@@ -32,11 +32,14 @@ const Index = () => {
               {[
                 { label: 'About', href: '#about' },
                 { label: 'Projects', href: '#projects' },
+                { label: 'Resume', href: 'https://drive.google.com/file/d/1UchzGFtq72KDwOsg8af5W2NKQDvoRi-J/view?usp=drive_link', external: true },
                 { label: 'Contact', href: '#contact' }
               ].map((link, index) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                   className="text-foreground-muted hover:text-amber-500 transition-colors relative"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
