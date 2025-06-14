@@ -1,12 +1,135 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+'use client';
+
+import { motion } from 'framer-motion';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import ProjectsSection from '../components/ProjectsSection';
+import ContactSection from '../components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <motion.nav
+        className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-white/10"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <motion.div
+              className="text-xl font-bold"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-gradient-amber">AR</span>
+            </motion.div>
+
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center gap-8">
+              {[
+                { label: 'About', href: '#about' },
+                { label: 'Projects', href: '#projects' },
+                { label: 'Contact', href: '#contact' }
+              ].map((link, index) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  className="text-foreground-muted hover:text-amber-500 transition-colors relative"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {link.label}
+                  <motion.div
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-amber-500 origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.a>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <motion.button
+              className="btn-ghost text-sm"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Hire Me
+            </motion.button>
+          </div>
+        </div>
+      </motion.nav>
+
+      {/* Main Content */}
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
+
+      {/* Footer */}
+      <motion.footer
+        className="py-12 border-t border-white/10 bg-background-secondary/30"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div className="container mx-auto px-6">
+          <div className="text-center">
+            <motion.div
+              className="text-2xl font-bold mb-4"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-gradient-amber">Abhishek Rajoria</span>
+            </motion.div>
+            <p className="text-foreground-muted mb-6">
+              Full Stack Developer • Building the Future, One Line of Code at a Time
+            </p>
+            <div className="flex justify-center gap-6 mb-8">
+              {[
+                { label: 'GitHub', href: 'https://github.com/abhishekrajoria' },
+                { label: 'LinkedIn', href: 'https://linkedin.com/in/abhishek-rajoria' },
+                { label: 'Email', href: 'mailto:AbhishekRajoria24@gmail.com' }
+              ].map((link, index) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground-muted hover:text-amber-500 transition-colors"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.1 }}
+                  viewport={{ once: true }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </div>
+            <motion.div
+              className="text-sm text-foreground-muted"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              © {new Date().getFullYear()} Abhishek Rajoria. Crafted with passion and precision.
+            </motion.div>
+          </div>
+        </div>
+      </motion.footer>
     </div>
   );
 };
