@@ -38,7 +38,8 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Using EmailJS service for client-side email sending
+      // TODO: Integrate with EmailJS
+      // Replace this with actual EmailJS implementation
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
@@ -312,7 +313,7 @@ const ContactSection = () => {
                     </motion.a>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Availability */}
               <motion.div
