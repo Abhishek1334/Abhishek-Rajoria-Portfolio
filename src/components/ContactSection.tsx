@@ -1,3 +1,4 @@
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -51,7 +52,13 @@ const ContactSection = () => {
 
       if (error) {
         console.error('Error sending email:', error);
-        toast.error('Failed to send message. Please try again.');
+        toast.error('Failed to send message. Please try again later.');
+        return;
+      }
+
+      if (!data.success) {
+        console.error('Email service error:', data.error);
+        toast.error(data.error || 'Failed to send message. Please try again later.');
         return;
       }
 
@@ -67,7 +74,7 @@ const ContactSection = () => {
       }, 5000);
     } catch (error) {
       console.error('Error sending email:', error);
-      toast.error('Failed to send message. Please try again.');
+      toast.error('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -257,7 +264,7 @@ const ContactSection = () => {
                     whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   >
                     {isSubmitting ? (
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-center gap-2">
                         <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                         Sending...
                       </div>
