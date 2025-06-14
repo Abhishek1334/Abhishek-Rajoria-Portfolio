@@ -8,6 +8,13 @@ import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 
 const Index = () => {
+  const handleHireMe = () => {
+    // Scroll to contact section
+    document.getElementById('contact')?.scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -57,16 +64,23 @@ const Index = () => {
               ))}
             </div>
 
-            {/* CTA Button */}
+            {/* Enhanced CTA Button */}
             <motion.button
-              className="btn-ghost text-sm"
+              className="btn-primary text-sm px-6 py-2 relative overflow-hidden"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleHireMe}
             >
-              Hire Me
+              <span className="relative z-10">Let's Work Together</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
             </motion.button>
           </div>
         </div>
@@ -80,7 +94,7 @@ const Index = () => {
         <ContactSection />
       </main>
 
-      {/* Footer */}
+      {/* Enhanced Footer */}
       <motion.footer
         className="py-12 border-t border-white/10 bg-background-secondary/30"
         initial={{ opacity: 0 }}
@@ -97,7 +111,7 @@ const Index = () => {
               <span className="text-gradient-amber">Abhishek Rajoria</span>
             </motion.div>
             <p className="text-foreground-muted mb-6">
-              Full Stack Developer • Building the Future, One Line of Code at a Time
+              Full Stack Developer • Turning Coffee into Code Since 2020 ☕
             </p>
             <div className="flex justify-center gap-6 mb-8">
               {[
@@ -128,7 +142,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              © {new Date().getFullYear()} Abhishek Rajoria. Crafted with passion and precision.
+              © {new Date().getFullYear()} Abhishek Rajoria. Crafted with 💜 and way too much caffeine.
             </motion.div>
           </div>
         </div>

@@ -3,13 +3,28 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { ChevronDown, Code2 } from 'lucide-react';
+import { ChevronDown, Code2, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentRole, setCurrentRole] = useState(0);
+
+  const roles = [
+    "Full Stack Developer",
+    "Problem Solver",
+    "Code Architect",
+    "Digital Creator"
+  ];
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Animate through different roles
+    const interval = setInterval(() => {
+      setCurrentRole((prev) => (prev + 1) % roles.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const containerVariants = {
@@ -76,7 +91,10 @@ const HeroSection = () => {
             className="mb-6"
             variants={itemVariants}
           >
-            <span className="text-foreground-muted text-lg">Hello, I'm</span>
+            <span className="text-foreground-muted text-lg flex items-center justify-center gap-2">
+              <Sparkles className="w-5 h-5 text-amber-500" />
+              Hey there! I'm
+            </span>
           </motion.div>
 
           {/* Name */}
@@ -88,49 +106,52 @@ const HeroSection = () => {
             <span className="text-white">Rajoria</span>
           </motion.h1>
 
-          {/* Title with Typing Effect */}
+          {/* Dynamic Title with Typing Effect */}
           <motion.div
             className="mb-8"
             variants={itemVariants}
           >
-            <div className="text-2xl md:text-3xl text-foreground-muted font-light">
-              <span className="text-gradient-purple">Full Stack Developer</span>
+            <div className="text-2xl md:text-3xl text-foreground-muted font-light mb-4">
+              <span className="text-gradient-purple">
+                {roles[currentRole]}
+              </span>
             </div>
-            <div className="text-lg md:text-xl text-foreground-muted mt-2">
-              Building the Future, One Line of Code at a Time
+            <div className="text-lg md:text-xl text-foreground-muted">
+              Transforming Ideas into Digital Reality 🚀
             </div>
           </motion.div>
 
-          {/* Description */}
+          {/* Enhanced Description */}
           <motion.p
             className="text-xl text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-12"
             variants={itemVariants}
           >
-            Passionate about creating scalable MERN applications with innovative IoT integrations 
-            and real-time analytics. Currently pursuing BCA at VIPS Delhi.
+            I craft scalable MERN applications that don't just work—they <em className="text-amber-500">wow</em>. 
+            From IoT integrations to real-time analytics, I turn complex challenges into elegant solutions. 
+            Currently mastering the art of code at <span className="text-purple-400">VIPS Delhi</span> 🎓
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* Enhanced CTA Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
             variants={itemVariants}
           >
             <motion.a
               href="#projects"
-              className="btn-primary"
+              className="btn-primary group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Code2 className="w-5 h-5 mr-2" />
-              View My Work
+              <Code2 className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+              Explore My Universe
             </motion.a>
             <motion.a
               href="#contact"
-              className="btn-ghost"
+              className="btn-ghost group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get In Touch
+              <span className="group-hover:text-amber-500 transition-colors">Let's Create Magic</span>
             </motion.a>
           </motion.div>
 
@@ -139,7 +160,9 @@ const HeroSection = () => {
             className="flex flex-col items-center"
             variants={itemVariants}
           >
-            <span className="text-foreground-muted text-sm mb-4">Scroll to explore</span>
+            <span className="text-foreground-muted text-sm mb-4">
+              Ready for the journey? ✨
+            </span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
