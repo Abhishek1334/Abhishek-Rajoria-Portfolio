@@ -29,8 +29,7 @@ const HeroSection = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.8
       }
     }
   };
@@ -116,21 +115,23 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
             variants={itemVariants}
           >
-            <motion.button
+            <motion.a
+              href="#projects"
               className="btn-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Code2 className="w-5 h-5 mr-2" />
               View My Work
-            </motion.button>
-            <motion.button
+            </motion.a>
+            <motion.a
+              href="#contact"
               className="btn-ghost"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Get In Touch
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Scroll Indicator */}

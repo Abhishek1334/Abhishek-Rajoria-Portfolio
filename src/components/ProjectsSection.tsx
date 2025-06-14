@@ -37,7 +37,9 @@ const ProjectsSection = () => {
       technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'TailwindCSS', 'JWT', 'IoT', 'RFID'],
       highlights: ['Real-time Check-ins', 'IoT Integration', 'QR Code System', 'Admin Dashboard'],
       gradient: 'from-amber-500 to-orange-600',
-      glowColor: 'amber'
+      glowColor: 'amber',
+      liveUrl: 'https://festify-tau.vercel.app/',
+      githubUrl: 'https://github.com/Abhishek1334/Festify'
     },
     {
       id: 2,
@@ -49,7 +51,9 @@ const ProjectsSection = () => {
       technologies: ['React.js', 'Zustand', 'Chart.js', 'React Query', 'REST APIs', 'TailwindCSS'],
       highlights: ['Real-time Data', 'Advanced Charts', 'Market Analytics', 'Performance Tracking'],
       gradient: 'from-purple-500 to-pink-600',
-      glowColor: 'purple'
+      glowColor: 'purple',
+      liveUrl: 'https://market-pulse-two.vercel.app/',
+      githubUrl: 'https://github.com/Abhishek1334/MarketPulse'
     }
   ];
 
@@ -69,8 +73,7 @@ const ProjectsSection = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.8
       }
     }
   };
@@ -184,22 +187,28 @@ const ProjectsSection = () => {
 
                   {/* Action Buttons */}
                   <div className="flex gap-4 pt-4">
-                    <motion.button
+                    <motion.a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`btn-ghost group ${project.glowColor === 'amber' ? 'hover:glow-amber' : 'hover:glow-purple'}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <Github className="w-4 h-4 mr-2" />
                       View Code
-                    </motion.button>
-                    <motion.button
+                    </motion.a>
+                    <motion.a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`btn-primary ${project.glowColor === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600' : ''}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
                       Live Demo
-                    </motion.button>
+                    </motion.a>
                   </div>
                 </div>
 

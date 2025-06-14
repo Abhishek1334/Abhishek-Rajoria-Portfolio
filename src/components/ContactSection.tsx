@@ -1,24 +1,18 @@
 
+
 'use client';
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
-
-interface FormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send } from 'lucide-react';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,19 +32,17 @@ const ContactSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      reset();
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted:', formData);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const contactInfo = [
@@ -58,19 +50,19 @@ const ContactSection = () => {
       icon: Mail,
       label: 'Email',
       value: 'AbhishekRajoria24@gmail.com',
-      href: 'mailto:AbhishekRajoria24@gmail.com'
+      link: 'mailto:AbhishekRajoria24@gmail.com'
     },
     {
       icon: Phone,
       label: 'Phone',
       value: '+91 9319054781',
-      href: 'tel:+919319054781'
+      link: 'tel:+919319054781'
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Rohini, New Delhi, India',
-      href: null
+      value: 'Rohini New Delhi, India',
+      link: '#'
     }
   ];
 
@@ -78,14 +70,20 @@ const ContactSection = () => {
     {
       icon: Github,
       label: 'GitHub',
-      href: 'https://github.com/abhishekrajoria',
+      link: 'https://github.com/abhishekrajoria',
       color: 'hover:text-white'
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/abhishek-rajoria',
-      color: 'hover:text-blue-400'
+      link: 'https://linkedin.com/in/abhishek-rajoria',
+      color: 'hover:text-blue-500'
+    },
+    {
+      icon: Twitter,
+      label: 'Twitter',
+      link: 'https://twitter.com/abhishekrajoria',
+      color: 'hover:text-cyan-500'
     }
   ];
 
@@ -105,26 +103,35 @@ const ContactSection = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.8
       }
     }
   };
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Background */}
+      {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.2, 0.4],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
           }}
         />
       </div>
@@ -142,10 +149,10 @@ const ContactSection = () => {
             variants={itemVariants}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Connection <span className="text-gradient-amber">Protocol</span>
+              Connection <span className="text-gradient-purple">Protocol</span>
             </h2>
             <p className="text-xl text-foreground-muted max-w-3xl mx-auto leading-relaxed">
-              Ready to bring your next project to life? Let's collaborate and create something extraordinary together.
+              Ready to bring your next project to life? Let's connect and create something extraordinary together.
             </p>
           </motion.div>
 
@@ -155,115 +162,50 @@ const ContactSection = () => {
               className="glass-card p-8"
               variants={itemVariants}
             >
-              <h3 className="text-2xl font-bold mb-6 text-gradient-purple">Send a Message</h3>
-              
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-foreground-muted mb-2">
-                    Full Name
-                  </label>
+              <h3 className="text-2xl font-bold mb-6 text-gradient-amber">Send Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="relative">
                   <input
-                    {...register('name', { required: 'Name is required' })}
                     type="text"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all duration-300"
-                    placeholder="Your full name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Your Name"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-foreground-muted focus:outline-none focus:border-amber-500 transition-colors"
+                    required
                   />
-                  {errors.name && (
-                    <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
-                  )}
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground-muted mb-2">
-                    Email Address
-                  </label>
+                <div className="relative">
                   <input
-                    {...register('email', { 
-                      required: 'Email is required',
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Invalid email address'
-                      }
-                    })}
                     type="email"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all duration-300"
-                    placeholder="your.email@example.com"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Your Email"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-foreground-muted focus:outline-none focus:border-amber-500 transition-colors"
+                    required
                   />
-                  {errors.email && (
-                    <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
-                  )}
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground-muted mb-2">
-                    Subject
-                  </label>
-                  <input
-                    {...register('subject', { required: 'Subject is required' })}
-                    type="text"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all duration-300"
-                    placeholder="Project inquiry, collaboration, etc."
-                  />
-                  {errors.subject && (
-                    <p className="text-red-400 text-sm mt-1">{errors.subject.message}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground-muted mb-2">
-                    Message
-                  </label>
+                <div className="relative">
                   <textarea
-                    {...register('message', { required: 'Message is required' })}
-                    rows={5}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all duration-300 resize-none"
-                    placeholder="Tell me about your project or how we can work together..."
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Your Message"
+                    rows={6}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-foreground-muted focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                    required
                   />
-                  {errors.message && (
-                    <p className="text-red-400 text-sm mt-1">{errors.message.message}</p>
-                  )}
                 </div>
-
-                {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full btn-primary relative overflow-hidden"
+                  className="btn-primary w-full"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className={`flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-0' : 'opacity-100'}`}>
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </span>
-                  
-                  {isSubmitting && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                    </div>
-                  )}
+                  <Send className="w-5 h-5 mr-2" />
+                  Send Message
                 </motion.button>
-
-                {/* Status Messages */}
-                {submitStatus === 'success' && (
-                  <motion.div
-                    className="text-green-400 text-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    Message sent successfully! I'll get back to you soon.
-                  </motion.div>
-                )}
-                
-                {submitStatus === 'error' && (
-                  <motion.div
-                    className="text-red-400 text-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    Something went wrong. Please try again.
-                  </motion.div>
-                )}
               </form>
             </motion.div>
 
@@ -273,75 +215,62 @@ const ContactSection = () => {
               variants={itemVariants}
             >
               <div className="glass-card p-8">
-                <h3 className="text-2xl font-bold mb-6 text-gradient-amber">Get in Touch</h3>
-                
+                <h3 className="text-2xl font-bold mb-6 text-gradient-purple">Get In Touch</h3>
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
-                    <motion.div
+                    <motion.a
                       key={info.label}
-                      className="flex items-start gap-4"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ delay: 0.2 + index * 0.1 }}
+                      href={info.link}
+                      className="flex items-center gap-4 text-foreground-muted hover:text-amber-500 transition-colors group"
+                      variants={itemVariants}
+                      whileHover={{ x: 5 }}
                     >
-                      <div className="p-3 bg-amber-500/10 rounded-lg">
-                        <info.icon className="w-5 h-5 text-amber-500" />
+                      <div className="p-3 bg-white/5 rounded-lg group-hover:bg-amber-500/10 transition-colors">
+                        <info.icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-medium text-white mb-1">{info.label}</h4>
-                        {info.href ? (
-                          <a
-                            href={info.href}
-                            className="text-foreground-muted hover:text-amber-500 transition-colors"
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-foreground-muted">{info.value}</p>
-                        )}
+                        <div className="text-sm text-foreground-muted">{info.label}</div>
+                        <div className="text-white">{info.value}</div>
                       </div>
-                    </motion.div>
+                    </motion.a>
                   ))}
                 </div>
               </div>
 
-              {/* Social Links */}
+              {/* Social Media */}
               <motion.div
                 className="glass-card p-8"
                 variants={itemVariants}
               >
-                <h3 className="text-xl font-bold mb-6 text-white">Connect Online</h3>
+                <h4 className="text-lg font-semibold mb-6 text-white">Connect Online</h4>
                 <div className="flex gap-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={social.label}
-                      href={social.href}
+                      href={social.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-4 bg-white/5 rounded-lg border border-white/10 ${social.color} transition-all duration-300 hover:bg-white/10 hover:border-white/20`}
-                      whileHover={{ scale: 1.05 }}
+                      className={`p-3 bg-white/5 rounded-lg text-foreground-muted ${social.color} transition-colors`}
+                      whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                      transition={{ delay: 0.5 + index * 0.1 }}
                     >
-                      <social.icon className="w-6 h-6" />
+                      <social.icon className="w-5 h-5" />
                     </motion.a>
                   ))}
                 </div>
               </motion.div>
 
-              {/* Available Status */}
+              {/* Availability */}
               <motion.div
-                className="glass-card p-6 text-center"
+                className="glass-card p-6"
                 variants={itemVariants}
               >
-                <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="flex items-center gap-3 mb-3">
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-green-500 font-medium">Available for Projects</span>
+                  <span className="text-green-500 font-medium">Available for opportunities</span>
                 </div>
                 <p className="text-sm text-foreground-muted">
-                  Currently accepting new opportunities and collaborations
+                  Currently open to full-time positions and exciting freelance projects.
                 </p>
               </motion.div>
             </motion.div>
