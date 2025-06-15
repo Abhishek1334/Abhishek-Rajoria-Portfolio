@@ -5,6 +5,28 @@ import { useEffect, useState, useCallback, memo } from 'react';
 import { ExternalLink, Github, Calendar, Users, Zap, TrendingUp, BarChart3, Target, Ticket, DollarSign } from 'lucide-react';
 import ProjectModal from './ProjectModal';
 
+// Import all media files
+import festifyHomepage from '../Media/Festify/festify-homepage.png';
+import festifyLoginpage from '../Media/Festify/festify-loginpage.png';
+import festifySignuppage from '../Media/Festify/festify-signuppage.png';
+import festifyEventspage from '../Media/Festify/festify-eventspage.png';
+import festifyEventsdetailpage from '../Media/Festify/festify-eventsdetailpage.png';
+import festifyEventidpage from '../Media/Festify/festify-eventidpage.png';
+import festifyCreateeventpage from '../Media/Festify/festify-createeventpage.png';
+import festifyCheckinpanelpage from '../Media/Festify/festify-checkinpanelpage.png';
+import festifyUserprofile from '../Media/Festify/festify-userprofile.png';
+import festifyUserprofile2 from '../Media/Festify/festify-userprofile-2.png';
+
+import marketPulseHomepage from '../Media/MarketPulse/Homepage.png';
+import marketPulseLoginPage from '../Media/MarketPulse/loginPage.png';
+import marketPulseSignupPage from '../Media/MarketPulse/signupPage.png';
+import marketPulseDashboardLight from '../Media/MarketPulse/DashboardLight.png';
+import marketPulseDashboardDark from '../Media/MarketPulse/DashboardDark.png';
+import marketPulseAnalyticsPageLight from '../Media/MarketPulse/AnalyticsPageLight.png';
+import marketPulseAnalyticsPageDark from '../Media/MarketPulse/AnalyticsPageDark.png';
+import marketPulseWatchlistPageLight from '../Media/MarketPulse/WatchlistPageLight.png';
+import marketPulseWatchlistPageDark from '../Media/MarketPulse/WatchlistPageDark.png';
+
 interface Project {
   id: string;
   title: string;
@@ -157,7 +179,7 @@ const ProjectsSection = () => {
       title: 'Festify',
       subtitle: 'Local Event Aggregator App',
       description: 'Festify is a local event aggregator platform where users can discover, create, RSVP, and manage events. It supports QR code-based ticketing, a complete check-in system for organizers, and a clean, modern user interface.',
-      image: '/src/Media/Festify/festify-homepage.png',
+      image: festifyHomepage,
       tags: ['React.js', 'Vite', 'Context API', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Bcrypt.js', 'Multer', 'Cloudinary', 'qrcode.react', 'Html5Qrcode'],
       liveUrl: 'https://festify-tau.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/Festify',
@@ -216,16 +238,16 @@ const ProjectsSection = () => {
         ]
       },
       media: [
-        { type: 'image', url: '/src/Media/Festify/festify-homepage.png', alt: 'Homepage' },
-        { type: 'image', url: '/src/Media/Festify/festify-loginpage.png', alt: 'Login Page' },
-        { type: 'image', url: '/src/Media/Festify/festify-signuppage.png', alt: 'Signup Page' },
-        { type: 'image', url: '/src/Media/Festify/festify-eventspage.png', alt: 'Events Page' },
-        { type: 'image', url: '/src/Media/Festify/festify-eventsdetailpage.png', alt: 'Event Details' },
-        { type: 'image', url: '/src/Media/Festify/festify-eventidpage.png', alt: 'Single Event (Event ID)' },
-        { type: 'image', url: '/src/Media/Festify/festify-createeventpage.png', alt: 'Create Event' },
-        { type: 'image', url: '/src/Media/Festify/festify-checkinpanelpage.png', alt: 'Check-in Panel' },
-        { type: 'image', url: '/src/Media/Festify/festify-userprofile.png', alt: 'User Profile 1' },
-        { type: 'image', url: '/src/Media/Festify/festify-userprofile-2.png', alt: 'User Profile 2' },
+        { type: 'image', url: festifyHomepage, alt: 'Homepage' },
+        { type: 'image', url: festifyLoginpage, alt: 'Login Page' },
+        { type: 'image', url: festifySignuppage, alt: 'Signup Page' },
+        { type: 'image', url: festifyEventspage, alt: 'Events Page' },
+        { type: 'image', url: festifyEventsdetailpage, alt: 'Event Details' },
+        { type: 'image', url: festifyEventidpage, alt: 'Single Event (Event ID)' },
+        { type: 'image', url: festifyCreateeventpage, alt: 'Create Event' },
+        { type: 'image', url: festifyCheckinpanelpage, alt: 'Check-in Panel' },
+        { type: 'image', url: festifyUserprofile, alt: 'User Profile 1' },
+        { type: 'image', url: festifyUserprofile2, alt: 'User Profile 2' },
         { type: 'video', url: 'https://github.com/user-attachments/assets/85308566-21fa-486d-8124-13ad2575e04b', alt: 'Festify Walkthrough' },
         { type: 'video', url: 'https://github.com/user-attachments/assets/c9fe9f42-945a-41ee-9662-485db62ea4b1', alt: 'QR Code Ticket Verification DEMO' },
         { type: 'video', url: 'https://github.com/user-attachments/assets/f9a34c16-8557-4085-854f-82331d2da0bb', alt: 'RFID-Based Ticket Verification using ESP8266 and RFID READER 522 (IoT)' }
@@ -236,7 +258,7 @@ const ProjectsSection = () => {
       title: 'Market Pulse',
       subtitle: 'Stock Market Analytics Dashboard',
       description: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools — all in a lightning-fast, responsive interface.',
-      image: '/src/Media/MarketPulse/Homepage.png',
+      image: marketPulseHomepage,
       tags: ['React.js', 'Vite', 'Tailwind CSS', 'Zustand', 'Chart.js', 'React Query', 'Express', 'Node.js'],
       liveUrl: 'https://market-pulse-two.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
@@ -289,15 +311,15 @@ const ProjectsSection = () => {
         ]
       },
       media: [
-        { type: 'image', url: '/src/Media/MarketPulse/Homepage.png', alt: 'Homepage' },
-        { type: 'image', url: '/src/Media/MarketPulse/loginPage.png', alt: 'Login Page' },
-        { type: 'image', url: '/src/Media/MarketPulse/signupPage.png', alt: 'Signup Page' },
-        { type: 'image', url: '/src/Media/MarketPulse/DashboardLight.png', alt: 'Dashboard (Light Mode)' },
-        { type: 'image', url: '/src/Media/MarketPulse/DashboardDark.png', alt: 'Dashboard (Dark Mode)' },
-        { type: 'image', url: '/src/Media/MarketPulse/AnalyticsPageLight.png', alt: 'Analytics Page (Light Mode)' },
-        { type: 'image', url: '/src/Media/MarketPulse/AnalyticsPageDark.png', alt: 'Analytics Page (Dark Mode)' },
-        { type: 'image', url: '/src/Media/MarketPulse/WatchlistPageLight.png', alt: 'Watchlist Page (Light Mode)' },
-        { type: 'image', url: '/src/Media/MarketPulse/WatchlistPageDark.png', alt: 'Watchlist Page (Dark Mode)' }
+        { type: 'image', url: marketPulseHomepage, alt: 'Homepage' },
+        { type: 'image', url: marketPulseLoginPage, alt: 'Login Page' },
+        { type: 'image', url: marketPulseSignupPage, alt: 'Signup Page' },
+        { type: 'image', url: marketPulseDashboardLight, alt: 'Dashboard (Light Mode)' },
+        { type: 'image', url: marketPulseDashboardDark, alt: 'Dashboard (Dark Mode)' },
+        { type: 'image', url: marketPulseAnalyticsPageLight, alt: 'Analytics Page (Light Mode)' },
+        { type: 'image', url: marketPulseAnalyticsPageDark, alt: 'Analytics Page (Dark Mode)' },
+        { type: 'image', url: marketPulseWatchlistPageLight, alt: 'Watchlist Page (Light Mode)' },
+        { type: 'image', url: marketPulseWatchlistPageDark, alt: 'Watchlist Page (Dark Mode)' }
       ]
     }
   ];
