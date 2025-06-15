@@ -19,7 +19,7 @@ A modern, responsive portfolio website showcasing my projects, skills, and exper
 ### Frontend
 - **React.js**: Modern UI library for building interactive interfaces
 - **TypeScript**: Type-safe JavaScript for better development experience
-- **Vite**: Next-generation frontend tooling
+- **Vite**: Next-generation frontend tooling for fast development and optimized builds
 - **TailwindCSS**: Utility-first CSS framework
 - **Framer Motion**: Production-ready motion library
 - **Lucide Icons**: Beautiful, consistent icons
@@ -64,7 +64,7 @@ yarn dev
 bun dev
 ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser
+4. Open [http://localhost:8080](http://localhost:8080) in your browser
 
 ## 📦 Project Structure
 
@@ -136,7 +136,7 @@ The portfolio is fully responsive and works seamlessly on:
 - Optimized image loading
 - Code splitting
 - Lazy loading components
-- Efficient asset bundling
+- Efficient asset bundling with Vite
 
 ## 🤝 Contributing
 
@@ -158,6 +158,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Framer Motion](https://www.framer.com/motion/)
 - [Lucide Icons](https://lucide.dev/)
 - [Shadcn/ui](https://ui.shadcn.com/)
+- [Vite](https://vitejs.dev/)
 
 ---
 
