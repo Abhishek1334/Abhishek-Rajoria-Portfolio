@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website showcasing my projects, skills, and experience. Built with cutting-edge technologies and best practices in web development.
 
-![Portfolio Preview](src/Media/HomePage.png)
+![Portfolio Preview](src/Media/HomaPage.png)
 
 ## 🌟 Features
 
