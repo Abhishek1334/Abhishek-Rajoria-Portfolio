@@ -99,7 +99,7 @@ const HeroSection = () => {
 
           {/* Name */}
           <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-8"
+            className="text-5xl md:text-7xl font-bold mb-8 pt-10"
             variants={itemVariants}
           >
             <span className="text-gradient-amber">Abhishek</span>{' '}
