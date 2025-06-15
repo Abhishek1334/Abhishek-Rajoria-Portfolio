@@ -1,73 +1,164 @@
-# Welcome to your Lovable project
+# Abhishek Rajoria's Portfolio 🚀
 
-## Project info
+A modern, responsive portfolio website showcasing my projects, skills, and experience. Built with cutting-edge technologies and best practices in web development.
 
-**URL**: https://lovable.dev/projects/13b69074-1b5d-4c7c-84e0-e30590ac29f9
+![Portfolio Preview](src/Media/MarketPulse/Homepage.png)
 
-## How can I edit this code?
-asdas
-There are several ways of editing your application.
+## 🌟 Features
 
-**Use Lovable**
+- **Modern Design**: Clean, responsive, and interactive UI built with TailwindCSS
+- **Project Showcase**: Interactive project cards with detailed modals
+- **Image Gallery**: Advanced image viewing with zoom and pan capabilities
+- **Smooth Animations**: Fluid transitions and micro-interactions using Framer Motion
+- **Performance Optimized**: Fast loading times and optimized assets
+- **SEO Friendly**: Meta tags and semantic HTML for better search engine visibility
+- **Accessibility**: WCAG compliant with proper ARIA labels and keyboard navigation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/13b69074-1b5d-4c7c-84e0-e30590ac29f9) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+### Frontend
+- **React.js**: Modern UI library for building interactive interfaces
+- **TypeScript**: Type-safe JavaScript for better development experience
+- **Vite**: Next-generation frontend tooling
+- **TailwindCSS**: Utility-first CSS framework
+- **Framer Motion**: Production-ready motion library
+- **Lucide Icons**: Beautiful, consistent icons
+- **Shadcn/ui**: Re-usable components built with Radix UI and Tailwind CSS
 
-**Use your preferred IDE**
+### Development Tools
+- **ESLint**: Code linting
+- **Prettier**: Code formatting
+- **TypeScript**: Static type checking
+- **PostCSS**: CSS processing
+- **Vite**: Build tool and development server
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn or bun
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. Clone the repository
+```bash
+git clone https://github.com/Abhishek1334/Abhishek-Rajoria-Portfolio.git
+cd Abhishek-Rajoria-Portfolio
 ```
 
-**Edit a file directly in GitHub**
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+# or
+bun install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. Start the development server
+```bash
+npm run dev
+# or
+yarn dev
+# or
+bun dev
+```
 
-**Use GitHub Codespaces**
+4. Open [http://localhost:5173](http://localhost:5173) in your browser
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📦 Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/     # React components
+├── pages/         # Page components
+├── Media/         # Project media files
+├── styles/        # Global styles
+└── utils/         # Utility functions
+```
 
-This project is built with:
+## 🎨 Customization
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Theme Configuration
+The project uses TailwindCSS for styling. You can customize the theme in `tailwind.config.ts`:
 
-## How can I deploy this project?
+```typescript
+// tailwind.config.ts
+export default {
+  theme: {
+    extend: {
+      colors: {
+        // Your custom colors
+      },
+      // Other theme customizations
+    }
+  }
+}
+```
 
-Simply open [Lovable](https://lovable.dev/projects/13b69074-1b5d-4c7c-84e0-e30590ac29f9) and click on Share -> Publish.
+### Adding Projects
+Add your projects in `src/components/ProjectsSection.tsx`:
 
-## Can I connect a custom domain to my Lovable project?
+```typescript
+const projects = [
+  {
+    id: 'project-id',
+    title: 'Project Title',
+    // ... other project details
+  }
+];
+```
 
-Yes, you can!
+## 🚀 Deployment
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+The project is configured for easy deployment on Vercel:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. Push your code to GitHub
+2. Import the repository in Vercel
+3. Deploy!
+
+## 📱 Responsive Design
+
+The portfolio is fully responsive and works seamlessly on:
+- Desktop
+- Tablet
+- Mobile devices
+
+## 🔍 SEO Optimization
+
+- Meta tags for better search engine visibility
+- Semantic HTML structure
+- Optimized images and assets
+- Proper heading hierarchy
+
+## 🎯 Performance
+
+- Optimized image loading
+- Code splitting
+- Lazy loading components
+- Efficient asset bundling
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Abhishek Rajoria**
+- GitHub: [@Abhishek1334](https://github.com/Abhishek1334)
+- LinkedIn: [Abhishek Rajoria](https://www.linkedin.com/in/abhishek-rajoria/)
+
+## 🙏 Acknowledgments
+
+- [TailwindCSS](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Lucide Icons](https://lucide.dev/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+
+---
+
+⭐️ If you like this project, please give it a star on GitHub!
