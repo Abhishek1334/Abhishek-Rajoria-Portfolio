@@ -1,4 +1,3 @@
-
 'use client';
 
 import { motion } from 'framer-motion';
@@ -7,17 +6,40 @@ import AboutSection from '../components/AboutSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import { Toaster } from '@/components/ui/sonner';
+import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
 
 const Index = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const handleHireMe = () => {
-    // Scroll to contact section
     document.getElementById('contact')?.scrollIntoView({ 
       behavior: 'smooth' 
     });
+    setIsMobileMenuOpen(false);
+  };
+
+  const navigationLinks = [
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Resume', href: 'https://drive.google.com/file/d/1UchzGFtq72KDwOsg8af5W2NKQDvoRi-J/view?usp=drive_link', external: true },
+    { label: 'Contact', href: '#contact' }
+  ];
+
+  const handleNavClick = (href: string, external?: boolean) => {
+    if (!external) {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div
+      className="min-h-screen bg-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+    >
       {/* Navigation */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-white/10"
@@ -25,7 +47,7 @@ const Index = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <motion.div
@@ -35,14 +57,9 @@ const Index = () => {
               <span className="text-gradient-amber">AR</span>
             </motion.div>
 
-            {/* Navigation Links */}
+            {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center gap-8">
-              {[
-                { label: 'About', href: '#about' },
-                { label: 'Projects', href: '#projects' },
-                { label: 'Resume', href: 'https://drive.google.com/file/d/1UchzGFtq72KDwOsg8af5W2NKQDvoRi-J/view?usp=drive_link', external: true },
-                { label: 'Contact', href: '#contact' }
-              ].map((link, index) => (
+              {navigationLinks.map((link, index) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
@@ -53,6 +70,7 @@ const Index = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
+                  onClick={() => handleNavClick(link.href, link.external)}
                 >
                   {link.label}
                   <motion.div
@@ -65,25 +83,72 @@ const Index = () => {
               ))}
             </div>
 
-            {/* Enhanced CTA Button */}
-            <motion.button
-              className="btn-primary text-sm px-6 py-2 relative overflow-hidden"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleHireMe}
-            >
-              <span className="relative z-10">Let's Work Together</span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-4">
+              <motion.button
+                className="btn-primary text-sm px-4 sm:px-6 py-2 relative overflow-hidden hidden sm:block"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleHireMe}
+              >
+                <span className="relative z-10">Let's Work Together</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+
+              <button
+                className="md:hidden p-2 text-foreground-muted hover:text-amber-500 transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          <motion.div
+            className={`md:hidden overflow-hidden ${isMobileMenuOpen ? 'max-h-96' : 'max-h-0'} transition-all duration-300 ease-in-out`}
+            initial={false}
+          >
+            <div className="py-4 space-y-4">
+              {navigationLinks.map((link, index) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  className="block text-foreground-muted hover:text-amber-500 transition-colors py-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => handleNavClick(link.href, link.external)}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+              <motion.button
+                className="btn-primary w-full text-sm px-6 py-2 relative overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleHireMe}
+              >
+                <span className="relative z-10">Let's Work Together</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </motion.nav>
 
@@ -97,24 +162,24 @@ const Index = () => {
 
       {/* Enhanced Footer */}
       <motion.footer
-        className="py-12 border-t border-white/10 bg-background-secondary/30"
+        className="py-8 sm:py-12 border-t border-white/10 bg-background-secondary/30"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center">
             <motion.div
-              className="text-2xl font-bold mb-4"
+              className="text-xl sm:text-2xl font-bold mb-4"
               whileHover={{ scale: 1.05 }}
             >
               <span className="text-gradient-amber">Abhishek Rajoria</span>
             </motion.div>
-            <p className="text-foreground-muted mb-6">
+            <p className="text-sm sm:text-base text-foreground-muted mb-6">
               Full Stack Developer • Turning Coffee into Code Since 2020 ☕
             </p>
-            <div className="flex justify-center gap-6 mb-8">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8">
               {[
                 { label: 'GitHub', href: 'https://github.com/abhishekrajoria' },
                 { label: 'LinkedIn', href: 'https://linkedin.com/in/abhishek-rajoria' },
@@ -125,7 +190,7 @@ const Index = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground-muted hover:text-amber-500 transition-colors"
+                  className="text-sm sm:text-base text-foreground-muted hover:text-amber-500 transition-colors"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -137,7 +202,7 @@ const Index = () => {
               ))}
             </div>
             <motion.div
-              className="text-sm text-foreground-muted"
+              className="text-xs sm:text-sm text-foreground-muted"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -151,7 +216,7 @@ const Index = () => {
       
       {/* Toast notifications */}
       <Toaster />
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { motion } from 'framer-motion';
@@ -13,7 +12,7 @@ const HeroSection = () => {
     "Full Stack Developer",
     "Problem Solver",
     "Code Architect",
-    "Digital Creator"
+    "UI/UX Enthusiast"
   ];
 
   useEffect(() => {
@@ -25,7 +24,7 @@ const HeroSection = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,11 +49,11 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 sm:pt-0">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-amber-500/3 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-48 sm:w-72 h-48 sm:h-72 bg-amber-500/3 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.6, 0.3],
@@ -66,7 +65,7 @@ const HeroSection = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/3 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-56 sm:w-80 h-56 sm:h-80 bg-purple-500/3 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.2, 0.4],
@@ -79,7 +78,7 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           className="text-center max-w-4xl mx-auto"
           variants={containerVariants}
@@ -88,18 +87,18 @@ const HeroSection = () => {
         >
           {/* Greeting */}
           <motion.div
-            className="mb-6"
+            className="mb-4 sm:mb-6"
             variants={itemVariants}
           >
-            <span className="text-foreground-muted text-lg flex items-center justify-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-500" />
+            <span className="text-base sm:text-lg text-foreground-muted flex items-center justify-center gap-2">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
               Hey there! I'm
             </span>
           </motion.div>
 
           {/* Name */}
           <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-8 pt-10"
+            className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 sm:mb-8 pt-6 sm:pt-10"
             variants={itemVariants}
           >
             <span className="text-gradient-amber">Abhishek</span>{' '}
@@ -108,22 +107,22 @@ const HeroSection = () => {
 
           {/* Dynamic Title with Typing Effect */}
           <motion.div
-            className="mb-8"
+            className="mb-6 sm:mb-8"
             variants={itemVariants}
           >
-            <div className="text-2xl md:text-3xl text-foreground-muted font-light mb-4">
+            <div className="text-xl sm:text-2xl md:text-3xl text-foreground-muted font-light mb-3 sm:mb-4">
               <span className="text-gradient-purple">
                 {roles[currentRole]}
               </span>
             </div>
-            <div className="text-lg md:text-xl text-foreground-muted">
+            <div className="text-base sm:text-lg md:text-xl text-foreground-muted">
               Transforming Ideas into Digital Reality 🚀
             </div>
           </motion.div>
 
           {/* Enhanced Description */}
           <motion.p
-            className="text-xl text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-12"
+            className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-12 px-4 sm:px-0"
             variants={itemVariants}
           >
             I craft scalable MERN applications that don't just work—they <em className="text-amber-500">wow</em>. 
@@ -133,12 +132,12 @@ const HeroSection = () => {
 
           {/* Enhanced CTA Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16 px-4 sm:px-0"
             variants={itemVariants}
           >
             <motion.a
               href="#projects"
-              className="btn-primary group"
+              className="btn-primary group w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -147,7 +146,7 @@ const HeroSection = () => {
             </motion.a>
             <motion.a
               href="#contact"
-              className="btn-ghost group"
+              className="btn-ghost group w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -160,14 +159,14 @@ const HeroSection = () => {
             className="flex flex-col items-center"
             variants={itemVariants}
           >
-            <span className="text-foreground-muted text-sm mb-4">
+            <span className="text-xs sm:text-sm text-foreground-muted mb-3 sm:mb-4">
               Ready for the journey? ✨
             </span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ChevronDown className="w-6 h-6 text-amber-500" />
+              <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -175,7 +174,7 @@ const HeroSection = () => {
 
       {/* Floating Elements */}
       <motion.div
-        className="absolute top-1/3 left-10 w-4 h-4 bg-amber-500/20 rounded-full"
+        className="absolute top-1/3 left-4 sm:left-10 w-3 h-3 sm:w-4 sm:h-4 bg-amber-500/20 rounded-full"
         animate={{
           y: [0, -20, 0],
           opacity: [0.3, 0.8, 0.3],
@@ -187,7 +186,7 @@ const HeroSection = () => {
         }}
       />
       <motion.div
-        className="absolute top-1/2 right-16 w-3 h-3 bg-purple-500/20 rounded-full"
+        className="absolute top-1/2 right-4 sm:right-16 w-2 h-2 sm:w-3 sm:h-3 bg-purple-500/20 rounded-full"
         animate={{
           y: [0, 15, 0],
           opacity: [0.4, 0.9, 0.4],
