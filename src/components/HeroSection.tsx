@@ -92,7 +92,7 @@ const HeroSection = () => {
           >
             <span className="text-base sm:text-lg text-foreground-muted flex items-center justify-center gap-2">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
-              Hey there! I'm
+              Hello! I'm
             </span>
           </motion.div>
 
@@ -116,7 +116,7 @@ const HeroSection = () => {
               </span>
             </div>
             <div className="text-base sm:text-lg md:text-xl text-foreground-muted">
-              Transforming Ideas into Digital Reality 🚀
+              Building Scalable Solutions with Modern Technology
             </div>
           </motion.div>
 
@@ -125,9 +125,9 @@ const HeroSection = () => {
             className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-12 px-4 sm:px-0"
             variants={itemVariants}
           >
-            I craft scalable MERN applications that don't just work—they <em className="text-amber-500">wow</em>. 
-            From IoT integrations to real-time analytics, I turn complex challenges into elegant solutions. 
-            Currently mastering the art of code at <span className="text-purple-400">VIPS Delhi</span> 🎓
+            I specialize in developing high-performance MERN stack applications that deliver exceptional user experiences. 
+            From IoT integrations to real-time analytics platforms, I transform complex technical challenges into elegant, 
+            scalable solutions. Currently pursuing <span className="text-purple-400">Computer Applications at VIPS Delhi</span> with a focus on modern web technologies.
           </motion.p>
 
           {/* Enhanced CTA Buttons */}
@@ -142,7 +142,7 @@ const HeroSection = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Code2 className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-              Explore My Universe
+              View My Work
             </motion.a>
             <motion.a
               href="#contact"
@@ -150,7 +150,7 @@ const HeroSection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="group-hover:text-amber-500 transition-colors">Let's Create Magic</span>
+              <span className="group-hover:text-amber-500 transition-colors">Let's Connect</span>
             </motion.a>
           </motion.div>
 

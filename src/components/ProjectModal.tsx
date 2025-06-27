@@ -1,14 +1,8 @@
 'use client';
 
 import { Dialog } from '@headlessui/react';
-import { X, Globe, Github, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Maximize2, Minimize2 } from 'lucide-react';
-import { useState, useEffect, useCallback, memo, useMemo, useRef } from 'react';
-import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
-import Video from 'yet-another-react-lightbox/plugins/video';
-import 'yet-another-react-lightbox/styles.css';
-import 'yet-another-react-lightbox/plugins/thumbnails.css';
-import 'yet-another-react-lightbox/plugins/counter.css';
-import type { Slide } from 'yet-another-react-lightbox';
+import { X, ExternalLink, Github, ChevronLeft, ChevronRight, Star, Tag, Zap, Info, Image as ImageIcon, Play, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
+import { useState, useEffect, useCallback, memo } from 'react';
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -36,356 +30,472 @@ interface ProjectModalProps {
   } | null;
 }
 
-const MediaItem = memo(({ slide, onClick }: { slide: { type: 'image' | 'video'; url: string; alt?: string }; onClick: () => void }) => (
-  <div
-    className="relative aspect-video rounded-lg overflow-hidden bg-muted cursor-pointer group"
-    onClick={onClick}
-  >
-    {slide.type === 'video' ? (
-      <video
-        src={slide.url}
-        className="h-full w-full object-cover"
-        preload="none"
-      />
-    ) : (
-      <img
-        src={slide.url}
-        alt={slide.alt}
-        className="h-full w-full object-cover transition-transform group-hover:scale-105"
-        loading="lazy"
-        decoding="async"
-      />
-    )}
-    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-  </div>
-));
-
-MediaItem.displayName = 'MediaItem';
-
 const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
-  const [isMounted, setIsMounted] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [scale, setScale] = useState(1);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'tech'>('overview');
+  
+  // Zoom functionality state
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const imageRef = useRef<HTMLImageElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsMounted(true);
+    if (isOpen) {
+      setCurrentSlide(0);
+      setActiveTab('overview');
+      // Reset zoom state
+      setIsZoomed(false);
+      setZoomLevel(1);
+      setPanPosition({ x: 0, y: 0 });
+    }
+  }, [isOpen]);
+
+  const handlePrevSlide = useCallback(() => {
+    setCurrentSlide((prev) => 
+      prev === 0 ? (project?.media?.length || 1) - 1 : prev - 1
+    );
+    // Reset zoom when changing slides
+    setIsZoomed(false);
+    setZoomLevel(1);
+    setPanPosition({ x: 0, y: 0 });
+  }, [project?.media?.length]);
+
+  const handleNextSlide = useCallback(() => {
+    setCurrentSlide((prev) => 
+      prev === (project?.media?.length || 1) - 1 ? 0 : prev + 1
+    );
+    // Reset zoom when changing slides
+    setIsZoomed(false);
+    setZoomLevel(1);
+    setPanPosition({ x: 0, y: 0 });
+  }, [project?.media?.length]);
+
+  // Zoom functionality handlers
+  const handleImageClick = useCallback((e: React.MouseEvent) => {
+    if (!isZoomed) {
+      setIsZoomed(true);
+      setZoomLevel(2);
+    } else {
+      // Toggle zoom level between 2x and 4x when already zoomed
+      setZoomLevel(prev => prev >= 4 ? 2 : prev + 1);
+    }
+  }, [isZoomed]);
+
+  const handleZoomIn = useCallback(() => {
+    setZoomLevel(prev => Math.min(prev + 0.5, 4));
+    setIsZoomed(true);
   }, []);
 
-  const handleZoom = useCallback((delta: number) => {
-    setScale(prevScale => {
-      const newScale = Math.max(1, Math.min(5, prevScale + delta));
-      return newScale;
+  const handleZoomOut = useCallback(() => {
+    setZoomLevel(prev => {
+      const newZoom = Math.max(prev - 0.5, 1);
+      if (newZoom === 1) {
+        setIsZoomed(false);
+        setPanPosition({ x: 0, y: 0 });
+      }
+      return newZoom;
     });
   }, []);
 
-  const handleWheel = useCallback((e: WheelEvent) => {
-    if (e.ctrlKey || e.metaKey) {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      handleZoom(delta);
-    }
-  }, [handleZoom]);
-
-  const handleClick = useCallback(() => {
-    setScale(prevScale => prevScale === 1 ? 2.5 : 1);
-    setPosition({ x: 0, y: 0 });
+  const handleResetZoom = useCallback(() => {
+    setIsZoomed(false);
+    setZoomLevel(1);
+    setPanPosition({ x: 0, y: 0 });
   }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    if (scale > 1) {
+    if (isZoomed && zoomLevel > 1) {
       setIsDragging(true);
-      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+      setDragStart({ x: e.clientX - panPosition.x, y: e.clientY - panPosition.y });
     }
-  }, [scale, position]);
+  }, [isZoomed, zoomLevel, panPosition]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (isDragging && scale > 1) {
-      const newX = e.clientX - dragStart.x;
-      const newY = e.clientY - dragStart.y;
-      
-      if (imageRef.current && containerRef.current) {
-        const imageRect = imageRef.current.getBoundingClientRect();
-        const containerRect = containerRef.current.getBoundingClientRect();
-        
-        const maxX = (imageRect.width * scale - containerRect.width) / 2;
-        const maxY = project?.title === 'Festify' 
-          ? imageRect.height * scale - containerRect.height
-          : (imageRect.height * scale - containerRect.height) / 2;
-        
-        setPosition({
-          x: Math.max(-maxX, Math.min(maxX, newX)),
-          y: Math.max(-maxY, Math.min(maxY, newY))
-        });
-      }
+    if (isDragging && isZoomed) {
+      setPanPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
     }
-  }, [isDragging, scale, dragStart, project?.title]);
+  }, [isDragging, isZoomed, dragStart]);
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
   }, []);
 
-  const handleReset = useCallback(() => {
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.2 : 0.2;
+    setZoomLevel(prev => {
+      const newZoom = Math.max(1, Math.min(4, prev + delta));
+      if (newZoom === 1) {
+        setIsZoomed(false);
+        setPanPosition({ x: 0, y: 0 });
+      } else {
+        setIsZoomed(true);
+      }
+      return newZoom;
+    });
   }, []);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('wheel', handleWheel, { passive: false });
-      return () => container.removeEventListener('wheel', handleWheel);
-    }
-  }, [handleWheel]);
+  if (!isOpen || !project) return null;
 
-  const handlePrevSlide = useCallback(() => {
-    setCurrentSlide((currentSlide - 1 + project?.media?.length || 0) % (project?.media?.length || 1));
-    handleReset();
-  }, [currentSlide, project, handleReset]);
-
-  const handleNextSlide = useCallback(() => {
-    setCurrentSlide((currentSlide + 1) % (project?.media?.length || 1));
-    handleReset();
-  }, [currentSlide, project, handleReset]);
-
-  const slides = useMemo(() => {
-    if (!project?.media) return [];
-    return project.media.map(item => ({
-      type: item.type === 'video' ? 'video' : 'image',
-      src: item.url,
-      alt: item.alt || project.title,
-      sources: item.type === 'video' ? [{ src: item.url, type: 'video/mp4' }] : undefined
-    })) as Slide[];
-  }, [project]);
-
-  if (!isOpen || !project || !isMounted) return null;
+  const tabs = [
+    { id: 'overview' as const, label: 'Overview', icon: Info },
+    { id: 'features' as const, label: 'Features', icon: Zap },
+    { id: 'tech' as const, label: 'Tech Stack', icon: Tag },
+  ];
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
-      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" aria-hidden="true" />
-      <div className="fixed inset-0 flex items-center justify-center p-4 sm:p-6">
-        <Dialog.Panel className="w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-lg bg-background shadow-xl">
+      {/* Simple Backdrop */}
+      <div className="fixed inset-0 bg-black/90" aria-hidden="true" />
+      
+      <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div className="w-full max-w-7xl my-4 sm:my-8">
+          <Dialog.Panel className="glass-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
           {/* Header */}
-          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+            <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10">
             <div className="flex items-center justify-between p-4 sm:p-6">
-              <Dialog.Title className="text-xl sm:text-2xl font-bold">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 flex items-center justify-center border border-amber-500/20">
+                    <Star className="w-6 h-6 text-amber-500" />
+                  </div>
+                  <div>
+                    <Dialog.Title className="text-xl sm:text-2xl font-bold text-gradient-amber">
                 {project.title}
               </Dialog.Title>
-              <button
-                onClick={onClose}
-                className="rounded-full p-2 hover:bg-accent transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
+                    <p className="text-sm text-foreground-muted">{project.subtitle}</p>
             </div>
           </div>
 
-          {/* Content */}
-          <div className="p-4 sm:p-6 space-y-6">
-            {/* Media Preview Section */}
-            <div className="relative w-full h-[50vh] overflow-hidden bg-black/5">
-              <div className="absolute inset-0 flex items-start justify-center">
-                <div className="relative w-full h-full">
-                  <div className="absolute inset-0 flex items-start justify-center overflow-auto">
-                    {project.media.map((item, index) => (
-                      <div
-                        key={index}
-                        className={`absolute inset-0 transition-opacity duration-500 ${
-                          currentSlide === index ? 'opacity-100' : 'opacity-0'
-                        }`}
+                <div className="flex items-center gap-2">
+                  {/* Action Buttons */}
+                  <div className="hidden sm:flex items-center gap-2">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary px-4 py-2 text-sm"
                       >
-                        {item.type === 'image' ? (
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Live Demo
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-ghost px-4 py-2 text-sm"
+                      >
+                        <Github className="w-4 h-4 mr-2" />
+                        Code
+                      </a>
+                    )}
+                  </div>
+                  
+                  <button
+                    onClick={onClose}
+                    className="rounded-xl p-3 hover:bg-red-500/20 transition-colors border border-white/10 group"
+                  >
+                    <X className="h-5 w-5 text-foreground-muted group-hover:text-red-400 transition-colors" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Content Layout */}
+            <div className="flex flex-col lg:grid lg:grid-cols-3">
+              {/* Left Panel - Media Gallery */}
+              <div className="lg:col-span-2 relative bg-black/5">
+                <div className="relative h-[50vh] sm:h-[60vh] lg:h-[70vh] bg-gradient-to-br from-amber-500/5 to-purple-500/5">
+                  {project.media && project.media.length > 0 && (
+                    <div className="relative h-full overflow-hidden">
+                      {/* Current Media */}
+                      <div className="absolute inset-0">
+                        {project.media[currentSlide].type === 'video' ? (
+                          <div className="relative h-full flex items-center justify-center bg-black/20">
+                            <video
+                              src={project.media[currentSlide].url}
+                              className="max-h-full max-w-full object-contain"
+                              controls
+                              preload="metadata"
+                            />
+                          </div>
+                        ) : (
                           <div 
-                            ref={containerRef}
-                            className="w-full h-full flex items-start justify-center"
+                            className="relative h-full w-full overflow-hidden cursor-pointer"
                             onMouseDown={handleMouseDown}
                             onMouseMove={handleMouseMove}
                             onMouseUp={handleMouseUp}
                             onMouseLeave={handleMouseUp}
+                            onWheel={handleWheel}
                           >
-                            <div className="relative w-full h-full flex items-start justify-center">
-                              <div className={`relative ${
-                                project?.title === 'Festify' 
-                                  ? 'w-[800px] min-h-[1000px]' 
-                                  : 'w-full h-full'
-                              }`}>
-                                <img
-                                  ref={imageRef}
-                                  src={item.url}
-                                  alt={`${project?.title || 'Project'} preview ${index + 1}`}
-                                  className="w-full h-auto transition-transform duration-200 cursor-zoom-in"
+                            <img
+                              src={project.media[currentSlide].url}
+                              alt={project.media[currentSlide].alt}
+                              className={`h-full w-full object-contain p-2 sm:p-4 transition-transform duration-300 ${
+                                isZoomed ? 'cursor-grab' : 'cursor-zoom-in'
+                              } ${isDragging ? 'cursor-grabbing' : ''}`}
                                   style={{
-                                    transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
-                                    cursor: scale > 1 ? 'grab' : 'zoom-in',
-                                    transformOrigin: 'top center',
-                                    objectFit: project?.title === 'Festify' ? 'cover' : 'contain',
-                                    objectPosition: 'top',
-                                  }}
-                                  onClick={handleClick}
-                                  loading="lazy"
-                                  decoding="async"
-                                />
-                                {scale > 1 && (
-                                  <div className="fixed bottom-4 right-4 flex gap-2 bg-black/50 p-2 rounded-lg z-50">
-                                    <button
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleZoom(-0.1);
-                                      }}
-                                      className="p-1 text-white hover:bg-white/20 rounded"
-                                      aria-label="Zoom out"
-                                    >
-                                      <ZoomOut className="w-5 h-5" />
-                                    </button>
-                                    <button
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleZoom(0.1);
-                                      }}
-                                      className="p-1 text-white hover:bg-white/20 rounded"
-                                      aria-label="Zoom in"
-                                    >
-                                      <ZoomIn className="w-5 h-5" />
-                                    </button>
-                                    <button
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleReset();
-                                      }}
-                                      className="p-1 text-white hover:bg-white/20 rounded"
-                                      aria-label="Reset zoom"
-                                    >
-                                      <Minimize2 className="w-5 h-5" />
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="w-full h-full">
-                            <video
-                              src={item.url}
-                              className="w-full h-full object-contain"
-                              preload="none"
-                              muted
-                              loop
-                              playsInline
+                                transform: `scale(${zoomLevel}) translate(${panPosition.x / zoomLevel}px, ${panPosition.y / zoomLevel}px)`,
+                                transformOrigin: 'center center'
+                              }}
+                              onClick={handleImageClick}
+                              draggable={false}
                             />
                           </div>
                         )}
                       </div>
-                    ))}
+
+                      {/* Navigation Controls */}
+                      {project.media.length > 1 && (
+                        <>
+                          <button
+                            onClick={handlePrevSlide}
+                            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors z-10"
+                          >
+                            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                          </button>
+                          
+                          <button
+                            onClick={handleNextSlide}
+                            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors z-10"
+                          >
+                            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                          </button>
+                        </>
+                      )}
+
+                      {/* Zoom Controls */}
+                      <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex flex-col gap-1 sm:gap-2 z-10">
+                                    <button
+                          onClick={handleZoomIn}
+                          className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group"
+                          title="Zoom In"
+                        >
+                          <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
+                                    </button>
+                        
+                                    <button
+                          onClick={handleZoomOut}
+                          className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group"
+                          title="Zoom Out"
+                        >
+                          <ZoomOut className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
+                                    </button>
+                        
+                        {isZoomed && (
+                                    <button
+                            onClick={handleResetZoom}
+                            className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group"
+                            title="Reset Zoom"
+                          >
+                            <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
+                                    </button>
+                        )}
+                                  </div>
+
+                      {/* Media Info */}
+                      <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2 sm:gap-3">
+                            <div className="glass-card px-2 sm:px-4 py-1 sm:py-2 bg-black/60">
+                              <div className="flex items-center gap-1 sm:gap-2 text-white text-xs sm:text-sm">
+                                {project.media[currentSlide].type === 'video' ? (
+                                  <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+                                ) : (
+                                  <ImageIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+                                )}
+                                <span className="hidden sm:inline">{project.media[currentSlide].alt || `Image ${currentSlide + 1}`}</span>
+                              </div>
+                            </div>
+                            
+                            {/* Zoom Level Indicator */}
+                            {isZoomed && (
+                              <div className="glass-card px-2 sm:px-3 py-1 sm:py-2 bg-black/60">
+                                <span className="text-amber-400 text-xs sm:text-sm font-medium">
+                                  {Math.round(zoomLevel * 100)}%
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          
+                          {project.media.length > 1 && (
+                            <div className="glass-card px-2 sm:px-3 py-1 sm:py-2 bg-black/60">
+                              <span className="text-white text-xs sm:text-sm font-medium">
+                                {currentSlide + 1} / {project.media.length}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Zoom Instructions - Hidden on mobile */}
+                        {!isZoomed && project.media[currentSlide].type === 'image' && (
+                          <div className="mt-2 hidden sm:flex justify-center">
+                            <div className="glass-card px-3 py-1 bg-black/40">
+                              <span className="text-white/70 text-xs">
+                                Click image to zoom • Use zoom controls to adjust
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {isZoomed && (
+                          <div className="mt-2 hidden sm:flex justify-center">
+                            <div className="glass-card px-3 py-1 bg-black/40">
+                              <span className="text-white/70 text-xs">
+                                Click to zoom more • Drag to pan • Use controls to adjust
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                  </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Panel - Project Details */}
+              <div className="border-t lg:border-t-0 lg:border-l border-white/10 bg-background-secondary/30">
+                <div className="h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
+                  <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                    {/* Tags */}
+                    <div>
+                      <h4 className="text-sm font-semibold text-amber-500 mb-3 flex items-center gap-2">
+                        <Tag className="w-4 h-4" />
+                        Technologies
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag, index) => (
+                          <span
+                            key={index}
+                            className="px-2 sm:px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Tab Navigation */}
+                    <div>
+                      <div className="flex rounded-lg bg-black/20 p-1">
+                        {tabs.map((tab) => (
+                <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium rounded-md transition-colors ${
+                              activeTab === tab.id
+                                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                                : 'text-foreground-muted hover:text-foreground hover:bg-white/5'
+                            }`}
+                          >
+                            <tab.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                            <span className="hidden sm:inline">{tab.label}</span>
+                </button>
+                  ))}
+                </div>
+              </div>
+
+                    {/* Tab Content */}
+                    <div className="space-y-4">
+                      {activeTab === 'overview' && (
+                <div className="space-y-4">
+                  <div>
+                            <h4 className="text-base sm:text-lg font-semibold text-gradient-purple mb-2">Project Overview</h4>
+                            <p className="text-foreground-muted leading-relaxed text-sm">
+                              {project.detailedContent.overview}
+                            </p>
+                  </div>
+                          
+                  <div>
+                            <h4 className="text-sm font-semibold text-amber-500 mb-3">Key Highlights</h4>
+                            <div className="space-y-2">
+                              {project.highlights.map((highlight, index) => (
+                                <div
+                                  key={index}
+                                  className="flex items-center gap-3 text-sm text-foreground-muted"
+                                >
+                                  <div className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" />
+                                  <span>{highlight}</span>
+                                </div>
+                              ))}
+                            </div>
                   </div>
                 </div>
-              </div>
+                      )}
 
-              {/* Navigation Buttons */}
-              <button
-                onClick={handlePrevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                onClick={handleNextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
+                      {activeTab === 'features' && (
+                  <div>
+                          <h4 className="text-base sm:text-lg font-semibold text-gradient-purple mb-4">Features & Functionality</h4>
+                          <div className="space-y-3">
+                            {project.detailedContent.features.map((feature, index) => (
+                              <div
+                          key={index}
+                                className="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10"
+                          >
+                                  <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                                  <span className="text-sm text-foreground-muted leading-relaxed">{feature}</span>
+                                </div>
+                      ))}
+                    </div>
+                  </div>
+                      )}
 
-              {/* Slide Indicators */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                {project.media.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setCurrentSlide(index);
-                      handleReset();
-                    }}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      currentSlide === index ? 'bg-white' : 'bg-white/50'
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Project Details */}
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold">Overview</h3>
-                  <p className="text-muted-foreground">{project.detailedContent.overview}</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Features</h3>
-                  <ul className="list-disc pl-4 text-muted-foreground">
-                    {project.detailedContent.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold">Tech Stack</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.detailedContent.techStack.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="rounded-full bg-primary/10 px-3 py-1 text-sm text-primary"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                      {activeTab === 'tech' && (
+                  <div>
+                          <h4 className="text-base sm:text-lg font-semibold text-gradient-purple mb-4">Technology Stack</h4>
+                          <div className="grid gap-3">
+                            {project.detailedContent.techStack.map((tech, index) => (
+                              <div
+                                key={index}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-amber-500/5 to-purple-500/5 border border-amber-500/20"
+                              >
+                                <div className="w-3 h-3 rounded-full bg-gradient-to-r from-amber-500 to-purple-500 flex-shrink-0" />
+                                <span className="text-sm font-medium text-foreground">{tech}</span>
+                              </div>
+                            ))}
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Highlights</h3>
-                  <ul className="list-disc pl-4 text-muted-foreground">
-                    {project.detailedContent.highlights.map((highlight, index) => (
-                      <li key={index}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+                      )}
+                    </div>
 
-            {/* Links */}
-            <div className="flex flex-wrap gap-4">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-                >
-                  <Globe className="h-4 w-4" />
-                  Live Demo
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/90"
-                >
-                  <Github className="h-4 w-4" />
-                  View Code
-                </a>
-              )}
+                    {/* Mobile Action Buttons */}
+                    <div className="sm:hidden flex flex-col gap-3 pt-4 border-t border-white/10">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                          className="btn-primary w-full text-center py-3 flex items-center justify-center gap-2"
+                  >
+                          <ExternalLink className="w-4 h-4" />
+                    Live Demo
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                          className="btn-ghost w-full text-center py-3 flex items-center justify-center gap-2"
+                  >
+                          <Github className="w-4 h-4" />
+                    View Code
+                  </a>
+                )}
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
         </Dialog.Panel>
+        </div>
       </div>
     </Dialog>
   );

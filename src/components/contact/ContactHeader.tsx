@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 
 interface ContactHeaderProps {
@@ -13,11 +12,12 @@ const ContactHeader = ({ containerVariants, itemVariants, isVisible }: ContactHe
     variants={itemVariants}
   >
     <h2 className="text-4xl md:text-5xl font-bold mb-6">
-      Let's Create <span className="text-gradient-purple">Digital Magic</span>
+      Let's Build <span className="text-gradient-purple">Something Great</span>
     </h2>
     <p className="text-xl text-foreground-muted max-w-3xl mx-auto leading-relaxed">
-      Got a wild idea? A challenging problem? Or just want to chat about the latest tech trends? 
-      I'm always excited to collaborate on projects that push boundaries and create meaningful impact.
+      I'm always excited to discuss new opportunities, collaborate on innovative projects, 
+      or connect with fellow developers. Whether you have a challenging problem to solve 
+      or want to explore the latest in web technology, I'd love to hear from you.
     </p>
   </motion.div>
 );

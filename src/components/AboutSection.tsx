@@ -95,12 +95,12 @@ const AboutSection = () => {
             variants={itemVariants}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-              My <span className="text-gradient-amber">Development DNA</span>
+              My <span className="text-gradient-amber">Development Approach</span>
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              I don't just write code—I architect digital experiences that solve real problems 
-              and create lasting impact. Every project is a chance to push boundaries and 
-              turn wild ideas into reality.
+              I build digital solutions that solve real-world problems and create meaningful impact. 
+              Each project is an opportunity to apply best practices, modern technologies, and 
+              innovative thinking to deliver exceptional results.
             </p>
           </motion.div>
 
@@ -117,23 +117,23 @@ const AboutSection = () => {
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
                     <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-gradient-purple" />
                     <h3 className="text-xl sm:text-2xl font-bold text-gradient-purple">
-                      Digital Architect & Problem Solver
+                      Full Stack Developer & Problem Solver
                     </h3>
                   </div>
                   <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4 sm:mb-6">
-                    I'm not your average developer—I'm a <span className="text-amber-500 font-semibold">digital craftsman</span> who 
-                    specializes in transforming complex challenges into elegant MERN stack solutions. 
-                    My superpower? Taking your wildest ideas and making them not just work, but <em className="text-purple-400">absolutely shine</em>.
+                    I'm a <span className="text-amber-500 font-semibold">dedicated full stack developer</span> who 
+                    specializes in creating robust MERN stack applications that drive business value. 
+                    My strength lies in translating complex requirements into clean, maintainable code that <em className="text-purple-400">performs exceptionally</em>.
                   </p>
                   <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4">
-                    From <span className="text-gradient-amber font-medium">IoT integrations that make devices dance</span> to 
-                    <span className="text-gradient-purple font-medium"> real-time analytics that predict the future</span>—
-                    I thrive in that sweet spot where innovation meets implementation.
+                    From <span className="text-gradient-amber font-medium">IoT integrations and sensor data processing</span> to 
+                    <span className="text-gradient-purple font-medium"> real-time analytics and data visualization</span>—
+                    I excel at bridging the gap between innovative ideas and production-ready solutions.
                   </p>
                   <div className="flex items-center gap-2 mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-amber-500/10 to-purple-500/10 rounded-lg border border-amber-500/20">
                     <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
                     <span className="text-xs sm:text-sm font-medium text-amber-500">
-                      Currently mastering the art of code at VIPS Delhi • CGPA: 7.917 🎓
+                      Computer Applications at VIPS Delhi • CGPA: 8.0
                     </span>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const AboutSection = () => {
                 <div className="absolute -top-2 -right-2 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <div className="flex items-center gap-3 mb-4 sm:mb-6">
                   <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
-                  <h4 className="text-lg sm:text-xl font-semibold text-amber-500">Academic Arsenal & Battle Scars</h4>
+                  <h4 className="text-lg sm:text-xl font-semibold text-amber-500">Education & Certifications</h4>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
                   <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
@@ -156,7 +156,7 @@ const AboutSection = () => {
                       <div className="text-xs sm:text-sm text-foreground-muted">VIPS Delhi • Class of 2025</div>
                     </div>
                     <div className="text-right">
-                      <span className="text-base sm:text-lg text-amber-500 font-bold">7.917</span>
+                      <span className="text-base sm:text-lg text-amber-500 font-bold">8.0</span>
                       <div className="text-xs text-foreground-muted">CGPA</div>
                     </div>
                   </div>
@@ -227,10 +227,10 @@ const AboutSection = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent rounded-2xl"></div>
             <blockquote className="text-lg sm:text-2xl md:text-3xl font-light text-foreground-muted italic max-w-4xl mx-auto relative z-10 p-6 sm:p-8">
-              "The future belongs to those who{' '}
-              <span className="text-gradient-amber font-semibold not-italic">code it into existence</span>."
+              "Great software is built by developers who{' '}
+              <span className="text-gradient-amber font-semibold not-italic">understand both the code and the user</span>."
               <div className="text-sm sm:text-base mt-3 sm:mt-4 text-foreground-muted/60 not-italic">
-                — My development philosophy ✨
+                — My development philosophy
               </div>
             </blockquote>
           </motion.div>

@@ -3,14 +3,23 @@
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
+import SkillsConstellation from '../components/SkillsConstellation';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
+import ResumeModal from '../components/ResumeModal';
+import MobileFloatingNav from '../components/MobileFloatingNav';
+
+import { useVisitorTracking } from '../hooks/useVisitorTracking';
 import { Toaster } from '@/components/ui/sonner';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const Index = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  
+  // Track visitor and send email alert
+  useVisitorTracking();
 
   const handleHireMe = () => {
     document.getElementById('contact')?.scrollIntoView({ 
@@ -22,12 +31,15 @@ const Index = () => {
   const navigationLinks = [
     { label: 'About', href: '#about' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Resume', href: 'https://drive.google.com/file/d/1UchzGFtq72KDwOsg8af5W2NKQDvoRi-J/view?usp=drive_link', external: true },
+    { label: 'Resume', href: '#resume', action: 'resume' },
     { label: 'Contact', href: '#contact' }
   ];
 
-  const handleNavClick = (href: string, external?: boolean) => {
-    if (!external) {
+  const handleNavClick = (href: string, action?: string) => {
+    if (action === 'resume') {
+      setIsResumeModalOpen(true);
+      setIsMobileMenuOpen(false);
+    } else {
       document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
       setIsMobileMenuOpen(false);
     }
@@ -60,17 +72,14 @@ const Index = () => {
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center gap-8">
               {navigationLinks.map((link, index) => (
-                <motion.a
+                <motion.button
                   key={link.label}
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
-                  className="text-foreground-muted hover:text-amber-500 transition-colors relative"
+                  className="text-foreground-muted hover:text-amber-500 transition-colors relative interactive"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
-                  onClick={() => handleNavClick(link.href, link.external)}
+                  onClick={() => handleNavClick(link.href, link.action)}
                 >
                   {link.label}
                   <motion.div
@@ -79,14 +88,14 @@ const Index = () => {
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.3 }}
                   />
-                </motion.a>
+                </motion.button>
               ))}
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-4">
               <motion.button
-                className="btn-primary text-sm px-4 sm:px-6 py-2 relative overflow-hidden hidden sm:block"
+                className="btn-primary text-sm px-4 sm:px-6 py-2 relative overflow-hidden hidden sm:block interactive"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 }}
@@ -119,19 +128,16 @@ const Index = () => {
           >
             <div className="py-4 space-y-4">
               {navigationLinks.map((link, index) => (
-                <motion.a
+                <motion.button
                   key={link.label}
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
-                  className="block text-foreground-muted hover:text-amber-500 transition-colors py-2"
+                  className="block text-left text-foreground-muted hover:text-amber-500 transition-colors py-2 w-full interactive"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => handleNavClick(link.href, link.external)}
+                  onClick={() => handleNavClick(link.href, link.action)}
                 >
                   {link.label}
-                </motion.a>
+                </motion.button>
               ))}
               <motion.button
                 className="btn-primary w-full text-sm px-6 py-2 relative overflow-hidden"
@@ -154,10 +160,21 @@ const Index = () => {
 
       {/* Main Content */}
       <main>
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <ContactSection />
+        <section id="hero">
+          <HeroSection />
+        </section>
+        <section id="about">
+          <AboutSection />
+        </section>
+        <section id="skills">
+          <SkillsConstellation />
+        </section>
+        <section id="projects">
+          <ProjectsSection />
+        </section>
+        <section id="contact">
+          <ContactSection />
+        </section>
       </main>
 
       {/* Enhanced Footer */}
@@ -177,7 +194,7 @@ const Index = () => {
               <span className="text-gradient-amber">Abhishek Rajoria</span>
             </motion.div>
             <p className="text-sm sm:text-base text-foreground-muted mb-6">
-              Full Stack Developer • Turning Coffee into Code Since 2020 ☕
+              Full Stack Developer • Building Digital Solutions Since 2020
             </p>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8">
               {[
@@ -208,11 +225,20 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              © {new Date().getFullYear()} Abhishek Rajoria. Crafted with 💜 and way too much caffeine.
+              © {new Date().getFullYear()} Abhishek Rajoria. Designed and developed with passion.
             </motion.div>
           </div>
         </div>
       </motion.footer>
+      
+      {/* Resume Modal */}
+      <ResumeModal 
+        isOpen={isResumeModalOpen} 
+        onClose={() => setIsResumeModalOpen(false)} 
+      />
+      
+      {/* Mobile Floating Nav */}
+      <MobileFloatingNav onResumeClick={() => setIsResumeModalOpen(true)} />
       
       {/* Toast notifications */}
       <Toaster />

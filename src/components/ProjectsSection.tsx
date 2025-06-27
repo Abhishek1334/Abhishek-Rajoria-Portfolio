@@ -2,7 +2,7 @@
 
 import { motion, Variants } from 'framer-motion';
 import { useEffect, useState, useCallback, memo } from 'react';
-import { ExternalLink, Github, Calendar, Users, Zap, TrendingUp, BarChart3, Target, Ticket, DollarSign } from 'lucide-react';
+import { ExternalLink, Github, Calendar, Users, Zap, TrendingUp, BarChart3, Target, Ticket, DollarSign, Home, Eye, Star, ArrowUpRight, Play, Image as ImageIcon } from 'lucide-react';
 import ProjectModal from './ProjectModal';
 
 // Import all media files
@@ -26,6 +26,13 @@ import marketPulseAnalyticsPageLight from '../Media/MarketPulse/AnalyticsPageLig
 import marketPulseAnalyticsPageDark from '../Media/MarketPulse/AnalyticsPageDark.png';
 import marketPulseWatchlistPageLight from '../Media/MarketPulse/WatchlistPageLight.png';
 import marketPulseWatchlistPageDark from '../Media/MarketPulse/WatchlistPageDark.png';
+
+import stayFinderHomepage from '../Media/StayFinder/stayfinder-homepage.png';
+import stayFinderDashboard from '../Media/StayFinder/stayfinder-dashboard.png';
+import stayFinderMyListings from '../Media/StayFinder/stayfinder-mylistings.png';
+import stayFinderExplore from '../Media/StayFinder/stayfinder-explore.png';
+import stayFinderCreateListings from '../Media/StayFinder/stayfinder-createListings.png';
+import stayFinderMyBookings from '../Media/StayFinder/stayfinder-mybookings.png';
 
 interface Project {
   id: string;
@@ -61,13 +68,19 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
   }, [project, onSelect]);
 
   return (
-    <motion.div
-      variants={itemVariants}
-      className="group relative overflow-hidden rounded-xl bg-card p-6 shadow-lg transition-all hover:shadow-xl"
+    <div
+      className="group relative overflow-hidden glass-card-hover cursor-pointer transform transition-transform duration-200 hover:-translate-y-2"
       onClick={handleClick}
     >
+      {/* Simple Badge */}
+      <div className="absolute top-4 right-4 z-10">
+        <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/30">
+          <Star className="w-3 h-3 text-amber-500" />
+        </div>
+      </div>
+
       {/* Project Image */}
-      <div className="relative aspect-video overflow-hidden rounded-lg bg-muted mb-4">
+      <div className="relative aspect-video overflow-hidden rounded-lg mb-6">
         <img
           src={project.image}
           alt={project.title}
@@ -75,51 +88,86 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
           loading="lazy"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        
+        {/* Simple Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        {/* Media Counter */}
+        <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="flex items-center gap-2 px-2 py-1 bg-black/70 rounded text-white text-xs">
+            <ImageIcon className="w-3 h-3" />
+            <span>{project.media?.length || 1}</span>
+          </div>
+        </div>
+
+        {/* Simple View Button */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <button className="btn-primary px-4 py-2 text-sm">
+            <Eye className="w-4 h-4 mr-2" />
+            View Project
+          </button>
+        </div>
       </div>
 
       {/* Project Info */}
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-xl font-bold">{project.title}</h3>
-          <p className="text-muted-foreground">{project.subtitle}</p>
+      <div className="space-y-4 p-6">
+        {/* Header */}
+        <div className="space-y-2">
+          <div className="flex items-start justify-between">
+            <h3 className="text-xl font-bold text-gradient-amber">
+              {project.title}
+            </h3>
+            <ArrowUpRight className="w-5 h-5 text-foreground-muted group-hover:text-amber-500 transition-colors" />
+          </div>
+          <p className="text-foreground-muted text-sm font-medium">{project.subtitle}</p>
         </div>
 
-        <p className="text-sm text-muted-foreground">{project.description}</p>
+        {/* Description */}
+        <p className="text-sm text-foreground-muted leading-relaxed line-clamp-2">
+          {project.description}
+        </p>
 
-        {/* Tags */}
+        {/* Simple Tags */}
         <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag, index) => (
+          {project.tags.slice(0, 6).map((tag, index) => (
             <span
               key={index}
-              className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary"
+              className="px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20"
             >
               {tag}
             </span>
           ))}
+          {project.tags.length > 6 && (
+            <span className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 text-foreground-muted border border-white/10">
+              +{project.tags.length - 6}
+            </span>
+          )}
         </div>
 
-        {/* Highlights */}
-        <div className="grid grid-cols-2 gap-2">
-          {project.highlights.slice(0, 4).map((highlight, index) => (
-            <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Zap className="h-4 w-4 text-primary" />
-              <span>{highlight}</span>
+        {/* Simple Highlights */}
+        <div className="space-y-2">
+          {project.highlights.slice(0, 3).map((highlight, index) => (
+            <div 
+              key={index} 
+              className="flex items-center gap-3 text-sm text-foreground-muted"
+            >
+              <div className="w-2 h-2 rounded-full bg-amber-500" />
+              <span className="font-medium">{highlight}</span>
             </div>
           ))}
         </div>
 
-        {/* Links */}
-        <div className="flex gap-4">
+        {/* Action Buttons */}
+        <div className="flex gap-3 pt-2">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              className="flex-1 btn-primary text-sm py-2 text-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="inline w-4 h-4 mr-2" />
               Live Demo
             </a>
           )}
@@ -128,16 +176,16 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/90"
+              className="btn-ghost text-sm py-2 px-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <Github className="h-4 w-4" />
-              View Code
+              <Github className="inline w-4 h-4 mr-2" />
+              Code
             </a>
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 });
 
@@ -174,6 +222,77 @@ const ProjectsSection = () => {
   }, []);
 
   const projects: Project[] = [
+    {
+      id: 'stayfinder',
+      title: 'StayFinder',
+      subtitle: 'Airbnb-Inspired Property Booking Platform',
+      description: 'StayFinder is a full-stack web application inspired by Airbnb, built as an internship assignment. It allows users to list, search, and book properties for short-term or long-term stays, demonstrating end-to-end development skills.',
+      image: stayFinderHomepage,
+      tags: ['React', 'TypeScript', 'Redux Toolkit', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe', 'Vite'],
+      liveUrl: 'https://stayfinder-eta.vercel.app/',
+      githubUrl: 'https://github.com/Abhishek1334/StayFinder',
+      highlights: [
+        'Property Search & Filters',
+        'Booking System',
+        'Host Dashboard',
+        'Payment Integration',
+        'Authentication System',
+        'Responsive Design',
+        'Property Management',
+        'Modern UI/UX'
+      ],
+      detailedContent: {
+        overview: 'StayFinder is a full-stack web application inspired by Airbnb, built as an internship assignment. It allows users to list, search, and book properties for short-term or long-term stays, demonstrating end-to-end development skills across frontend, backend, and database layers.',
+        features: [
+          'Property browsing with image galleries, location, and pricing',
+          'Detailed property pages with descriptions, amenities, and availability calendar',
+          'Advanced search and filtering by location, price range, and dates',
+          'User authentication with registration and login validation',
+          'Complete booking flow with date selection and confirmation',
+          'User profile for managing bookings and reservations',
+          'Host dashboard for property management',
+          'CRUD operations for property listings',
+          'Mock payment integration with Stripe',
+          'Responsive design optimized for all devices',
+          'RESTful API endpoints for all major operations',
+          'Secure JWT-based authentication',
+          'Modern UI inspired by Airbnb and contemporary design trends'
+        ],
+        techStack: [
+          'React + TypeScript',
+          'Redux Toolkit for state management',
+          'Vite for fast development',
+          'Tailwind CSS for styling',
+          'Node.js + Express backend',
+          'MongoDB with Mongoose ODM',
+          'JWT authentication',
+          'bcrypt for password security',
+          'Stripe for payment processing',
+          'Vercel for frontend deployment',
+          'Render for backend hosting'
+        ],
+        highlights: [
+          'Full-stack development with modern React and Node.js',
+          'Type-safe development with TypeScript',
+          'Scalable state management with Redux Toolkit',
+          'Secure authentication with JWT and bcrypt',
+          'Payment processing integration with Stripe',
+          'Responsive, mobile-first design approach',
+          'RESTful API design and implementation',
+          'Database modeling and optimization',
+          'Cloud deployment and hosting',
+          'Modern UI/UX inspired by industry leaders'
+        ]
+      },
+      media: [
+        { type: 'image', url: stayFinderHomepage, alt: 'StayFinder Homepage' },
+        { type: 'image', url: stayFinderDashboard, alt: 'Dashboard' },
+        { type: 'image', url: stayFinderMyListings, alt: 'My Listings' },
+        { type: 'image', url: stayFinderExplore, alt: 'Explore Properties' },
+        { type: 'image', url: stayFinderCreateListings, alt: 'Create Listings' },
+        { type: 'image', url: stayFinderMyBookings, alt: 'My Bookings' }
+      ]
+    },
     {
       id: 'festify',
       title: 'Festify',
