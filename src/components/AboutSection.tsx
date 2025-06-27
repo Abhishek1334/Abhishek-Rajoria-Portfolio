@@ -29,30 +29,30 @@ const AboutSection = () => {
     {
       icon: Globe,
       title: 'Frontend Mastery',
-      skills: ['React.js', 'TailwindCSS', 'TypeScript', 'Redux Toolkit', 'React Query'],
+      skills: ['React.js', 'TailwindCSS', 'React Query', 'Redux Toolkit', 'Chart.js', 'Zustand'],
       color: 'text-amber-500',
-      description: 'Crafting pixel-perfect interfaces'
+      description: 'Crafting responsive, dynamic UIs'
     },
     {
       icon: Server,
       title: 'Backend Wizardry',
-      skills: ['Node.js', 'Express.js', 'REST APIs', 'GraphQL', 'JWT Auth'],
+      skills: ['Node.js', 'Express.js', 'REST API', 'GraphQL', 'JWT', 'Bcrypt.js'],
       color: 'text-purple-500',
-      description: 'Building rock-solid architectures'
+      description: 'Building secure, scalable APIs'
     },
     {
       icon: Database,
-      title: 'Data Engineering',
-      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Prisma ORM'],
+      title: 'Database Sorcery',
+      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Prisma', 'Mongoose'],
       color: 'text-blue-500',
-      description: 'Designing scalable data solutions'
+      description: 'Optimizing data architecture'
     },
     {
       icon: Cloud,
-      title: 'DevOps & Cloud',
-      skills: ['Docker', 'Git & GitHub', 'Vercel', 'Railway', 'CI/CD'],
+      title: 'DevOps Arsenal',
+      skills: ['Docker', 'Git & GitHub', 'Vercel', 'Railway', 'Cloudinary', 'Firebase'],
       color: 'text-green-500',
-      description: 'Automating deployment pipelines'
+      description: 'Streamlining deployment flows'
     }
   ];
 
@@ -133,7 +133,7 @@ const AboutSection = () => {
                   <div className="flex items-center gap-2 mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-amber-500/10 to-purple-500/10 rounded-lg border border-amber-500/20">
                     <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
                     <span className="text-xs sm:text-sm font-medium text-amber-500">
-                      Computer Applications at VIPS Delhi • CGPA: 8.0
+                      Computer Applications at VIPS Delhi • CGPA: 7.92
                     </span>
                   </div>
                 </div>
@@ -153,10 +153,10 @@ const AboutSection = () => {
                   <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
                     <div>
                       <span className="text-sm sm:text-base text-white font-medium">Bachelor of Computer Applications</span>
-                      <div className="text-xs sm:text-sm text-foreground-muted">VIPS Delhi • Class of 2025</div>
+                      <div className="text-xs sm:text-sm text-foreground-muted">VIPS Delhi • 2022-Present</div>
                     </div>
                     <div className="text-right">
-                      <span className="text-base sm:text-lg text-amber-500 font-bold">8.0</span>
+                      <span className="text-base sm:text-lg text-amber-500 font-bold">7.92</span>
                       <div className="text-xs text-foreground-muted">CGPA</div>
                     </div>
                   </div>
