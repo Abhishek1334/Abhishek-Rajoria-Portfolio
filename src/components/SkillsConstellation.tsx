@@ -195,6 +195,13 @@ const SkillsConstellation = () => {
     };
   }, [updateDimensions]);
 
+  // Memoized filtered skills to prevent recalculation
+  const filteredSkills = useMemo(() => 
+    selectedCategory 
+      ? skills.filter(skill => skill.category === selectedCategory)
+      : skills
+  , [skills, selectedCategory]);
+
   // Optimized animation loop with reduced frequency on mobile
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -383,13 +390,6 @@ const SkillsConstellation = () => {
       setParticles(prev => [...prev, ...newParticles]);
     }
   }, [draggedSkill, createParticle, categories, isMobile]);
-
-  // Memoized filtered skills to prevent recalculation
-  const filteredSkills = useMemo(() => 
-    selectedCategory 
-      ? skills.filter(skill => skill.category === selectedCategory)
-      : skills
-  , [skills, selectedCategory]);
 
   // Mobile Tech Grid Component - memoized to prevent re-renders
   const MobileTechGrid = useMemo(() => {
