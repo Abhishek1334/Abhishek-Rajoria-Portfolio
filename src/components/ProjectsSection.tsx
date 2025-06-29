@@ -17,15 +17,34 @@ import festifyCheckinpanelpage from '../Media/Festify/festify-checkinpanelpage.p
 import festifyUserprofile from '../Media/Festify/festify-userprofile.png';
 import festifyUserprofile2 from '../Media/Festify/festify-userprofile-2.png';
 
+// MarketPulse imports - Updated with all new images
 import marketPulseHomepage from '../Media/MarketPulse/Homepage.png';
+import marketPulseHomepageLight from '../Media/MarketPulse/Homepage_Light.png';
+import marketPulseHomepageDark from '../Media/MarketPulse/Homapage_Dark.png';
 import marketPulseLoginPage from '../Media/MarketPulse/loginPage.png';
+import marketPulseLoginLight from '../Media/MarketPulse/Login_Light.png';
+import marketPulseLoginDark from '../Media/MarketPulse/Login_Dark.png';
 import marketPulseSignupPage from '../Media/MarketPulse/signupPage.png';
+import marketPulseSignupLight from '../Media/MarketPulse/SignUp_Light.png';
+import marketPulseSignupDark from '../Media/MarketPulse/SignUp_Dark.png';
 import marketPulseDashboardLight from '../Media/MarketPulse/DashboardLight.png';
 import marketPulseDashboardDark from '../Media/MarketPulse/DashboardDark.png';
+import marketPulseDashboardLightNew from '../Media/MarketPulse/Dashboard_Light.png';
+import marketPulseDashboardDarkNew from '../Media/MarketPulse/Dashboard_Dark.png';
 import marketPulseAnalyticsPageLight from '../Media/MarketPulse/AnalyticsPageLight.png';
 import marketPulseAnalyticsPageDark from '../Media/MarketPulse/AnalyticsPageDark.png';
+import marketPulseAnalytics1Light from '../Media/MarketPulse/Analytics1_Light.png';
+import marketPulseAnalytics1Dark from '../Media/MarketPulse/Analytics1_Dark.png';
+import marketPulseAnalytics2Light from '../Media/MarketPulse/Analytics2_Light.png';
+import marketPulseAnalytics2Dark from '../Media/MarketPulse/Analytics2_Dark.png';
 import marketPulseWatchlistPageLight from '../Media/MarketPulse/WatchlistPageLight.png';
 import marketPulseWatchlistPageDark from '../Media/MarketPulse/WatchlistPageDark.png';
+import marketPulseWatchlistLight from '../Media/MarketPulse/Watchlist_Light.png';
+import marketPulseWatchlistDark from '../Media/MarketPulse/Watchlist_Dark.png';
+import marketPulsePortfolio1Light from '../Media/MarketPulse/Portfolio1_Light.png';
+import marketPulsePortfolio1Dark from '../Media/MarketPulse/Portfolio1_Dark.png';
+import marketPulsePortfolio2Light from '../Media/MarketPulse/Portfolio2_Light.png';
+import marketPulsePortfolio2Dark from '../Media/MarketPulse/Portfolio2_Dark.png';
 
 import stayFinderHomepage from '../Media/StayFinder/stayfinder-homepage.png';
 import stayFinderDashboard from '../Media/StayFinder/stayfinder-dashboard.png';
@@ -375,70 +394,97 @@ const ProjectsSection = () => {
     {
       id: 'marketpulse',
       title: 'Market Pulse',
-      subtitle: 'Stock Market Analytics Dashboard',
-      description: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools — all in a lightning-fast, responsive interface.',
+      subtitle: 'Advanced Stock Market Analytics Dashboard',
+      description: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools — all in a lightning-fast, responsive interface with light/dark mode support.',
       image: marketPulseHomepage,
-      tags: ['React.js', 'Vite', 'Tailwind CSS', 'Zustand', 'Chart.js', 'React Query', 'Express', 'Node.js'],
+      tags: ['React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand', 'Chart.js', 'React Query', 'Express', 'Node.js', 'JWT', 'Yahoo Finance API', 'Twelve Data'],
       liveUrl: 'https://market-pulse-two.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
       highlights: [
-        'Real-time Stock Charting',
-        'Customizable Timeframe Filters',
-        'Toggle Metrics: Open, Close, High, Low, Volume',
-        'Modular & Scalable Component Architecture',
-        'Global State Management with Zustand',
-        'Optimized Data Fetching & Rate-Limiting',
-        'Responsive, Mobile-Friendly Design',
-        'Light/Dark Mode'
+        'Real-time Stock Charting & Analytics',
+        'Advanced Portfolio Management',
+        'Customizable Watchlist System',
+        'Light/Dark Mode Interface',
+        'Responsive Mobile Design',
+        'Global State Management',
+        'Optimized Data Fetching',
+        'Interactive Data Visualizations'
       ],
       detailedContent: {
-        overview: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools — all in a lightning-fast, responsive interface.',
+        overview: 'Market Pulse is a comprehensive stock market analytics platform that provides users with real-time market data, advanced charting capabilities, portfolio tracking, and customizable watchlists. Built with modern web technologies, it offers a seamless experience across all devices with both light and dark mode interfaces.',
         features: [
-          'Real-time Stock Charting',
-          'Customizable Timeframe Filters (1D, 1M, 1Y, ALL)',
-          'Toggle Metrics: Open, Close, High, Low, Volume',
-          'Modular & Scalable Component Architecture',
-          'Global State Management with Zustand',
-          'Optimized Data Fetching & Rate-Limiting',
-          'Start/End Date Range Selector',
-          'Responsive, Mobile-Friendly Design',
-          'Light/Dark Mode',
-          'Yahoo Finance API, Twelve Data',
-          'Express, Node.js, JWT (Authentication)',
-          'Deployed on Vercel (Frontend), Railway (Backend)'
+          'Real-time Stock Charting with multiple timeframes (1D, 1M, 1Y, ALL)',
+          'Advanced Analytics Dashboard with key market metrics',
+          'Portfolio Management with performance tracking',
+          'Customizable Watchlist with real-time price updates',
+          'Interactive Charts with zoom, pan, and technical indicators',
+          'Toggle Metrics: Open, Close, High, Low, Volume data',
+          'Start/End Date Range Selector for historical analysis',
+          'Light/Dark Mode with persistent theme preferences',
+          'Responsive Design optimized for mobile and desktop',
+          'Global State Management with Zustand for optimal performance',
+          'Optimized Data Fetching with React Query and rate limiting',
+          'JWT Authentication for secure user sessions',
+          'Real-time price updates and market alerts',
+          'Export functionality for portfolio and watchlist data',
+          'Advanced filtering and sorting capabilities',
+          'Cross-platform compatibility and accessibility features'
         ],
         techStack: [
-          'React.js',
-          'Vite',
-          'Tailwind CSS',
-          'Zustand',
-          'Chart.js',
-          'React Query',
-          'Express',
-          'Node.js',
-          'Yahoo Finance API',
-          'Twelve Data'
+          'React.js 18 with TypeScript',
+          'Vite for lightning-fast development',
+          'Tailwind CSS for responsive styling',
+          'Zustand for global state management',
+          'Chart.js for interactive data visualizations',
+          'React Query for efficient data fetching',
+          'Express.js backend with Node.js',
+          'JWT for secure authentication',
+          'Yahoo Finance API for real-time data',
+          'Twelve Data for additional market insights',
+          'Vercel for frontend deployment',
+          'Railway for backend hosting'
         ],
         highlights: [
-          'Real-time Stock Charting',
-          'Customizable Timeframe Filters',
-          'Toggle Metrics: Open, Close, High, Low, Volume',
+          'Real-time Stock Charting with multiple timeframes',
+          'Advanced Portfolio Management System',
+          'Customizable Watchlist with real-time updates',
+          'Light/Dark Mode with seamless theme switching',
+          'Responsive Design for all device sizes',
           'Global State Management with Zustand',
-          'Optimized Data Fetching & Rate-Limiting',
-          'Responsive, Mobile-Friendly Design',
-          'Light/Dark Mode'
+          'Optimized Data Fetching with React Query',
+          'Interactive Data Visualizations with Chart.js',
+          'Secure Authentication with JWT',
+          'Real-time Market Data Integration'
         ]
       },
       media: [
-        { type: 'image', url: marketPulseHomepage, alt: 'Homepage' },
+        { type: 'image', url: marketPulseHomepage, alt: 'MarketPulse Homepage' },
+        { type: 'image', url: marketPulseHomepageLight, alt: 'Homepage (Light Mode)' },
+        { type: 'image', url: marketPulseHomepageDark, alt: 'Homepage (Dark Mode)' },
         { type: 'image', url: marketPulseLoginPage, alt: 'Login Page' },
+        { type: 'image', url: marketPulseLoginLight, alt: 'Login Page (Light Mode)' },
+        { type: 'image', url: marketPulseLoginDark, alt: 'Login Page (Dark Mode)' },
         { type: 'image', url: marketPulseSignupPage, alt: 'Signup Page' },
+        { type: 'image', url: marketPulseSignupLight, alt: 'Signup Page (Light Mode)' },
+        { type: 'image', url: marketPulseSignupDark, alt: 'Signup Page (Dark Mode)' },
         { type: 'image', url: marketPulseDashboardLight, alt: 'Dashboard (Light Mode)' },
         { type: 'image', url: marketPulseDashboardDark, alt: 'Dashboard (Dark Mode)' },
+        { type: 'image', url: marketPulseDashboardLightNew, alt: 'Dashboard Overview (Light)' },
+        { type: 'image', url: marketPulseDashboardDarkNew, alt: 'Dashboard Overview (Dark)' },
         { type: 'image', url: marketPulseAnalyticsPageLight, alt: 'Analytics Page (Light Mode)' },
         { type: 'image', url: marketPulseAnalyticsPageDark, alt: 'Analytics Page (Dark Mode)' },
+        { type: 'image', url: marketPulseAnalytics1Light, alt: 'Analytics Dashboard 1 (Light)' },
+        { type: 'image', url: marketPulseAnalytics1Dark, alt: 'Analytics Dashboard 1 (Dark)' },
+        { type: 'image', url: marketPulseAnalytics2Light, alt: 'Analytics Dashboard 2 (Light)' },
+        { type: 'image', url: marketPulseAnalytics2Dark, alt: 'Analytics Dashboard 2 (Dark)' },
         { type: 'image', url: marketPulseWatchlistPageLight, alt: 'Watchlist Page (Light Mode)' },
-        { type: 'image', url: marketPulseWatchlistPageDark, alt: 'Watchlist Page (Dark Mode)' }
+        { type: 'image', url: marketPulseWatchlistPageDark, alt: 'Watchlist Page (Dark Mode)' },
+        { type: 'image', url: marketPulseWatchlistLight, alt: 'Watchlist Overview (Light)' },
+        { type: 'image', url: marketPulseWatchlistDark, alt: 'Watchlist Overview (Dark)' },
+        { type: 'image', url: marketPulsePortfolio1Light, alt: 'Portfolio Dashboard 1 (Light)' },
+        { type: 'image', url: marketPulsePortfolio1Dark, alt: 'Portfolio Dashboard 1 (Dark)' },
+        { type: 'image', url: marketPulsePortfolio2Light, alt: 'Portfolio Dashboard 2 (Light)' },
+        { type: 'image', url: marketPulsePortfolio2Dark, alt: 'Portfolio Dashboard 2 (Dark)' }
       ]
     }
   ];

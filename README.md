@@ -204,6 +204,63 @@ const projects = [
 ];
 ```
 
+## 🚀 Featured Projects
+
+### **Market Pulse** 📈
+**Advanced Stock Market Analytics Dashboard**
+
+A cutting-edge stock market analytics platform that provides real-time market data, advanced charting capabilities, portfolio tracking, and customizable watchlists. Features both light and dark mode interfaces with responsive design.
+
+**Key Features:**
+- Real-time Stock Charting with multiple timeframes (1D, 1M, 1Y, ALL)
+- Advanced Analytics Dashboard with key market metrics
+- Portfolio Management with performance tracking
+- Customizable Watchlist with real-time price updates
+- Interactive Charts with zoom, pan, and technical indicators
+- Light/Dark Mode with persistent theme preferences
+- JWT Authentication for secure user sessions
+
+**Tech Stack:** React.js 18, TypeScript, Vite, Tailwind CSS, Zustand, Chart.js, React Query, Express.js, Node.js, JWT, Yahoo Finance API
+
+**Live Demo:** [Market Pulse](https://market-pulse-two.vercel.app/) | **GitHub:** [Repository](https://github.com/Abhishek1334/MarketPulse)
+
+### **StayFinder** 🏠
+**Airbnb-Inspired Property Booking Platform**
+
+A full-stack web application inspired by Airbnb, allowing users to list, search, and book properties for short-term or long-term stays. Demonstrates end-to-end development skills across frontend, backend, and database layers.
+
+**Key Features:**
+- Property browsing with image galleries and detailed descriptions
+- Advanced search and filtering by location, price range, and dates
+- Complete booking flow with date selection and confirmation
+- User authentication with registration and login validation
+- Host dashboard for property management
+- Mock payment integration with Stripe
+- Responsive design optimized for all devices
+
+**Tech Stack:** React, TypeScript, Redux Toolkit, Tailwind CSS, Node.js, Express, MongoDB, JWT, Stripe, Vite
+
+**Live Demo:** [StayFinder](https://stayfinder-eta.vercel.app/) | **GitHub:** [Repository](https://github.com/Abhishek1334/StayFinder)
+
+### **Festify** 🎉
+**Local Event Aggregator App**
+
+A local event aggregator platform where users can discover, create, RSVP, and manage events. Supports QR code-based ticketing, a complete check-in system for organizers, and a clean, modern user interface.
+
+**Key Features:**
+- JWT Authentication for secure login/signup
+- Event Management: Create, Edit, Delete Events (Organizers)
+- Ticketing System with QR Code Generation
+- QR Code Scanner using Html5Qrcode for attendee verification
+- Organizer Dashboard with check-ins details
+- RSVP Management in user profile
+- Image Uploads via Multer + Cloudinary
+- Event Search & Filter by category
+
+**Tech Stack:** React.js, Vite, Context API, Tailwind CSS, Node.js, Express.js, MongoDB, JWT, Bcrypt.js, Multer, Cloudinary, qrcode.react, Html5Qrcode
+
+**Live Demo:** [Festify](https://festify-tau.vercel.app/) | **GitHub:** [Repository](https://github.com/Abhishek1334/Festify)
+
 ## 🚀 Deployment
 
 ### **Vercel Deployment**
