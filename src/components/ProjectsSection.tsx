@@ -4,6 +4,7 @@ import { motion, Variants } from 'framer-motion';
 import { useEffect, useState, useCallback, memo } from 'react';
 import { ExternalLink, Github, Calendar, Users, Zap, TrendingUp, BarChart3, Target, Ticket, DollarSign, Home, Eye, Star, ArrowUpRight, Play, Image as ImageIcon } from 'lucide-react';
 import ProjectModal from './ProjectModal';
+import { useIsMobile } from '../hooks/use-mobile';
 
 // Import all media files
 import festifyHomepage from '../Media/Festify/festify-homepage.png';
@@ -213,6 +214,7 @@ ProjectCard.displayName = 'ProjectCard';
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -501,58 +503,62 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="py-12 sm:py-20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/3 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+    <section id="projects" className="py-8 sm:py-12 relative overflow-hidden">
+      <div className="container mx-auto px-2 sm:px-4 relative z-10">
         <motion.div
           className="max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
         >
-          {/* Section Header */}
           <motion.div
             variants={itemVariants}
-            className="text-center mb-12"
+            className="text-center mb-6 sm:mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Projects</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore some of my recent work, showcasing my expertise in full-stack development,
-              UI/UX design, and innovative problem-solving.
+            <h2 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4">Featured Projects</h2>
+            <p className="text-muted-foreground max-w-xl mx-auto text-xs sm:text-base">
+              Explore some of my recent work, showcasing my expertise in full-stack development, UI/UX design, and innovative problem-solving.
             </p>
           </motion.div>
 
-          {/* Projects Grid */}
-          <motion.div
-            variants={containerVariants}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onSelect={handleProjectSelect}
-              />
-            ))}
-          </motion.div>
+          {/* Minimal Mobile List */}
+          {isMobile ? (
+            <div className="flex flex-col gap-4">
+              {projects.map((project) => (
+                <div
+                  key={project.id}
+                  className="rounded-xl bg-white/5 border border-white/10 shadow-sm flex items-center gap-3 p-2"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-20 h-14 object-cover rounded-lg flex-shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-semibold truncate text-gradient-amber">{project.title}</h3>
+                    <p className="text-xs text-foreground-muted truncate">{project.subtitle}</p>
+                  </div>
+                  <button className="btn-primary px-3 py-1 text-xs rounded-lg">View</button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <motion.div
+              variants={containerVariants}
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {projects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onSelect={handleProjectSelect}
+                />
+              ))}
+            </motion.div>
+          )}
         </motion.div>
       </div>
-
-      {/* Project Modal */}
       <ProjectModal
         isOpen={!!selectedProject}
         onClose={handleModalClose}

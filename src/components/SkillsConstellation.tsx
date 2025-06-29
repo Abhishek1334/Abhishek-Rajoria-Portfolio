@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiJavascript, 
@@ -40,18 +40,19 @@ const SkillsConstellation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
   const lastFrameTime = useRef<number>(0);
+  const mousePosRef = useRef({ x: 0, y: 0 });
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState<Particle[]>([]);
   const [dimensions, setDimensions] = useState({ width: 1400, height: 800 });
   const [skills, setSkills] = useState<Skill[]>([]);
   const [draggedSkill, setDraggedSkill] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  // All skills data for mobile grid
-  const allSkills: Omit<Skill, 'x' | 'y' | 'vx' | 'vy' | 'connections'>[] = [
+  // Memoized skills data to prevent recreation
+  const allSkills: Omit<Skill, 'x' | 'y' | 'vx' | 'vy' | 'connections'>[] = useMemo(() => [
     { id: 'react', name: 'React', level: 8, category: 'frontend', icon: SiReact },
     { id: 'nextjs', name: 'Next.js', level: 4, category: 'frontend', icon: SiNextdotjs },
     { id: 'typescript', name: 'TypeScript', level: 4, category: 'frontend', icon: SiTypescript },
@@ -81,9 +82,9 @@ const SkillsConstellation = () => {
     { id: 'docker', name: 'Docker', level: 5, category: 'tools', icon: SiDocker },
     { id: 'vscode', name: 'VS Code', level: 8, category: 'tools', icon: Code2 },
     { id: 'vercel', name: 'Vercel', level: 6, category: 'tools', icon: SiVercel },
-  ];
+  ], []);
 
-  const initialSkills: Skill[] = [
+  const initialSkills: Skill[] = useMemo(() => [
     // Frontend cluster (left side, well spaced)
     { id: 'react', name: 'React', level: 8, category: 'frontend', icon: SiReact, x: 250, y: 300, vx: 0, vy: 0, connections: ['javascript', 'typescript', 'nextjs', 'redux', 'zustand'] },
     { id: 'nextjs', name: 'Next.js', level: 4, category: 'frontend', icon: SiNextdotjs, x: 350, y: 200, vx: 0, vy: 0, connections: ['react', 'typescript', 'vercel'] },
@@ -117,36 +118,47 @@ const SkillsConstellation = () => {
     { id: 'docker', name: 'Docker', level: 5, category: 'tools', icon: SiDocker, x: 850, y: 550, vx: 0, vy: 0, connections: ['nodejs'] },
     { id: 'vscode', name: 'VS Code', level: 8, category: 'tools', icon: Code2, x: 350, y: 650, vx: 0, vy: 0, connections: ['git'] },
     { id: 'vercel', name: 'Vercel', level: 6, category: 'tools', icon: SiVercel, x: 750, y: 650, vx: 0, vy: 0, connections: ['github', 'nextjs'] },
-  ];
+  ], []);
 
-  const categories = {
+  const categories = useMemo(() => ({
     frontend: { name: 'Frontend', color: '#06B6D4', count: initialSkills.filter(s => s.category === 'frontend').length },
     backend: { name: 'Backend', color: '#8B5CF6', count: initialSkills.filter(s => s.category === 'backend').length },
     database: { name: 'Database', color: '#10B981', count: initialSkills.filter(s => s.category === 'database').length },
     tools: { name: 'Tools', color: '#F59E0B', count: initialSkills.filter(s => s.category === 'tools').length },
-  };
+  }), [initialSkills]);
 
-  // Check for mobile screen size
+  // Check for mobile screen size - optimized to prevent frequent updates
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      setSkills(mobile ? allSkills.map(skill => ({ ...skill, x: 0, y: 0, vx: 0, vy: 0, connections: [] })) : initialSkills);
+      if (mobile !== isMobile) {
+        setIsMobile(mobile);
+        setSkills(mobile ? allSkills.map(skill => ({ ...skill, x: 0, y: 0, vx: 0, vy: 0, connections: [] })) : initialSkills);
+      }
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    const resizeHandler = () => {
+      // Debounce resize events
+      clearTimeout((window as any).resizeTimeout);
+      (window as any).resizeTimeout = setTimeout(checkMobile, 100);
+    };
+    
+    window.addEventListener('resize', resizeHandler);
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+      clearTimeout((window as any).resizeTimeout);
+    };
+  }, [isMobile, allSkills, initialSkills]);
 
   const createParticle = useCallback((x: number, y: number, color: string) => {
     return {
       x,
       y,
-      vx: (Math.random() - 0.5) * 3, // Reduced velocity
-      vy: (Math.random() - 0.5) * 3,
-      life: 60, // Reduced lifetime
-      maxLife: 60,
+      vx: (Math.random() - 0.5) * 2, // Reduced velocity for better performance
+      vy: (Math.random() - 0.5) * 2,
+      life: 40, // Reduced lifetime
+      maxLife: 40,
       color,
     };
   }, []);
@@ -154,22 +166,36 @@ const SkillsConstellation = () => {
   const updateDimensions = useCallback(() => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
-      // Responsive dimensions based on screen size
       const baseWidth = isMobile ? 420 : 1400;
       const baseHeight = isMobile ? 520 : 800;
-      setDimensions({ 
+      const newDimensions = { 
         width: Math.min(rect.width, baseWidth), 
         height: baseHeight 
-      });
+      };
+      
+      // Only update if dimensions actually changed
+      if (newDimensions.width !== dimensions.width || newDimensions.height !== dimensions.height) {
+        setDimensions(newDimensions);
+      }
     }
-  }, [isMobile]);
+  }, [isMobile, dimensions]);
 
   useEffect(() => {
     updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    const resizeHandler = () => {
+      // Debounce resize events
+      clearTimeout((window as any).dimensionTimeout);
+      (window as any).dimensionTimeout = setTimeout(updateDimensions, 100);
+    };
+    
+    window.addEventListener('resize', resizeHandler);
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+      clearTimeout((window as any).dimensionTimeout);
+    };
   }, [updateDimensions]);
 
+  // Optimized animation loop with reduced frequency on mobile
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -181,9 +207,10 @@ const SkillsConstellation = () => {
     canvas.height = dimensions.height;
 
     const animate = (currentTime: number) => {
-      // Throttle to 20fps for better performance during drag
-      const targetFPS = draggedSkill ? 20 : 30;
+      // Reduced FPS on mobile for better performance
+      const targetFPS = isMobile ? 15 : (draggedSkill ? 20 : 30);
       const frameInterval = 1000 / targetFPS;
+      
       if (currentTime - lastFrameTime.current < frameInterval) {
         animationRef.current = requestAnimationFrame(animate);
         return;
@@ -193,142 +220,112 @@ const SkillsConstellation = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Skip background stars during drag for performance
-      if (!draggedSkill) {
+      if (!draggedSkill && !isMobile) {
         const time = Date.now() * 0.001;
         ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        for (let i = 0; i < 20; i++) { // Further reduced star count
+        for (let i = 0; i < 15; i++) { // Reduced star count
           const x = (i * 147.83) % canvas.width;
-          const y = (i * 91.27) % canvas.height;
-          const twinkle = (Math.sin(time + i) + 1) * 0.5;
-          
-          ctx.globalAlpha = 0.1 * twinkle;
-          ctx.beginPath();
-          ctx.arc(x, y, 1, 0, Math.PI * 2);
-          ctx.fill();
+          const y = (i * 97.23) % canvas.height;
+          const opacity = 0.3 + 0.4 * Math.sin(time + i);
+          ctx.globalAlpha = opacity;
+          ctx.fillRect(x, y, 1, 1);
         }
         ctx.globalAlpha = 1;
       }
-      
-      // Update and draw particles (simplified)
-      setParticles(prev => {
-        const updated = prev.map(particle => ({
-          ...particle,
-          x: particle.x + particle.vx,
-          y: particle.y + particle.vy,
-          life: particle.life - 1,
-          vx: particle.vx * 0.97,
-          vy: particle.vy * 0.97,
-        })).filter(particle => particle.life > 0);
 
+      // Update and draw particles
+      setParticles(prev => {
+        const updated = prev
+          .map(particle => ({
+            ...particle,
+            x: particle.x + particle.vx,
+            y: particle.y + particle.vy,
+            life: particle.life - 1
+          }))
+          .filter(particle => particle.life > 0);
+
+        // Draw particles
         updated.forEach(particle => {
           const alpha = particle.life / particle.maxLife;
-          ctx.fillStyle = particle.color + Math.floor(alpha * 255).toString(16).padStart(2, '0');
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, 3, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.globalAlpha = alpha;
+          ctx.fillStyle = particle.color;
+          ctx.fillRect(particle.x, particle.y, 2, 2);
         });
+        ctx.globalAlpha = 1;
 
         return updated;
       });
 
-      // Optimized connections - reduce complexity during drag
-      if (!draggedSkill || hoveredSkill) {
-        skills.forEach(skill => {
-          if (selectedCategory && skill.category !== selectedCategory) return;
-          
-          // Limit connections during drag for performance
-          const connectionsToShow = draggedSkill ? 
-            skill.connections.filter(id => id === hoveredSkill || skill.id === hoveredSkill) : 
-            skill.connections;
-          
-          connectionsToShow.forEach(connectionId => {
+      // Draw connections only if not dragging and not on mobile
+      if (!draggedSkill && !isMobile) {
+        filteredSkills.forEach(skill => {
+          skill.connections.forEach(connectionId => {
             const connectedSkill = skills.find(s => s.id === connectionId);
-            if (!connectedSkill) return;
-            if (selectedCategory && connectedSkill.category !== selectedCategory) return;
-
-            const isHighlighted = hoveredSkill === skill.id || hoveredSkill === connectionId;
-            
-            // Simplified gradients for better performance
-            ctx.strokeStyle = isHighlighted ? 
-              categories[skill.category].color + 'CC' : 
-              categories[skill.category].color + '40';
-            
-            ctx.lineWidth = isHighlighted ? 2.5 : 1;
-            ctx.lineCap = 'round';
-            
-            ctx.beginPath();
-            ctx.moveTo(skill.x, skill.y);
-            ctx.lineTo(connectedSkill.x, connectedSkill.y);
-            ctx.stroke();
+            if (connectedSkill) {
+              const distance = Math.sqrt(
+                Math.pow(skill.x - connectedSkill.x, 2) + 
+                Math.pow(skill.y - connectedSkill.y, 2)
+              );
+              
+              if (distance < 200) {
+                const opacity = Math.max(0, 1 - distance / 200) * 0.3;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(skill.x, skill.y);
+                ctx.lineTo(connectedSkill.x, connectedSkill.y);
+                ctx.stroke();
+              }
+            }
           });
         });
-      }
-
-      // Simplified mouse connections
-      if (hoveredSkill && !draggedSkill) {
-        const skill = skills.find(s => s.id === hoveredSkill);
-        if (skill) {
-          const gradient = ctx.createLinearGradient(skill.x, skill.y, mousePos.x, mousePos.y);
-          gradient.addColorStop(0, categories[skill.category].color + '80');
-          gradient.addColorStop(1, '#FFFFFF00');
-          
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = 2;
-          ctx.setLineDash([4, 4]);
-          ctx.beginPath();
-          ctx.moveTo(skill.x, skill.y);
-          ctx.lineTo(mousePos.x, mousePos.y);
-          ctx.stroke();
-          ctx.setLineDash([]);
-        }
       }
 
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate(0);
+    setIsAnimating(true);
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      setIsAnimating(false);
     };
-  }, [dimensions, hoveredSkill, selectedCategory, mousePos, categories, skills, draggedSkill]);
+  }, [dimensions, draggedSkill, isMobile, skills, filteredSkills]);
 
+  // Optimized mouse move handler with throttling
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const newMousePos = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      };
+    if (!containerRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const newMousePos = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+    
+    // Update mouse position ref instead of state to prevent re-renders
+    mousePosRef.current = newMousePos;
+
+    // Only update skills state if dragging
+    if (draggedSkill) {
+      const newX = newMousePos.x - dragOffset.x;
+      const newY = newMousePos.y - dragOffset.y;
       
-      // Only update mouse position if not dragging for performance
-      if (!draggedSkill) {
-        setMousePos(newMousePos);
-      }
-
-      // Optimized dragging with responsive boundary checks
-      if (draggedSkill) {
-        const newX = newMousePos.x - dragOffset.x;
-        const newY = newMousePos.y - dragOffset.y;
-        
-        // Responsive margin based on screen size
-        const margin = isMobile ? 30 : 40;
-        const boundedX = Math.max(margin, Math.min(dimensions.width - margin, newX));
-        const boundedY = Math.max(margin, Math.min(dimensions.height - margin, newY));
-        
-        // Update position immediately for smoother dragging
-        setSkills(prev => prev.map(skill => 
-          skill.id === draggedSkill 
-            ? { ...skill, x: boundedX, y: boundedY }
-            : skill
-        ));
-      }
+      const margin = isMobile ? 30 : 40;
+      const boundedX = Math.max(margin, Math.min(dimensions.width - margin, newX));
+      const boundedY = Math.max(margin, Math.min(dimensions.height - margin, newY));
+      
+      setSkills(prev => prev.map(skill => 
+        skill.id === draggedSkill 
+          ? { ...skill, x: boundedX, y: boundedY }
+          : skill
+      ));
     }
-  }, [draggedSkill, dragOffset, dimensions]);
+  }, [draggedSkill, dragOffset, dimensions, isMobile]);
 
-  const handleMouseDown = (e: React.MouseEvent, skill: Skill) => {
+  const handleMouseDown = useCallback((e: React.MouseEvent, skill: Skill) => {
     e.preventDefault();
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -341,14 +338,14 @@ const SkillsConstellation = () => {
       x: mouseX - skill.x,
       y: mouseY - skill.y
     });
-  };
+  }, []);
 
   const handleMouseUp = useCallback(() => {
     setDraggedSkill(null);
     setDragOffset({ x: 0, y: 0 });
   }, []);
 
-  // Add touch event handlers for mobile
+  // Optimized touch event handlers
   useEffect(() => {
     const handleGlobalMouseUp = () => {
       setDraggedSkill(null);
@@ -371,12 +368,12 @@ const SkillsConstellation = () => {
 
   const handleSkillClick = useCallback((skill: Skill) => {
     if (!draggedSkill) {
-      // Further reduced particle count for mobile
-      const particleCount = isMobile ? 8 : 12;
+      // Reduced particle count for better performance
+      const particleCount = isMobile ? 6 : 10;
       const newParticles = Array.from({ length: particleCount }, (_, i) => {
         const angle = (i / particleCount) * Math.PI * 2;
-        const speed = isMobile ? 1.5 + Math.random() * 1.5 : 2 + Math.random() * 2;
-        const radius = isMobile ? 8 + Math.random() * 3 : 10 + Math.random() * 5;
+        const speed = isMobile ? 1 + Math.random() : 1.5 + Math.random() * 1.5;
+        const radius = isMobile ? 6 + Math.random() * 2 : 8 + Math.random() * 3;
         return createParticle(
           skill.x + Math.cos(angle) * radius,
           skill.y + Math.sin(angle) * radius,
@@ -387,157 +384,73 @@ const SkillsConstellation = () => {
     }
   }, [draggedSkill, createParticle, categories, isMobile]);
 
-  const filteredSkills = selectedCategory 
-    ? skills.filter(skill => skill.category === selectedCategory)
-    : skills;
+  // Memoized filtered skills to prevent recalculation
+  const filteredSkills = useMemo(() => 
+    selectedCategory 
+      ? skills.filter(skill => skill.category === selectedCategory)
+      : skills
+  , [skills, selectedCategory]);
 
-  // Mobile Tech Grid Component
-  const MobileTechGrid = () => {
+  // Mobile Tech Grid Component - memoized to prevent re-renders
+  const MobileTechGrid = useMemo(() => {
     const filteredMobileSkills = selectedCategory 
       ? allSkills.filter(skill => skill.category === selectedCategory)
       : allSkills;
 
     return (
-      <section className="py-8 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <motion.div 
-            className="text-center mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-2">
-              Tech Arsenal
-            </h2>
-            <p className="text-foreground-muted max-w-2xl mx-auto text-xs">
-              Modern technologies and tools I use to build scalable solutions
-            </p>
-          </motion.div>
-
-          {/* Mobile Category Filter */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-1.5 mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <motion.button
+      <section className="py-6 relative overflow-hidden">
+        {/* Sticky Category Filter */}
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md pb-2 mb-2">
+          <div className="flex flex-nowrap overflow-x-auto gap-1.5 px-2 pt-2">
+            <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-2.5 py-1.5 text-xs rounded-lg font-semibold transition-all duration-300 backdrop-blur-sm border ${
+              className={`px-3 py-1 text-xs rounded-lg font-semibold border transition-all duration-200 whitespace-nowrap ${
                 selectedCategory === null 
-                  ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border-cyan-400/50 text-cyan-300 shadow-lg shadow-cyan-500/25' 
+                  ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border-cyan-400/50 text-cyan-300' 
                   : 'bg-white/5 border-white/20 text-foreground-muted hover:bg-white/10 hover:border-white/30'
               }`}
-              whileHover={{ scale: 1.02, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}
-              whileTap={{ scale: 0.95 }}
             >
-              All ({allSkills.length})
-            </motion.button>
-            
+              All
+            </button>
             {Object.entries(categories).map(([key, category]) => (
-              <motion.button
+              <button
                 key={key}
                 onClick={() => setSelectedCategory(selectedCategory === key ? null : key)}
-                className={`px-2.5 py-1.5 text-xs rounded-lg font-semibold transition-all duration-300 backdrop-blur-sm border ${
+                className={`px-3 py-1 text-xs rounded-lg font-semibold border transition-all duration-200 whitespace-nowrap ${
                   selectedCategory === key 
-                    ? 'border-2 shadow-lg text-white' 
+                    ? 'border-2 text-white' 
                     : 'bg-white/5 border-white/20 text-foreground-muted hover:bg-white/10 hover:border-white/30'
                 }`}
                 style={{
                   backgroundColor: selectedCategory === key ? category.color + '30' : undefined,
                   borderColor: selectedCategory === key ? category.color : undefined,
                   color: selectedCategory === key ? category.color : undefined,
-                  boxShadow: selectedCategory === key ? `0 0 25px ${category.color}40` : undefined,
                 }}
-                whileHover={{ scale: 1.02, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}
-                whileTap={{ scale: 0.95 }}
               >
                 {category.name}
-              </motion.button>
+              </button>
             ))}
-          </motion.div>
-
-          {/* Compact Mobile Skills Grid */}
-          <motion.div 
-            className="grid grid-cols-3 sm:grid-cols-4 gap-2 max-w-md mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            {filteredMobileSkills.map((skill, index) => (
-              <motion.div
-                key={skill.id}
-                className="relative group"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.03,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div 
-                  className="p-2.5 rounded-lg backdrop-blur-sm border transition-all duration-300 hover:shadow-lg"
-                  style={{
-                    background: `linear-gradient(135deg, ${categories[skill.category].color}10, ${categories[skill.category].color}05)`,
-                    borderColor: categories[skill.category].color + '30',
-                    boxShadow: `0 2px 8px ${categories[skill.category].color}15`
-                  }}
-                >
-                  {/* Compact Tech Icon */}
-                  <div className="flex justify-center mb-1.5">
-                    <div 
-                      className="w-7 h-7 rounded-md flex items-center justify-center"
-                      style={{
-                        background: `linear-gradient(135deg, ${categories[skill.category].color}20, ${categories[skill.category].color}10)`,
-                        border: `1px solid ${categories[skill.category].color}40`
-                      }}
-                    >
-                      <skill.icon 
-                        className="w-4 h-4" 
-                      />
-                    </div>
-                  </div>
-
-                  {/* Compact Tech Name */}
-                  <h3 className="text-xs font-semibold text-center mb-1.5 text-white leading-tight">
-                    {skill.name}
-                  </h3>
-
-                  {/* Minimal Skill Level */}
-                  <div className="space-y-1">
-                    <div className="w-full bg-white/10 rounded-full h-1">
-                      <div 
-                        className="h-1 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${(skill.level / 10) * 100}%`,
-                          background: `linear-gradient(90deg, ${categories[skill.category].color}, ${categories[skill.category].color}80)`,
-                          boxShadow: `0 0 4px ${categories[skill.category].color}60`
-                        }}
-                      />
-                    </div>
-                    <div className="text-center">
-                      <span className="text-xs font-bold text-white">{skill.level}/10</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          </div>
+        </div>
+        {/* Minimal Grid */}
+        <div className="grid grid-cols-3 gap-2 px-2">
+          {filteredMobileSkills.map((skill) => (
+            <div
+              key={skill.id}
+              className="flex flex-col items-center justify-center p-2 rounded-lg border bg-white/5 border-white/10"
+            >
+              <div className="w-8 h-8 flex items-center justify-center rounded-md mb-1" style={{background: `${categories[skill.category].color}10`}}>
+                <skill.icon className="w-5 h-5" style={{color: categories[skill.category].color}} />
+              </div>
+              <span className="text-xs font-medium text-center text-white truncate w-full">{skill.name}</span>
+            </div>
+          ))}
         </div>
       </section>
     );
-  };
+  }, [allSkills, categories, selectedCategory]);
 
-  return isMobile ? <MobileTechGrid /> : (
+  return isMobile ? MobileTechGrid : (
     <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
