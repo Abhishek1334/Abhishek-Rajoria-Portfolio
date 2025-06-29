@@ -18,28 +18,19 @@ import festifyCheckinpanelpage from '../Media/Festify/festify-checkinpanelpage.p
 import festifyUserprofile from '../Media/Festify/festify-userprofile.png';
 import festifyUserprofile2 from '../Media/Festify/festify-userprofile-2.png';
 
-// MarketPulse imports - Updated with all new images
-import marketPulseHomepage from '../Media/MarketPulse/Homepage.png';
+// MarketPulse imports - Only use images that exist in src/Media/MarketPulse
 import marketPulseHomepageLight from '../Media/MarketPulse/Homepage_Light.png';
 import marketPulseHomepageDark from '../Media/MarketPulse/Homapage_Dark.png';
-import marketPulseLoginPage from '../Media/MarketPulse/loginPage.png';
 import marketPulseLoginLight from '../Media/MarketPulse/Login_Light.png';
 import marketPulseLoginDark from '../Media/MarketPulse/Login_Dark.png';
-import marketPulseSignupPage from '../Media/MarketPulse/signupPage.png';
 import marketPulseSignupLight from '../Media/MarketPulse/SignUp_Light.png';
 import marketPulseSignupDark from '../Media/MarketPulse/SignUp_Dark.png';
-import marketPulseDashboardLight from '../Media/MarketPulse/DashboardLight.png';
-import marketPulseDashboardDark from '../Media/MarketPulse/DashboardDark.png';
-import marketPulseDashboardLightNew from '../Media/MarketPulse/Dashboard_Light.png';
-import marketPulseDashboardDarkNew from '../Media/MarketPulse/Dashboard_Dark.png';
-import marketPulseAnalyticsPageLight from '../Media/MarketPulse/AnalyticsPageLight.png';
-import marketPulseAnalyticsPageDark from '../Media/MarketPulse/AnalyticsPageDark.png';
+import marketPulseDashboardLight from '../Media/MarketPulse/Dashboard_Light.png';
+import marketPulseDashboardDark from '../Media/MarketPulse/Dashboard_Dark.png';
 import marketPulseAnalytics1Light from '../Media/MarketPulse/Analytics1_Light.png';
 import marketPulseAnalytics1Dark from '../Media/MarketPulse/Analytics1_Dark.png';
 import marketPulseAnalytics2Light from '../Media/MarketPulse/Analytics2_Light.png';
 import marketPulseAnalytics2Dark from '../Media/MarketPulse/Analytics2_Dark.png';
-import marketPulseWatchlistPageLight from '../Media/MarketPulse/WatchlistPageLight.png';
-import marketPulseWatchlistPageDark from '../Media/MarketPulse/WatchlistPageDark.png';
 import marketPulseWatchlistLight from '../Media/MarketPulse/Watchlist_Light.png';
 import marketPulseWatchlistDark from '../Media/MarketPulse/Watchlist_Dark.png';
 import marketPulsePortfolio1Light from '../Media/MarketPulse/Portfolio1_Light.png';
@@ -398,7 +389,7 @@ const ProjectsSection = () => {
       title: 'Market Pulse',
       subtitle: 'Advanced Stock Market Analytics Dashboard',
       description: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools — all in a lightning-fast, responsive interface with light/dark mode support.',
-      image: marketPulseHomepage,
+      image: marketPulseHomepageLight,
       tags: ['React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand', 'Chart.js', 'React Query', 'Express', 'Node.js', 'JWT', 'Yahoo Finance API', 'Twelve Data'],
       liveUrl: 'https://market-pulse-two.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
@@ -460,33 +451,24 @@ const ProjectsSection = () => {
         ]
       },
       media: [
-        { type: 'image', url: marketPulseHomepage, alt: 'MarketPulse Homepage' },
         { type: 'image', url: marketPulseHomepageLight, alt: 'Homepage (Light Mode)' },
         { type: 'image', url: marketPulseHomepageDark, alt: 'Homepage (Dark Mode)' },
-        { type: 'image', url: marketPulseLoginPage, alt: 'Login Page' },
         { type: 'image', url: marketPulseLoginLight, alt: 'Login Page (Light Mode)' },
         { type: 'image', url: marketPulseLoginDark, alt: 'Login Page (Dark Mode)' },
-        { type: 'image', url: marketPulseSignupPage, alt: 'Signup Page' },
         { type: 'image', url: marketPulseSignupLight, alt: 'Signup Page (Light Mode)' },
         { type: 'image', url: marketPulseSignupDark, alt: 'Signup Page (Dark Mode)' },
         { type: 'image', url: marketPulseDashboardLight, alt: 'Dashboard (Light Mode)' },
         { type: 'image', url: marketPulseDashboardDark, alt: 'Dashboard (Dark Mode)' },
-        { type: 'image', url: marketPulseDashboardLightNew, alt: 'Dashboard Overview (Light)' },
-        { type: 'image', url: marketPulseDashboardDarkNew, alt: 'Dashboard Overview (Dark)' },
-        { type: 'image', url: marketPulseAnalyticsPageLight, alt: 'Analytics Page (Light Mode)' },
-        { type: 'image', url: marketPulseAnalyticsPageDark, alt: 'Analytics Page (Dark Mode)' },
-        { type: 'image', url: marketPulseAnalytics1Light, alt: 'Analytics Dashboard 1 (Light)' },
-        { type: 'image', url: marketPulseAnalytics1Dark, alt: 'Analytics Dashboard 1 (Dark)' },
-        { type: 'image', url: marketPulseAnalytics2Light, alt: 'Analytics Dashboard 2 (Light)' },
-        { type: 'image', url: marketPulseAnalytics2Dark, alt: 'Analytics Dashboard 2 (Dark)' },
-        { type: 'image', url: marketPulseWatchlistPageLight, alt: 'Watchlist Page (Light Mode)' },
-        { type: 'image', url: marketPulseWatchlistPageDark, alt: 'Watchlist Page (Dark Mode)' },
-        { type: 'image', url: marketPulseWatchlistLight, alt: 'Watchlist Overview (Light)' },
-        { type: 'image', url: marketPulseWatchlistDark, alt: 'Watchlist Overview (Dark)' },
-        { type: 'image', url: marketPulsePortfolio1Light, alt: 'Portfolio Dashboard 1 (Light)' },
-        { type: 'image', url: marketPulsePortfolio1Dark, alt: 'Portfolio Dashboard 1 (Dark)' },
-        { type: 'image', url: marketPulsePortfolio2Light, alt: 'Portfolio Dashboard 2 (Light)' },
-        { type: 'image', url: marketPulsePortfolio2Dark, alt: 'Portfolio Dashboard 2 (Dark)' }
+        { type: 'image', url: marketPulseAnalytics1Light, alt: 'Analytics 1 (Light)' },
+        { type: 'image', url: marketPulseAnalytics1Dark, alt: 'Analytics 1 (Dark)' },
+        { type: 'image', url: marketPulseAnalytics2Light, alt: 'Analytics 2 (Light)' },
+        { type: 'image', url: marketPulseAnalytics2Dark, alt: 'Analytics 2 (Dark)' },
+        { type: 'image', url: marketPulseWatchlistLight, alt: 'Watchlist (Light)' },
+        { type: 'image', url: marketPulseWatchlistDark, alt: 'Watchlist (Dark)' },
+        { type: 'image', url: marketPulsePortfolio1Light, alt: 'Portfolio 1 (Light)' },
+        { type: 'image', url: marketPulsePortfolio1Dark, alt: 'Portfolio 1 (Dark)' },
+        { type: 'image', url: marketPulsePortfolio2Light, alt: 'Portfolio 2 (Light)' },
+        { type: 'image', url: marketPulsePortfolio2Dark, alt: 'Portfolio 2 (Dark)' }
       ]
     }
   ];
