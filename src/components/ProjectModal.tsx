@@ -172,44 +172,54 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
   ];
 
   if (isMobile) {
-    // Minimal mobile modal
+    // Enhanced mobile modal with more details
     return (
       <Dialog open={isOpen} onClose={onClose} className="relative z-50">
         <div className="fixed inset-0 bg-black/90" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center p-1 overflow-y-auto">
           <div className="w-full max-w-md my-2">
-            <Dialog.Panel className="glass-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden p-0">
-              {/* Header */}
-              <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10">
-                <div className="flex items-center justify-between p-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 flex items-center justify-center border border-amber-500/20">
-                      <Star className="w-5 h-5 text-amber-500" />
+            <Dialog.Panel className="glass-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden p-0 max-h-[90vh] overflow-y-auto">
+              {/* Enhanced Responsive Header */}
+              <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10 sticky top-0 z-10">
+                <div className="p-3">
+                  {/* Title and Close Button Row */}
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 flex items-center justify-center border border-amber-500/20 flex-shrink-0">
+                        <Star className="w-5 h-5 text-amber-500" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <Dialog.Title className="font-bold text-gradient-amber text-lg leading-tight truncate">{project.title}</Dialog.Title>
+                        <p className="text-xs text-foreground-muted truncate">{project.subtitle}</p>
+                      </div>
                     </div>
-                    <div>
-                      <Dialog.Title className="font-bold text-gradient-amber text-lg">{project.title}</Dialog.Title>
-                      <p className="text-xs text-foreground-muted">{project.subtitle}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary px-3 py-1.5 text-xs">
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost px-3 py-1.5 text-xs">
-                        <Github className="w-4 h-4 mr-1" />
-                      </a>
-                    )}
-                    <button onClick={onClose} className="rounded-xl p-2 hover:bg-red-500/20 transition-colors border border-white/10 group">
+                    <button onClick={onClose} className="rounded-xl p-2 hover:bg-red-500/20 transition-colors border border-white/10 group flex-shrink-0">
                       <X className="h-5 w-5 text-foreground-muted group-hover:text-red-400 transition-colors" />
                     </button>
                   </div>
+                  
+                  {/* Action Buttons Row */}
+                  <div className="flex items-center gap-2">
+                    {project.liveUrl && (
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1 px-3 py-2 text-xs flex items-center justify-center gap-2">
+                        <ExternalLink className="w-4 h-4" />
+                        <span className="hidden xs:inline">Live Demo</span>
+                        <span className="xs:hidden">Demo</span>
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost flex-1 px-3 py-2 text-xs flex items-center justify-center gap-2">
+                        <Github className="w-4 h-4" />
+                        <span className="hidden xs:inline">View Code</span>
+                        <span className="xs:hidden">Code</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
+
               {/* Image carousel */}
-              <div className="relative h-56 bg-gradient-to-br from-amber-500/5 to-purple-500/5">
+              <div className="relative h-48 bg-gradient-to-br from-amber-500/5 to-purple-500/5">
                 {project.media && project.media.length > 0 && (
                   <div className="relative h-full overflow-hidden">
                     <div className="absolute inset-0">
@@ -236,23 +246,135 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                         <button onClick={handleNextSlide} className="absolute right-2 top-1/2 -translate-y-1/2 glass-card p-1.5 hover:bg-white/20 transition-colors z-10">
                           <ChevronRight className="w-4 h-4 text-white" />
                         </button>
+                        {/* Slide indicator */}
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                          <div className="glass-card px-2 py-1 bg-black/60">
+                            <span className="text-white text-xs font-medium">{currentSlide + 1} / {project.media.length}</span>
+                          </div>
+                        </div>
                       </>
                     )}
                   </div>
                 )}
               </div>
-              {/* Description */}
-              <div className="p-4">
-                <p className="text-sm text-foreground-muted mb-2 line-clamp-5">{project.description}</p>
-                <div className="flex gap-2 mt-2">
+
+              {/* Enhanced Content Section */}
+              <div className="p-4 space-y-4">
+                {/* Description */}
+                <div>
+                  <h4 className="text-sm font-semibold text-amber-500 mb-2 flex items-center gap-2">
+                    <Info className="w-4 h-4" />
+                    About Project
+                  </h4>
+                  <p className="text-sm text-foreground-muted leading-relaxed">{project.description}</p>
+                </div>
+
+                {/* Technologies */}
+                <div>
+                  <h4 className="text-sm font-semibold text-amber-500 mb-2 flex items-center gap-2">
+                    <Tag className="w-4 h-4" />
+                    Technologies
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, index) => (
+                      <span key={index} className="px-2 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Key Highlights */}
+                <div>
+                  <h4 className="text-sm font-semibold text-amber-500 mb-2 flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    Key Highlights
+                  </h4>
+                  <div className="space-y-2">
+                    {project.highlights.slice(0, 3).map((highlight, index) => (
+                      <div key={index} className="flex items-start gap-3 text-sm text-foreground-muted">
+                        <div className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0 mt-2" />
+                        <span className="leading-relaxed">{highlight}</span>
+                      </div>
+                    ))}
+                    {project.highlights.length > 3 && (
+                      <div className="text-xs text-foreground-muted/70 italic">
+                        +{project.highlights.length - 3} more highlights
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Collapsible Detailed Content */}
+                <details className="group">
+                  <summary className="cursor-pointer list-none">
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                      <h4 className="text-sm font-semibold text-amber-500 flex items-center gap-2">
+                        <Info className="w-4 h-4" />
+                        Detailed Information
+                      </h4>
+                      <ChevronRight className="w-4 h-4 text-foreground-muted group-open:rotate-90 transition-transform" />
+                    </div>
+                  </summary>
+                  <div className="mt-3 space-y-4 pl-4 border-l border-white/10">
+                    {/* Overview */}
+                    <div>
+                      <h5 className="text-xs font-semibold text-purple-400 mb-2">Project Overview</h5>
+                      <p className="text-xs text-foreground-muted leading-relaxed">{project.detailedContent.overview}</p>
+                    </div>
+
+                    {/* Features */}
+                    <div>
+                      <h5 className="text-xs font-semibold text-purple-400 mb-2">Features & Functionality</h5>
+                      <div className="space-y-2">
+                        {project.detailedContent.features.slice(0, 4).map((feature, index) => (
+                          <div key={index} className="flex items-start gap-2 text-xs text-foreground-muted">
+                            <Zap className="w-3 h-3 text-amber-500 flex-shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{feature}</span>
+                          </div>
+                        ))}
+                        {project.detailedContent.features.length > 4 && (
+                          <div className="text-xs text-foreground-muted/70 italic">
+                            +{project.detailedContent.features.length - 4} more features
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div>
+                      <h5 className="text-xs font-semibold text-purple-400 mb-2">Technology Stack</h5>
+                      <div className="grid grid-cols-2 gap-2">
+                        {project.detailedContent.techStack.slice(0, 6).map((tech, index) => (
+                          <div key={index} className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-r from-amber-500/5 to-purple-500/5 border border-amber-500/20">
+                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-amber-500 to-purple-500 flex-shrink-0" />
+                            <span className="text-xs font-medium text-foreground truncate">{tech}</span>
+                          </div>
+                        ))}
+                        {project.detailedContent.techStack.length > 6 && (
+                          <div className="col-span-2 text-xs text-foreground-muted/70 italic">
+                            +{project.detailedContent.techStack.length - 6} more technologies
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+                {/* Bottom Action Buttons */}
+                <div className="flex gap-2 pt-2 border-t border-white/10">
                   {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1 text-xs py-2 flex items-center justify-center gap-2">
-                      <ExternalLink className="w-4 h-4" />Live Demo
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1 text-xs py-3 flex items-center justify-center gap-2">
+                      <ExternalLink className="w-4 h-4" />
+                      <span className="hidden xs:inline">View Live Demo</span>
+                      <span className="xs:hidden">Live Demo</span>
                     </a>
                   )}
                   {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost flex-1 text-xs py-2 flex items-center justify-center gap-2">
-                      <Github className="w-4 h-4" />Code
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost flex-1 text-xs py-3 flex items-center justify-center gap-2">
+                      <Github className="w-4 h-4" />
+                      <span className="hidden xs:inline">View Source Code</span>
+                      <span className="xs:hidden">Source Code</span>
                     </a>
                   )}
                 </div>
@@ -272,37 +394,43 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
       <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
         <div className="w-full max-w-7xl my-4 sm:my-8">
           <Dialog.Panel className="glass-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
-            {/* Header */}
+            {/* Enhanced Responsive Header */}
             <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10">
-              <div className="flex items-center justify-between p-4 sm:p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 flex items-center justify-center border border-amber-500/20">
-                    <Star className="w-6 h-6 text-amber-500" />
+              <div className="p-4 sm:p-6">
+                {/* Title and Close Button Row */}
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-4 flex-1 min-w-0">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 flex items-center justify-center border border-amber-500/20 flex-shrink-0">
+                      <Star className="w-6 h-6 text-amber-500" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <Dialog.Title className="text-xl sm:text-2xl lg:text-3xl font-bold text-gradient-amber leading-tight truncate">
+                        {project.title}
+                      </Dialog.Title>
+                      <p className="text-sm text-foreground-muted truncate mt-1">{project.subtitle}</p>
+                    </div>
                   </div>
-                  <div>
-                    <Dialog.Title className="text-xl sm:text-2xl font-bold text-gradient-amber">
-                      {project.title}
-                    </Dialog.Title>
-                    <p className="text-sm text-foreground-muted">{project.subtitle}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  {/* Action Buttons */}
-                  <div className="hidden sm:flex items-center gap-2">
-                    {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary px-4 py-2 text-sm">
-                        <ExternalLink className="w-4 h-4 mr-2" />Live Demo
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost px-4 py-2 text-sm">
-                        <Github className="w-4 h-4 mr-2" />Code
-                      </a>
-                    )}
-                  </div>
-                  <button onClick={onClose} className="rounded-xl p-3 hover:bg-red-500/20 transition-colors border border-white/10 group">
+                  <button onClick={onClose} className="rounded-xl p-3 hover:bg-red-500/20 transition-colors border border-white/10 group flex-shrink-0">
                     <X className="h-5 w-5 text-foreground-muted group-hover:text-red-400 transition-colors" />
                   </button>
+                </div>
+                
+                {/* Action Buttons Row */}
+                <div className="flex items-center gap-3">
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base flex items-center gap-2 hover:scale-105 transition-transform">
+                      <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="hidden sm:inline">Live Demo</span>
+                      <span className="sm:hidden">Demo</span>
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base flex items-center gap-2 hover:scale-105 transition-transform">
+                      <Github className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="hidden sm:inline">View Source Code</span>
+                      <span className="sm:hidden">Code</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
