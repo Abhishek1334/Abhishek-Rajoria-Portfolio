@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 
 const itemVariants = {
@@ -12,7 +11,7 @@ const itemVariants = {
 
 const ContactAvailability = () => (
   <motion.div
-    className="glass-card p-6"
+    className="glass-card p-4 sm:p-6 md:p-8"
     variants={itemVariants}
   >
     <div className="flex items-center gap-3 mb-3">

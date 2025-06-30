@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -59,7 +58,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="glass-card p-8">
+    <div className="glass-card p-4 sm:p-6 md:p-8 bg-background-secondary/5">
       <h3 className="text-2xl font-bold mb-6 text-gradient-amber">
         {isSubmitted ? 'Message Sent! 🚀' : 'Launch Your Idea'}
       </h3>
@@ -85,7 +84,7 @@ const ContactForm = () => {
               value={formData.name}
               onChange={handleInputChange}
               placeholder="Your Name"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-foreground-muted focus:outline-none focus:border-amber-500 transition-colors"
+              className="w-full px-4 py-3 bg-muted border border-border rounded-lg text-foreground placeholder-foreground-muted focus:outline-none focus:border-primary transition-colors"
               required
             />
           </div>
@@ -96,7 +95,7 @@ const ContactForm = () => {
               value={formData.email}
               onChange={handleInputChange}
               placeholder="Your Email"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-foreground-muted focus:outline-none focus:border-amber-500 transition-colors"
+              className="w-full px-4 py-3 bg-muted border border-border rounded-lg text-foreground placeholder-foreground-muted focus:outline-none focus:border-primary transition-colors"
               required
             />
           </div>
@@ -107,7 +106,7 @@ const ContactForm = () => {
               onChange={handleInputChange}
               placeholder="Tell me about your project, idea, or just say hi!"
               rows={6}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-foreground-muted focus:outline-none focus:border-amber-500 transition-colors resize-none"
+              className="w-full px-4 py-3 bg-muted border border-border rounded-lg text-foreground placeholder-foreground-muted focus:outline-none focus:border-primary transition-colors resize-none"
               required
             />
           </div>

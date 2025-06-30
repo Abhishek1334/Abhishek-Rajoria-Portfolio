@@ -5,9 +5,11 @@ import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import SkillsConstellation from '../components/SkillsConstellation';
 import ProjectsSection from '../components/ProjectsSection';
+import CertificateSection from '../components/CertificateSection';
 import ContactSection from '../components/ContactSection';
 import ResumeModal from '../components/ResumeModal';
 import MobileFloatingNav from '../components/MobileFloatingNav';
+import ThemeToggle from '../components/ThemeToggle';
 
 import { useVisitorTracking } from '../hooks/useVisitorTracking';
 import { Toaster } from '@/components/ui/sonner';
@@ -30,7 +32,9 @@ const Index = () => {
 
   const navigationLinks = [
     { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Certificates', href: '#certificates' },
     { label: 'Resume', href: '#resume', action: 'resume' },
     { label: 'Contact', href: '#contact' }
   ];
@@ -54,7 +58,7 @@ const Index = () => {
     >
       {/* Navigation */}
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-white/10"
+        className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -66,7 +70,7 @@ const Index = () => {
               className="text-xl font-bold"
               whileHover={{ scale: 1.05 }}
             >
-              <span className="text-gradient-amber">AR</span>
+              <span className="text-gradient-primary">AR</span>
             </motion.div>
 
             {/* Desktop Navigation Links */}
@@ -74,7 +78,7 @@ const Index = () => {
               {navigationLinks.map((link, index) => (
                 <motion.button
                   key={link.label}
-                  className="text-foreground-muted hover:text-amber-500 transition-colors relative interactive"
+                  className="text-foreground-muted hover:text-primary transition-colors relative interactive"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
@@ -83,7 +87,7 @@ const Index = () => {
                 >
                   {link.label}
                   <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-amber-500 origin-left"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary origin-left"
                     initial={{ scaleX: 0 }}
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.3 }}
@@ -92,10 +96,11 @@ const Index = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center gap-4">
+            {/* Desktop Actions */}
+            <div className="hidden md:flex items-center gap-4">
+              <ThemeToggle />
               <motion.button
-                className="btn-primary text-sm px-4 sm:px-6 py-2 relative overflow-hidden hidden sm:block interactive"
+                className="btn-primary text-sm px-4 sm:px-6 py-2 relative overflow-hidden interactive"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 }}
@@ -105,15 +110,19 @@ const Index = () => {
               >
                 <span className="relative z-10">Let's Work Together</span>
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600"
+                  className="absolute inset-0 bg-gradient-to-r from-primary to-primary/90"
                   initial={{ x: '-100%' }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3 }}
                 />
               </motion.button>
+            </div>
 
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-4 md:hidden">
+              <ThemeToggle />
               <button
-                className="md:hidden p-2 text-foreground-muted hover:text-amber-500 transition-colors"
+                className="p-2 text-foreground-muted hover:text-primary transition-colors"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -130,7 +139,7 @@ const Index = () => {
               {navigationLinks.map((link, index) => (
                 <motion.button
                   key={link.label}
-                  className="block text-left text-foreground-muted hover:text-amber-500 transition-colors py-2 w-full interactive"
+                  className="block text-left text-foreground-muted hover:text-primary transition-colors py-2 w-full interactive"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -147,7 +156,7 @@ const Index = () => {
               >
                 <span className="relative z-10">Let's Work Together</span>
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600"
+                  className="absolute inset-0 bg-gradient-to-r from-primary to-primary/90"
                   initial={{ x: '-100%' }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3 }}
@@ -163,23 +172,26 @@ const Index = () => {
         <section id="hero">
           <HeroSection />
         </section>
-        <section id="about">
+        <section id="about" className="scroll-mt-16">
           <AboutSection />
         </section>
-        <section id="skills">
+        <section id="skills" className="scroll-mt-16">
           <SkillsConstellation />
         </section>
-        <section id="projects">
+        <section id="projects" className="scroll-mt-16">
           <ProjectsSection />
         </section>
-        <section id="contact">
+        <section id="certificates" className="scroll-mt-16">
+          <CertificateSection />
+        </section>
+        <section id="contact" className="scroll-mt-16">
           <ContactSection />
         </section>
       </main>
 
       {/* Enhanced Footer */}
       <motion.footer
-        className="py-8 sm:py-12 border-t border-white/10 bg-background-secondary/30"
+        className="py-8 sm:py-12 border-t border-border/50 bg-background-secondary/30"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -191,56 +203,50 @@ const Index = () => {
               className="text-xl sm:text-2xl font-bold mb-4"
               whileHover={{ scale: 1.05 }}
             >
-              <span className="text-gradient-amber">Abhishek Rajoria</span>
+              <span className="text-gradient-primary">Abhishek Rajoria</span>
             </motion.div>
             <p className="text-sm sm:text-base text-foreground-muted mb-6">
               Full Stack Developer • Building Digital Solutions Since 2020
             </p>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8">
               {[
-                { label: 'GitHub', href: 'https://github.com/abhishekrajoria' },
-                { label: 'LinkedIn', href: 'https://linkedin.com/in/abhishek-rajoria' },
-                { label: 'Email', href: 'mailto:AbhishekRajoria24@gmail.com' }
-              ].map((link, index) => (
+                { name: 'GitHub', url: 'https://github.com/yourusername' },
+                { name: 'LinkedIn', url: 'https://linkedin.com/in/yourusername' },
+                { name: 'Twitter', url: 'https://twitter.com/yourusername' },
+                { name: 'Email', url: 'mailto:your.email@example.com' }
+              ].map((social, index) => (
                 <motion.a
-                  key={link.label}
-                  href={link.href}
+                  key={social.name}
+                  href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm sm:text-base text-foreground-muted hover:text-amber-500 transition-colors"
+                  className="text-foreground-muted hover:text-primary transition-colors"
+                  whileHover={{ scale: 1.1 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
                   viewport={{ once: true }}
                 >
-                  {link.label}
+                  {social.name}
                 </motion.a>
               ))}
             </div>
-            <motion.div
-              className="text-xs sm:text-sm text-foreground-muted"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              © {new Date().getFullYear()} Abhishek Rajoria. Designed and developed with passion.
-            </motion.div>
+            <p className="text-xs text-foreground-muted">
+              © 2024 Abhishek Rajoria. All rights reserved.
+            </p>
           </div>
         </div>
       </motion.footer>
-      
+
+      {/* Mobile Floating Navigation */}
+      <MobileFloatingNav />
+
       {/* Resume Modal */}
       <ResumeModal 
         isOpen={isResumeModalOpen} 
         onClose={() => setIsResumeModalOpen(false)} 
       />
-      
-      {/* Mobile Floating Nav */}
-      <MobileFloatingNav onResumeClick={() => setIsResumeModalOpen(true)} />
-      
-      {/* Toast notifications */}
+
       <Toaster />
     </motion.div>
   );

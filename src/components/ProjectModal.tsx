@@ -42,6 +42,8 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
+
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -173,14 +175,14 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
 
   if (isMobile) {
     // Enhanced mobile modal with more details
-    return (
-      <Dialog open={isOpen} onClose={onClose} className="relative z-50">
-        <div className="fixed inset-0 bg-black/90" aria-hidden="true" />
+  return (
+    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+      <div className="fixed inset-0 bg-black/90" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center p-1 overflow-y-auto">
           <div className="w-full max-w-md my-2">
             <Dialog.Panel className="glass-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden p-0 max-h-[90vh] overflow-y-auto">
               {/* Enhanced Responsive Header */}
-              <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10 sticky top-0 z-10">
+            <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10">
                 <div className="p-3">
                   {/* Title and Close Button Row */}
                   <div className="flex items-start justify-between gap-3 mb-3">
@@ -196,10 +198,10 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                     <button onClick={onClose} className="rounded-xl p-2 hover:bg-red-500/20 transition-colors border border-white/10 group flex-shrink-0">
                       <X className="h-5 w-5 text-foreground-muted group-hover:text-red-400 transition-colors" />
                     </button>
-                  </div>
-                  
+          </div>
+
                   {/* Action Buttons Row */}
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
                     {project.liveUrl && (
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1 px-3 py-2 text-xs flex items-center justify-center gap-2">
                         <ExternalLink className="w-4 h-4" />
@@ -228,13 +230,14 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                           <video src={project.media[currentSlide].url} className="max-h-full max-w-full object-contain" controls preload="metadata" />
                         </div>
                       ) : (
-                        <div className="relative h-full w-full overflow-hidden cursor-pointer">
+                        <div className="relative h-full w-full overflow-hidden cursor-pointer" onClick={() => setIsImageExpanded(true)}>
                           <img
                             src={project.media[currentSlide].url}
                             alt={project.media[currentSlide].alt}
                             className="h-full w-full object-contain p-1 transition-transform duration-300"
                             draggable={false}
                           />
+                          <span className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-lg flex items-center gap-1"><ZoomIn className="w-3 h-3" />Expand</span>
                         </div>
                       )}
                     </div>
@@ -255,8 +258,28 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                       </>
                     )}
                   </div>
-                )}
-              </div>
+                    )}
+                  </div>
+                  
+              {/* Expanded Image Overlay */}
+              {isImageExpanded && project.media && project.media[currentSlide].type === 'image' && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95" onClick={() => setIsImageExpanded(false)}>
+                  <button
+                    className="absolute top-4 right-4 z-10 rounded-full bg-black/70 p-2 border border-white/20 hover:bg-red-500/30 transition-colors"
+                    onClick={e => { e.stopPropagation(); setIsImageExpanded(false); }}
+                    aria-label="Close expanded image"
+                  >
+                    <X className="w-6 h-6 text-white" />
+                  </button>
+                  <img
+                    src={project.media[currentSlide].url}
+                    alt={project.media[currentSlide].alt}
+                    className="max-h-[90vh] max-w-[95vw] object-contain rounded-xl shadow-2xl border border-white/10"
+                    draggable={false}
+                    onClick={e => e.stopPropagation()}
+                  />
+                </div>
+              )}
 
               {/* Enhanced Content Section */}
               <div className="p-4 space-y-4">
@@ -390,28 +413,28 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
       {/* Simple Backdrop */}
-      <div className="fixed inset-0 bg-black/90" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/80" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
         <div className="w-full max-w-7xl my-4 sm:my-8">
-          <Dialog.Panel className="glass-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+          <Dialog.Panel className="rounded-2xl shadow-xl border border-border bg-background-secondary overflow-hidden">
             {/* Enhanced Responsive Header */}
-            <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10">
+            <div className="bg-gradient-to-r from-secondary/10 via-primary/5 to-secondary/10 border-b border-border">
               <div className="p-4 sm:p-6">
                 {/* Title and Close Button Row */}
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="flex items-center gap-4 flex-1 min-w-0">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 flex items-center justify-center border border-amber-500/20 flex-shrink-0">
-                      <Star className="w-6 h-6 text-amber-500" />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center border border-secondary/20 flex-shrink-0">
+                      <Star className="w-6 h-6 text-secondary" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <Dialog.Title className="text-xl sm:text-2xl lg:text-3xl font-bold text-gradient-amber leading-tight truncate">
+                      <Dialog.Title className="text-xl sm:text-2xl lg:text-3xl font-bold text-gradient-primary leading-tight truncate">
                         {project.title}
                       </Dialog.Title>
                       <p className="text-sm text-foreground-muted truncate mt-1">{project.subtitle}</p>
                     </div>
                   </div>
-                  <button onClick={onClose} className="rounded-xl p-3 hover:bg-red-500/20 transition-colors border border-white/10 group flex-shrink-0">
-                    <X className="h-5 w-5 text-foreground-muted group-hover:text-red-400 transition-colors" />
+                  <button onClick={onClose} className="rounded-xl p-3 hover:bg-destructive/10 transition-colors border border-border group flex-shrink-0">
+                    <X className="h-5 w-5 text-foreground-muted group-hover:text-destructive transition-colors" />
                   </button>
                 </div>
                 
@@ -437,8 +460,8 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
             {/* Content Layout */}
             <div className="flex flex-col lg:grid lg:grid-cols-3">
               {/* Left Panel - Media Gallery */}
-              <div className="lg:col-span-2 relative bg-black/5">
-                <div className="relative h-[50vh] sm:h-[60vh] lg:h-[70vh] bg-gradient-to-br from-amber-500/5 to-purple-500/5">
+              <div className="lg:col-span-2 relative bg-background border-r border-border">
+                <div className="relative h-[50vh] sm:h-[60vh] lg:h-[70vh] bg-gradient-to-br from-secondary/5 to-primary/5">
                   {project.media && project.media.length > 0 && (
                     <div className="relative h-full overflow-hidden">
                       {/* Current Media */}
@@ -448,7 +471,7 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                             <video src={project.media[currentSlide].url} className="max-h-full max-w-full object-contain" controls preload="metadata" />
                           </div>
                         ) : (
-                          <div className="relative h-full w-full overflow-hidden cursor-pointer" onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} onWheel={handleWheel}>
+                          <div className="relative h-full w-full overflow-hidden cursor-pointer" onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
                             <img
                               src={project.media[currentSlide].url}
                               alt={project.media[currentSlide].alt}
@@ -475,16 +498,16 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                       <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex flex-col gap-1 sm:gap-2 z-10">
                         <button onClick={handleZoomIn} className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group" title="Zoom In">
                           <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
-                        </button>
+                                    </button>
                         <button onClick={handleZoomOut} className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group" title="Zoom Out">
                           <ZoomOut className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
-                        </button>
+                                    </button>
                         {isZoomed && (
                           <button onClick={handleResetZoom} className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group" title="Reset Zoom">
                             <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
-                          </button>
+                                    </button>
                         )}
-                      </div>
+                                  </div>
                       {/* Media Info */}
                       <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
                         <div className="flex items-center justify-between">
@@ -528,20 +551,19 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                           </div>
                         )}
                       </div>
-                    </div>
+                  </div>
                   )}
                 </div>
               </div>
               {/* Right Panel - Project Details */}
-              <div className="border-t lg:border-t-0 lg:border-l border-white/10 bg-background-secondary/30">
-                <div className="h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
-                  <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+              <div className="bg-background p-6 space-y-6 flex flex-col min-h-[50vh]">
+                <div className="space-y-4">
                     {/* Tags */}
                     <div>
-                      <h4 className="text-sm font-semibold text-amber-500 mb-3 flex items-center gap-2"><Tag className="w-4 h-4" />Technologies</h4>
+                    <h4 className="text-sm font-semibold text-amber-500 mb-3 flex items-center gap-2"><Tag className="w-4 h-4" />Technologies</h4>
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag, index) => (
-                          <span key={index} className="px-2 sm:px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">{tag}</span>
+                        <span key={index} className="px-2 sm:px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">{tag}</span>
                         ))}
                       </div>
                     </div>
@@ -549,66 +571,65 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                     <div>
                       <div className="flex rounded-lg bg-black/20 p-1">
                         {tabs.map((tab) => (
-                          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium rounded-md transition-colors ${activeTab === tab.id ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'text-foreground-muted hover:text-foreground hover:bg-white/5'}`}>
+                        <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium rounded-md transition-colors ${activeTab === tab.id ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'text-foreground-muted hover:text-foreground hover:bg-white/5'}`}>
                             <tab.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                             <span className="hidden sm:inline">{tab.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                </button>
+                  ))}
+                </div>
+              </div>
                     {/* Tab Content */}
                     <div className="space-y-4">
                       {activeTab === 'overview' && (
-                        <div className="space-y-4">
-                          <div>
+                <div className="space-y-4">
+                  <div>
                             <h4 className="text-base sm:text-lg font-semibold text-gradient-purple mb-2">Project Overview</h4>
-                            <p className="text-foreground-muted leading-relaxed text-sm">{project.detailedContent.overview}</p>
-                          </div>
-                          <div>
+                          <p className="text-foreground-muted leading-relaxed text-sm">{project.detailedContent.overview}</p>
+                  </div>
+                  <div>
                             <h4 className="text-sm font-semibold text-amber-500 mb-3">Key Highlights</h4>
                             <div className="space-y-2">
                               {project.highlights.map((highlight, index) => (
-                                <div key={index} className="flex items-center gap-3 text-sm text-foreground-muted">
+                              <div key={index} className="flex items-center gap-3 text-sm text-foreground-muted">
                                   <div className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" />
                                   <span>{highlight}</span>
                                 </div>
                               ))}
                             </div>
-                          </div>
-                        </div>
+                  </div>
+                </div>
                       )}
                       {activeTab === 'features' && (
-                        <div>
+                  <div>
                           <h4 className="text-base sm:text-lg font-semibold text-gradient-purple mb-4">Features & Functionality</h4>
                           <div className="space-y-3">
                             {project.detailedContent.features.map((feature, index) => (
-                              <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 flex-shrink-0 mt-0.5" />
-                                <span className="text-sm text-foreground-muted leading-relaxed">{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+                                  <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                                  <span className="text-sm text-foreground-muted leading-relaxed">{feature}</span>
+                                </div>
+                      ))}
+                    </div>
+                  </div>
                       )}
                       {activeTab === 'tech' && (
-                        <div>
+                  <div>
                           <h4 className="text-base sm:text-lg font-semibold text-gradient-purple mb-4">Technology Stack</h4>
                           <div className="grid gap-3">
                             {project.detailedContent.techStack.map((tech, index) => (
-                              <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-amber-500/5 to-purple-500/5 border border-amber-500/20">
+                            <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-amber-500/5 to-purple-500/5 border border-amber-500/20">
                                 <div className="w-3 h-3 rounded-full bg-gradient-to-r from-amber-500 to-purple-500 flex-shrink-0" />
                                 <span className="text-sm font-medium text-foreground">{tech}</span>
                               </div>
                             ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </div>
-              </div>
+                      )}
+                  </div>
+                </div>
             </div>
-          </Dialog.Panel>
+          </div>
+        </Dialog.Panel>
         </div>
       </div>
     </Dialog>

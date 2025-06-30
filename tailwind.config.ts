@@ -28,9 +28,9 @@ export default {
 		},
 		extend: {
 			colors: {
-				border: 'hsl(var(--border))',
-				input: 'hsl(var(--input))',
-				ring: 'hsl(var(--ring))',
+				border: 'rgb(var(--border))',
+				input: 'rgb(var(--input))',
+				ring: 'rgb(var(--ring))',
 				background: {
 					DEFAULT: 'rgb(var(--background))',
 					secondary: 'rgb(var(--background-secondary))'
@@ -40,35 +40,32 @@ export default {
 					muted: 'rgb(var(--foreground-muted))'
 				},
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: 'rgb(var(--primary))',
+					foreground: 'rgb(var(--primary-foreground))'
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
-				},
-				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))'
-				},
-				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
+					DEFAULT: 'rgb(var(--secondary))',
+					foreground: 'rgb(var(--secondary-foreground))'
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))',
-					amber: 'rgb(var(--accent-amber))',
-					purple: 'rgb(var(--accent-purple))',
-					dark: 'rgb(var(--accent-dark))'
+					DEFAULT: 'rgb(var(--accent))',
+					foreground: 'rgb(var(--accent-foreground))'
+				},
+				destructive: {
+					DEFAULT: 'rgb(var(--destructive))',
+					foreground: 'rgb(var(--destructive-foreground))'
+				},
+				muted: {
+					DEFAULT: 'rgb(var(--muted))',
+					foreground: 'rgb(var(--muted-foreground))'
 				},
 				popover: {
-					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))'
+					DEFAULT: 'rgb(var(--popover))',
+					foreground: 'rgb(var(--popover-foreground))'
 				},
 				card: {
-					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))'
+					DEFAULT: 'rgb(var(--card))',
+					foreground: 'rgb(var(--card-foreground))'
 				}
 			},
 			borderRadius: {
@@ -136,7 +133,7 @@ export default {
 						borderColor: 'transparent'
 					},
 					'50%': {
-						borderColor: 'rgb(245, 158, 11)'
+						borderColor: 'rgb(var(--secondary))'
 					}
 				},
 				'float': {
@@ -149,10 +146,10 @@ export default {
 				},
 				'pulse-glow': {
 					'0%, 100%': {
-						boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)'
+						boxShadow: '0 0 20px rgb(var(--primary) / 0.3)'
 					},
 					'50%': {
-						boxShadow: '0 0 40px rgba(245, 158, 11, 0.6)'
+						boxShadow: '0 0 40px rgb(var(--primary) / 0.6)'
 					}
 				}
 			},

@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
@@ -34,23 +33,23 @@ const itemVariants = {
 };
 
 const ContactInfo = () => (
-  <div className="glass-card p-8">
+  <div className="glass-card p-4 sm:p-6 md:p-8 bg-background-secondary/5">
     <h3 className="text-2xl font-bold mb-6 text-gradient-purple">Connect & Collaborate</h3>
     <div className="space-y-6">
       {contactInfo.map((info) => (
         <motion.a
           key={info.label}
           href={info.link}
-          className="flex items-center gap-4 text-foreground-muted hover:text-amber-500 transition-colors group"
+          className="flex items-center gap-4 text-foreground-muted hover:text-primary transition-colors group"
           variants={itemVariants}
           whileHover={{ x: 5 }}
         >
-          <div className="p-3 bg-white/5 rounded-lg group-hover:bg-amber-500/10 transition-colors">
-            <info.icon className="w-5 h-5" />
+          <div className="p-3 bg-muted rounded-lg group-hover:bg-primary/10 transition-colors">
+            <info.icon className="w-5 h-5 text-foreground" />
           </div>
           <div>
             <div className="text-sm text-foreground-muted">{info.label}</div>
-            <div className="text-white">{info.value}</div>
+            <div className="text-foreground font-medium">{info.value}</div>
           </div>
         </motion.a>
       ))}

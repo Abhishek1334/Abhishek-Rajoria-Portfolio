@@ -72,7 +72,7 @@ const ContactSection = () => {
           }}
         />
       </div>
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           className="max-w-6xl mx-auto"
           variants={containerVariants}
@@ -85,10 +85,10 @@ const ContactSection = () => {
             itemVariants={itemVariants}
             isVisible={isVisible}
           />
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
             <ContactForm />
             <motion.div
-              className="space-y-8"
+              className="space-y-6"
               variants={itemVariants}
             >
               <ContactInfo />

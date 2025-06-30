@@ -45,6 +45,11 @@ import stayFinderExplore from '../Media/StayFinder/stayfinder-explore.png';
 import stayFinderCreateListings from '../Media/StayFinder/stayfinder-createListings.png';
 import stayFinderMyBookings from '../Media/StayFinder/stayfinder-mybookings.png';
 
+// New main project images from root Media folder
+import marketPulseMain from '../Media/MarketPulse.png';
+import stayFinderMain from '../Media/StayFinder.png';
+import festifyMain from '../Media/Festify.png';
+
 interface Project {
   id: string;
   title: string;
@@ -239,7 +244,7 @@ const ProjectsSection = () => {
       title: 'StayFinder',
       subtitle: 'Airbnb-Inspired Property Booking Platform',
       description: 'StayFinder is a full-stack web application inspired by Airbnb, built as an internship assignment. It allows users to list, search, and book properties for short-term or long-term stays, demonstrating end-to-end development skills.',
-      image: stayFinderHomepage,
+      image: '/StayFinder.png',
       tags: ['React', 'TypeScript', 'Redux Toolkit', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe', 'Vite'],
       liveUrl: 'https://stayfinder-eta.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/StayFinder',
@@ -310,7 +315,7 @@ const ProjectsSection = () => {
       title: 'Festify',
       subtitle: 'Local Event Aggregator App',
       description: 'Festify is a local event aggregator platform where users can discover, create, RSVP, and manage events. It supports QR code-based ticketing, a complete check-in system for organizers, and a clean, modern user interface.',
-      image: festifyHomepage,
+      image: '/Festify.png',
       tags: ['React.js', 'Vite', 'Context API', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Bcrypt.js', 'Multer', 'Cloudinary', 'qrcode.react', 'Html5Qrcode'],
       liveUrl: 'https://festify-tau.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/Festify',
@@ -389,7 +394,7 @@ const ProjectsSection = () => {
       title: 'Market Pulse',
       subtitle: 'Advanced Stock Market Analytics Dashboard',
       description: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools — all in a lightning-fast, responsive interface with light/dark mode support.',
-      image: marketPulseHomepageLight,
+      image: '/MarketPulse.png',
       tags: ['React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand', 'Chart.js', 'React Query', 'Express', 'Node.js', 'JWT', 'Yahoo Finance API', 'Twelve Data'],
       liveUrl: 'https://market-pulse-two.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/MarketPulse',

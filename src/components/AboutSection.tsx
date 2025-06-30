@@ -132,8 +132,8 @@ const AboutSection = () => {
                   </p>
                   <div className="flex items-center gap-2 mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-amber-500/10 to-purple-500/10 rounded-lg border border-amber-500/20">
                     <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
-                    <span className="text-xs sm:text-sm font-medium text-amber-500">
-                      Computer Applications at VIPS Delhi • CGPA: 7.92
+                    <span className="text-xs sm:text-sm font-medium text-foreground-muted">
+                      Computer Applications at VIPS Delhi • CGPA: 8.0
                     </span>
                   </div>
                 </div>
@@ -147,28 +147,28 @@ const AboutSection = () => {
                 <div className="absolute -top-2 -right-2 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <div className="flex items-center gap-3 mb-4 sm:mb-6">
                   <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
-                  <h4 className="text-lg sm:text-xl font-semibold text-amber-500">Education & Certifications</h4>
+                  <h4 className="text-lg sm:text-xl font-semibold text-foreground-muted">Education & Certifications</h4>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+                  <div className="flex justify-between items-center p-3 bg-background-secondary/5 rounded-lg">
                     <div>
-                      <span className="text-sm sm:text-base text-white font-medium">Bachelor of Computer Applications</span>
-                      <div className="text-xs sm:text-sm text-foreground-muted">VIPS Delhi • 2022-Present</div>
+                      <span className="text-sm sm:text-base text-foreground font-medium">Bachelor of Computer Applications</span>
+                      <div className="text-xs sm:text-sm text-foreground-muted">VIPS Delhi • 2019-2022 • Completed</div>
                     </div>
                     <div className="text-right">
-                      <span className="text-base sm:text-lg text-amber-500 font-bold">7.92</span>
+                      <span className="text-base sm:text-lg text-foreground font-bold">8.0</span>
                       <div className="text-xs text-foreground-muted">CGPA</div>
                     </div>
                   </div>
-                  <div className="border-t border-white/10 pt-3 sm:pt-4">
+                  <div className="border-t border-background-secondary pt-3 sm:pt-4">
                     <div className="grid gap-2 sm:gap-3">
-                      <div className="flex items-center gap-3 p-2 bg-blue-500/10 rounded-lg">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span className="text-xs sm:text-sm text-blue-400 font-medium">IBM Frontend Web Development Certified</span>
+                      <div className="flex items-center gap-3 p-2 bg-muted/10 rounded-lg">
+                        <div className="w-2 h-2 bg-muted rounded-full"></div>
+                        <span className="text-xs sm:text-sm text-foreground-muted font-medium">IBM Frontend Web Development Certified</span>
                       </div>
-                      <div className="flex items-center gap-3 p-2 bg-purple-500/10 rounded-lg">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                        <span className="text-xs sm:text-sm text-purple-400 font-medium">Newton School SQL Database Expert</span>
+                      <div className="flex items-center gap-3 p-2 bg-background-secondary/10 rounded-lg">
+                        <div className="w-2 h-2 bg-background-secondary rounded-full"></div>
+                        <span className="text-xs sm:text-sm text-foreground-muted font-medium">Newton School SQL Database Expert</span>
                       </div>
                     </div>
                   </div>
@@ -189,12 +189,12 @@ const AboutSection = () => {
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-background-secondary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative z-10">
                     <div className="mb-3 sm:mb-4">
                       <category.icon className={`w-6 h-6 sm:w-8 sm:h-8 mx-auto ${category.color} group-hover:scale-110 transition-transform duration-300`} />
                     </div>
-                    <h4 className="text-base sm:text-lg font-bold mb-2 text-white group-hover:text-gradient-amber transition-colors">
+                    <h4 className="text-base sm:text-lg font-bold mb-2 text-foreground group-hover:text-gradient-amber transition-colors">
                       {category.title}
                     </h4>
                     <p className="text-xs text-foreground-muted mb-3 sm:mb-4 italic">
@@ -204,7 +204,7 @@ const AboutSection = () => {
                       {category.skills.map((skill, skillIndex) => (
                         <motion.div
                           key={skill}
-                          className="text-xs sm:text-sm text-foreground-muted px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 rounded-full hover:bg-white/10 transition-colors cursor-default"
+                          className="text-xs sm:text-sm text-foreground-muted px-2 sm:px-3 py-1 sm:py-1.5 bg-background-secondary/5 rounded-full hover:bg-background-secondary/10 transition-colors cursor-default"
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                           transition={{ delay: 0.5 + skillIndex * 0.1 }}

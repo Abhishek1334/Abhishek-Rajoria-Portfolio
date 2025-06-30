@@ -53,7 +53,7 @@ const HeroSection = () => {
       {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute top-20 left-20 w-48 sm:w-72 h-48 sm:h-72 bg-amber-500/3 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-48 sm:w-72 h-48 sm:h-72 bg-secondary/3 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.6, 0.3],
@@ -65,7 +65,7 @@ const HeroSection = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-56 sm:w-80 h-56 sm:h-80 bg-purple-500/3 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-56 sm:w-80 h-56 sm:h-80 bg-primary/3 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.2, 0.4],
@@ -91,7 +91,7 @@ const HeroSection = () => {
             variants={itemVariants}
           >
             <span className="text-base sm:text-lg text-foreground-muted flex items-center justify-center gap-2">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
               Hello! I'm
             </span>
           </motion.div>
@@ -101,8 +101,8 @@ const HeroSection = () => {
             className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 sm:mb-8 pt-6 sm:pt-10"
             variants={itemVariants}
           >
-            <span className="text-gradient-amber">Abhishek</span>{' '}
-            <span className="text-white">Rajoria</span>
+            <span className="text-gradient-primary">Abhishek</span>{' '}
+            <span className="text-foreground">Rajoria</span>
           </motion.h1>
 
           {/* Dynamic Title with Typing Effect */}
@@ -111,7 +111,7 @@ const HeroSection = () => {
             variants={itemVariants}
           >
             <div className="text-xl sm:text-2xl md:text-3xl text-foreground-muted font-light mb-3 sm:mb-4">
-              <span className="text-gradient-purple">
+              <span className="text-gradient-secondary">
                 {roles[currentRole]}
               </span>
             </div>
@@ -127,7 +127,7 @@ const HeroSection = () => {
           >
             I specialize in developing high-performance MERN stack applications that deliver exceptional user experiences. 
             From IoT integrations to real-time analytics platforms, I transform complex technical challenges into elegant, 
-            scalable solutions. Currently pursuing <span className="text-purple-400">Computer Applications at VIPS Delhi</span> with a focus on modern web technologies.
+            scalable solutions. Currently pursuing <span className="text-accent">Computer Applications at VIPS Delhi</span> with a focus on modern web technologies.
           </motion.p>
 
           {/* Enhanced CTA Buttons */}
@@ -150,7 +150,7 @@ const HeroSection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="group-hover:text-amber-500 transition-colors">Let's Connect</span>
+              <span className="group-hover:text-secondary transition-colors">Let's Connect</span>
             </motion.a>
           </motion.div>
 
@@ -166,7 +166,7 @@ const HeroSection = () => {
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" />
+              <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -174,7 +174,7 @@ const HeroSection = () => {
 
       {/* Floating Elements */}
       <motion.div
-        className="absolute top-1/3 left-4 sm:left-10 w-3 h-3 sm:w-4 sm:h-4 bg-amber-500/20 rounded-full"
+        className="absolute top-1/3 left-4 sm:left-10 w-3 h-3 sm:w-4 sm:h-4 bg-secondary/20 rounded-full"
         animate={{
           y: [0, -20, 0],
           opacity: [0.3, 0.8, 0.3],
@@ -186,7 +186,7 @@ const HeroSection = () => {
         }}
       />
       <motion.div
-        className="absolute top-1/2 right-4 sm:right-16 w-2 h-2 sm:w-3 sm:h-3 bg-purple-500/20 rounded-full"
+        className="absolute top-1/2 right-4 sm:right-16 w-2 h-2 sm:w-3 sm:h-3 bg-primary/20 rounded-full"
         animate={{
           y: [0, 15, 0],
           opacity: [0.4, 0.9, 0.4],

@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter } from 'lucide-react';
 
@@ -35,22 +34,22 @@ const itemVariants = {
 
 const ContactSocials = () => (
   <motion.div
-    className="glass-card p-8"
+    className="glass-card p-4 sm:p-6 md:p-8 bg-background-secondary/5"
     variants={itemVariants}
   >
-    <h4 className="text-lg font-semibold mb-6 text-white">Follow My Journey</h4>
-    <div className="flex gap-4">
+    <h4 className="text-lg font-semibold mb-6 text-foreground">Follow My Journey</h4>
+    <div className="flex flex-wrap justify-center gap-4">
       {socialLinks.map((social) => (
         <motion.a
           key={social.label}
           href={social.link}
           target="_blank"
           rel="noopener noreferrer"
-          className={`p-3 bg-white/5 rounded-lg text-foreground-muted ${social.color} transition-colors`}
+          className={`p-3 bg-muted rounded-lg text-foreground-muted ${social.color} transition-colors`}
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
-          <social.icon className="w-5 h-5" />
+          <social.icon className="w-5 h-5 text-foreground" />
         </motion.a>
       ))}
     </div>
