@@ -193,8 +193,8 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                       <div className="min-w-0 flex-1">
                         <Dialog.Title className="font-bold text-gradient-amber text-lg leading-tight truncate">{project.title}</Dialog.Title>
                         <p className="text-xs text-foreground-muted truncate">{project.subtitle}</p>
-                      </div>
-                    </div>
+                  </div>
+            </div>
                     <button onClick={onClose} className="rounded-xl p-2 hover:bg-red-500/20 transition-colors border border-white/10 group flex-shrink-0">
                       <X className="h-5 w-5 text-foreground-muted group-hover:text-red-400 transition-colors" />
                     </button>
@@ -416,7 +416,7 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
       <div className="fixed inset-0 bg-black/80" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
         <div className="w-full max-w-7xl my-4 sm:my-8">
-          <Dialog.Panel className="rounded-2xl shadow-xl border border-border bg-background-secondary overflow-hidden">
+          <Dialog.Panel className="rounded-2xl shadow-xl border border-border bg-background-secondary overflow-hidden max-h-[90vh]">
             {/* Enhanced Responsive Header */}
             <div className="bg-gradient-to-r from-secondary/10 via-primary/5 to-secondary/10 border-b border-border">
               <div className="p-4 sm:p-6">
@@ -458,7 +458,7 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
               </div>
             </div>
             {/* Content Layout */}
-            <div className="flex flex-col lg:grid lg:grid-cols-3">
+            <div className="flex flex-col lg:grid lg:grid-cols-3 h-full">
               {/* Left Panel - Media Gallery */}
               <div className="lg:col-span-2 relative bg-background border-r border-border">
                 <div className="relative h-[50vh] sm:h-[60vh] lg:h-[70vh] bg-gradient-to-br from-secondary/5 to-primary/5">
@@ -486,25 +486,25 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                       {/* Navigation Controls */}
                       {project.media.length > 1 && (
                         <>
-                          <button onClick={handlePrevSlide} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors z-10">
-                            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                          <button onClick={handlePrevSlide} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary z-10">
+                            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 text-foreground" />
                           </button>
-                          <button onClick={handleNextSlide} className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors z-10">
-                            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                          <button onClick={handleNextSlide} className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary z-10">
+                            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6 text-foreground" />
                           </button>
                         </>
                       )}
                       {/* Zoom Controls */}
                       <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex flex-col gap-1 sm:gap-2 z-10">
-                        <button onClick={handleZoomIn} className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group" title="Zoom In">
-                          <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
+                        <button onClick={handleZoomIn} className="bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary group" title="Zoom In">
+                          <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary transition-colors" />
                                     </button>
-                        <button onClick={handleZoomOut} className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group" title="Zoom Out">
-                          <ZoomOut className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
+                        <button onClick={handleZoomOut} className="bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary group" title="Zoom Out">
+                          <ZoomOut className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary transition-colors" />
                                     </button>
                         {isZoomed && (
-                          <button onClick={handleResetZoom} className="glass-card p-2 sm:p-3 hover:bg-white/20 transition-colors group" title="Reset Zoom">
-                            <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400 transition-colors" />
+                          <button onClick={handleResetZoom} className="bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary group" title="Reset Zoom">
+                            <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary transition-colors" />
                                     </button>
                         )}
                                   </div>
@@ -556,22 +556,29 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                 </div>
               </div>
               {/* Right Panel - Project Details */}
-              <div className="bg-background p-6 space-y-6 flex flex-col min-h-[50vh]">
-                <div className="space-y-4">
+              <div className="bg-background p-6 space-y-6 flex flex-col h-full max-h-[70vh]">
+                <div className="space-y-4 flex-1 overflow-y-auto min-h-0">
                     {/* Tags */}
                     <div>
                     <h4 className="text-sm font-semibold text-amber-500 mb-3 flex items-center gap-2"><Tag className="w-4 h-4" />Technologies</h4>
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag, index) => (
-                        <span key={index} className="px-2 sm:px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">{tag}</span>
+                        <span key={index} className="px-2 sm:px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20">{tag}</span>
                         ))}
                       </div>
                     </div>
                     {/* Tab Navigation */}
                     <div>
-                      <div className="flex rounded-lg bg-black/20 p-1">
+                      <div className="flex rounded-lg bg-muted/50 p-1 gap-1">
                         {tabs.map((tab) => (
-                        <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium rounded-md transition-colors ${activeTab === tab.id ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'text-foreground-muted hover:text-foreground hover:bg-white/5'}`}>
+                <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                          className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium rounded-md transition-colors border ${activeTab === tab.id
+                            ? 'bg-primary text-primary-foreground border-primary shadow'
+                            : 'bg-muted text-foreground-muted border-border hover:bg-accent'}
+                          `}
+                          >
                             <tab.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                             <span className="hidden sm:inline">{tab.label}</span>
                 </button>
@@ -579,7 +586,7 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                 </div>
               </div>
                     {/* Tab Content */}
-                    <div className="space-y-4">
+                    <div className="overflow-y-auto min-h-[30vh] max-h-[40vh] lg:max-h-[60vh] pr-2 space-y-4">
                       {activeTab === 'overview' && (
                 <div className="space-y-4">
                   <div>

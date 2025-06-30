@@ -396,7 +396,7 @@ const SkillsConstellation = () => {
                         }}
                       />
                     ))}
-                  </div>
+                    </div>
                   <span className="text-[10px] text-foreground-muted font-medium ml-1">{skill.level}/10</span>
                   </div>
                 </div>
@@ -406,18 +406,6 @@ const SkillsConstellation = () => {
         </div>
     );
   };
-
-  // --- Debug Panel ---
-  const DebugPanel = () => (
-    isDev ? (
-      <div className="fixed bottom-2 right-2 bg-background-secondary/90 text-xs text-foreground-muted p-2 rounded shadow z-[9999] border border-border">
-        <div>isMobile: {String(isMobile)}</div>
-        <div>skills.length: {skills.length}</div>
-        <div>selectedCategory: {String(selectedCategory)}</div>
-        <div>mobileCategory: {String(mobileCategory)}</div>
-      </div>
-    ) : null
-  );
 
   // --- Tab color logic ---
   const getTabClass = (active: boolean) =>
@@ -706,7 +694,6 @@ const SkillsConstellation = () => {
           ))}
         </motion.div>
       </div>
-      <DebugPanel />
     </section>
   );
 };
