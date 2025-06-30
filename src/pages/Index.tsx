@@ -240,7 +240,7 @@ const Index = () => {
                     href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                    className="text-foreground-muted hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-muted/50 transition-all duration-300"
+                    className="text-foreground-muted hover:text-primary px-3 py-2 rounded-lg hover:bg-muted/50 transition-all duration-300"
                     whileHover={{ scale: 1.1 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
