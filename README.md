@@ -6,6 +6,14 @@ A modern, high-performance portfolio website showcasing full-stack development e
 
 ## 🌟 Features
 
+### 🆕 **2024 UI/UX Polish**
+- **Ultra-smooth, slow theme transitions**: Theme switching is now glassmorphic, elegant, and seamless (1.5s fade, theme-aware, no abruptness)
+- **Modern floating mobile nav/buttons**: Floating AR logo (top-left) and theme toggle (top-right) are always accessible, glassmorphic, and adapt to light/dark mode
+- **Only one navbar visible at a time**: Desktop shows sticky top nav, mobile shows floating nav—never both
+- **Hero section & skills constellation**: Fully responsive, editorial, and mobile-first; headline, typewriter, and description are perfectly spaced and readable on all devices
+- **Tech Arsenal grid**: All skills per category are shown on mobile, but grid is non-interactive for performance and accidental tap prevention
+- **Visitor info modal**: Fully responsive, glassmorphic, theme-aware, and bug-free; closes instantly on submit/skip, never reappears unnecessarily
+
 ### 🎨 **Interactive User Experience**
 - **Stunning Hero Section**: Dynamic gradient animations with smooth call-to-action buttons
 - **Skills Constellation**: Interactive star-based visualization with draggable technology nodes
@@ -149,6 +157,7 @@ Real-time analytics featuring:
 ### **Mobile Experience**
 Optimized mobile interface with:
 - Floating navigation bar with smooth animations
+- Floating AR logo and theme toggle always accessible (top-left and top-right)
 - Touch-friendly interactions
 - Responsive layout adaptations
 - Hardware-accelerated scrolling
@@ -175,6 +184,10 @@ export default {
   }
 }
 ```
+
+### **Floating Nav & Buttons Appearance**
+- To customize the floating nav or floating logo/theme toggle buttons, edit their styles in `src/components/MobileFloatingNav.tsx`.
+- You can adjust glassmorphism, color, border, and shadow for both light and dark themes.
 
 ### **Adding Projects**
 Add new projects in `src/components/ProjectsSection.tsx`:
@@ -335,6 +348,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Lucide Icons](https://lucide.dev/) - For consistent, beautiful icons
 - [Supabase](https://supabase.com/) - For backend services
 - [Vercel](https://vercel.com/) - For seamless deployment
+
+## 📝 Changelog
+
+### 2024 UI/UX Polish & Bugfixes
+- Ultra-smooth, slow theme transitions (1.5s, cubic-bezier, glassmorphic, theme-aware)
+- Modern floating nav/buttons: AR logo and theme toggle always accessible, theme-aware, glassmorphic
+- Only one navbar visible at a time (desktop: sticky top nav, mobile: floating nav)
+- Hero section and skills constellation fully responsive, editorial, and mobile-first
+- Tech Arsenal grid: all skills shown, non-interactive on mobile for performance
+- Visitor info modal: fully responsive, glassmorphic, theme-aware, closes instantly, never reappears unnecessarily
+- Bugfixes: No more double navbars, no accidental re-renders on mobile, no abrupt theme changes, all modals and forms are bug-free
 
 ---
 

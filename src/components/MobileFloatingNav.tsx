@@ -106,7 +106,7 @@ const MobileFloatingNav = ({ onResumeClick }: MobileFloatingNavProps) => {
         <span className="text-lg font-bold text-gradient-primary">AR</span>
       </button>
       {/* Floating Theme Toggle (top-right) */}
-      <div className={`fixed top-3 right-3 z-50 w-11 h-11 flex items-center justify-center rounded-full ${glassBg} shadow-lg md:hidden transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-opacity-90`}>
+      <div className="fixed top-3 right-3 z-50 md:hidden">
         <ThemeToggle />
       </div>
       <AnimatePresence>
