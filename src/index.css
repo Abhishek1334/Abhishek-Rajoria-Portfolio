@@ -366,15 +366,15 @@
   main {
     @apply px-4;
   }
-  
+
   [role="dialog"] {
     @apply mx-4;
   }
-  
+
   input, select, textarea {
     @apply text-base;
   }
-  
+
   button, a {
     @apply text-base;
     min-height: 44px;

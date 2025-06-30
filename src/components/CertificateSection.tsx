@@ -161,77 +161,84 @@ const CertificateSection = () => {
         {/* Certificate Modal */}
         {selectedCertificate && (
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedCertificate(null)}
           >
             <motion.div
-              className="bg-background-secondary rounded-xl p-4 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto flex flex-col items-center"
+              className="bg-background-secondary rounded-xl p-3 sm:p-6 lg:p-8 max-w-sm sm:max-w-2xl w-full max-h-[95vh] overflow-y-auto flex flex-col"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between w-full mb-4">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+              {/* Header */}
+              <div className="flex items-start justify-between w-full mb-3 sm:mb-4">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground pr-2 leading-tight">
                   {selectedCertificate.title}
                 </h3>
                 <button
                   onClick={() => setSelectedCertificate(null)}
-                  className="text-foreground-muted hover:text-foreground transition-colors"
+                  className="text-foreground-muted hover:text-foreground transition-colors p-1 rounded-lg hover:bg-muted/50 flex-shrink-0"
                 >
-                  <X size={24} />
+                  <X size={20} className="sm:w-6 sm:h-6" />
                 </button>
               </div>
-              <div className="w-full aspect-[4/3] bg-muted flex items-center justify-center overflow-hidden rounded-lg mb-4">
+              
+              {/* Certificate Image */}
+              <div className="w-full aspect-[4/3] bg-muted flex items-center justify-center overflow-hidden rounded-lg mb-3 sm:mb-4">
                 <img
                   src={selectedCertificate.imagePath}
                   alt={selectedCertificate.title}
                   className="object-contain w-full h-full"
                 />
               </div>
-              <div className="w-full space-y-2 mb-4">
+              
+              {/* Certificate Details */}
+              <div className="w-full space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                 <div>
-                  <p className="text-sm text-foreground-muted">Issuer</p>
-                  <p className="text-foreground font-medium">{selectedCertificate.issuer}</p>
+                  <p className="text-xs sm:text-sm text-foreground-muted">Issuer</p>
+                  <p className="text-sm sm:text-base text-foreground font-medium">{selectedCertificate.issuer}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-foreground-muted">Date</p>
-                  <p className="text-foreground font-medium">{selectedCertificate.date}</p>
+                  <p className="text-xs sm:text-sm text-foreground-muted">Date</p>
+                  <p className="text-sm sm:text-base text-foreground font-medium">{selectedCertificate.date}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-foreground-muted">Description</p>
-                  <p className="text-foreground">{selectedCertificate.description}</p>
+                  <p className="text-xs sm:text-sm text-foreground-muted">Description</p>
+                  <p className="text-sm sm:text-base text-foreground leading-relaxed">{selectedCertificate.description}</p>
                 </div>
               </div>
-              <div className="flex gap-3 w-full">
+              
+              {/* Action Buttons - Responsive Layout */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full">
                 <motion.button
                   onClick={() => handleDownloadCertificate(selectedCertificate)}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-300"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-4 lg:px-6 py-2 sm:py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-300 text-sm sm:text-base"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Download size={18} />
+                  <Download size={16} className="sm:w-5 sm:h-5" />
                   <span className="font-medium">Download PDF</span>
                 </motion.button>
                 <motion.button
                   onClick={() => window.open(selectedCertificate.filePath, '_blank')}
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90 transition-colors duration-300"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-4 lg:px-6 py-2 sm:py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90 transition-colors duration-300 text-sm sm:text-base"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <ExternalLink size={18} />
+                  <ExternalLink size={16} className="sm:w-5 sm:h-5" />
                   <span className="font-medium">Open PDF</span>
                 </motion.button>
                 <motion.button
                   onClick={() => window.open(selectedCertificate.imagePath, '_blank')}
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-muted text-foreground rounded-lg hover:bg-muted/80 transition-colors duration-300"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-4 lg:px-6 py-2 sm:py-3 bg-muted text-foreground rounded-lg hover:bg-muted/80 transition-colors duration-300 text-sm sm:text-base"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Eye size={18} />
+                  <Eye size={16} className="sm:w-5 sm:h-5" />
                   <span className="font-medium">Open Image</span>
                 </motion.button>
               </div>

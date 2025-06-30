@@ -531,18 +531,18 @@ const ProjectsSection = () => {
               ))}
             </div>
           ) : (
-            <motion.div
-              variants={containerVariants}
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  onSelect={handleProjectSelect}
-                />
-              ))}
-            </motion.div>
+          <motion.div
+            variants={containerVariants}
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onSelect={handleProjectSelect}
+              />
+            ))}
+          </motion.div>
           )}
         </motion.div>
       </div>

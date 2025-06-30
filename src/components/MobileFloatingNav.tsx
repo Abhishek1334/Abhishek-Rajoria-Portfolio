@@ -109,96 +109,96 @@ const MobileFloatingNav = ({ onResumeClick }: MobileFloatingNavProps) => {
       <div className="fixed top-3 right-3 z-50 md:hidden">
         <ThemeToggle />
       </div>
-      <AnimatePresence>
-        {isVisible && (
+    <AnimatePresence>
+      {isVisible && (
           <div className="fixed bottom-4 left-0 right-0 z-50 md:hidden flex justify-center px-4 pointer-events-none">
-            <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 100, opacity: 0 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 30,
-                duration: 0.3 
-              }}
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 30,
+              duration: 0.3 
+            }}
               className="w-fit pointer-events-auto"
-            >
+          >
               <div className={`rounded-2xl ${glassBg} ${navShadow} shadow-2xl w-fit mx-auto px-3 py-2 flex flex-col items-center gap-1 transition-all duration-200`}>
-                <div className="flex items-center justify-center gap-2">
-                  {navItems.map((item, index) => {
-                    const isActive = activeSection === item.id;
-                    const Icon = item.icon;
-                    return (
-                      <motion.button
-                        key={item.id}
-                        onClick={() => handleNavClick(item)}
+            <div className="flex items-center justify-center gap-2">
+              {navItems.map((item, index) => {
+                const isActive = activeSection === item.id;
+                const Icon = item.icon;
+                return (
+                  <motion.button
+                    key={item.id}
+                    onClick={() => handleNavClick(item)}
                         className={`relative flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-200 w-12 sm:w-14 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black/80 bg-white/5 hover:bg-white/10 ${
-                          isActive 
+                      isActive 
                             ? `${activeText} shadow-lg` 
                             : `${inactiveText} hover:text-primary`
-                        }`}
+                    }`}
                         whileHover={{ scale: 1.08 }}
-                        whileTap={{ scale: 0.95 }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
                         tabIndex={0}
                         aria-label={item.label}
-                      >
-                        {/* Active indicator */}
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeIndicator"
+                  >
+                    {/* Active indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
                             className="absolute inset-0 bg-primary/20 rounded-xl border border-primary/30"
-                            initial={false}
-                            transition={{ 
-                              type: "spring", 
-                              stiffness: 500, 
-                              damping: 30 
-                            }}
-                          />
-                        )}
-                        {/* Icon */}
-                        <div className="relative z-10 mb-1">
-                          <Icon 
+                        initial={false}
+                        transition={{ 
+                          type: "spring", 
+                          stiffness: 500, 
+                          damping: 30 
+                        }}
+                      />
+                    )}
+                    {/* Icon */}
+                    <div className="relative z-10 mb-1">
+                      <Icon 
                             className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-200 ${
-                              isActive ? 'scale-110' : ''
-                            }`} 
-                          />
-                        </div>
-                        {/* Label */}
+                          isActive ? 'scale-110' : ''
+                        }`} 
+                      />
+                    </div>
+                    {/* Label */}
                         <span className={`text-[11px] sm:text-xs font-medium transition-all duration-200 relative z-10 ${
-                          isActive ? 'opacity-100' : 'opacity-70'
-                        }`}>
-                          {item.label}
-                        </span>
-                        {/* Glow effect for active item */}
-                        {isActive && (
-                          <motion.div
+                      isActive ? 'opacity-100' : 'opacity-70'
+                    }`}>
+                      {item.label}
+                    </span>
+                    {/* Glow effect for active item */}
+                    {isActive && (
+                      <motion.div
                             className="absolute inset-0 bg-primary/10 rounded-xl blur-sm"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.3 }}
-                          />
-                        )}
-                      </motion.button>
-                    );
-                  })}
-                </div>
-                {/* Floating nav indicator */}
-                <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
+                  </motion.button>
+                );
+              })}
+            </div>
+          {/* Floating nav indicator */}
+          <motion.div
                   className="mt-1 absolute -top-2 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-primary to-primary/80 rounded-full"
-                  initial={{ opacity: 0, scaleX: 0 }}
-                  animate={{ opacity: 1, scaleX: 1 }}
-                  transition={{ delay: 0.3, duration: 0.3 }}
-                />
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
+          />
               </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+        </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
     </>
   );
 };

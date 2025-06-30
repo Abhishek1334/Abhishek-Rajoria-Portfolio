@@ -101,7 +101,7 @@ const HeroSection = () => {
               From <span className="text-gradient-secondary font-semibold">IoT integrations</span> to <span className="text-gradient-secondary font-semibold">real-time analytics platforms</span>, I transform complex technical challenges into <span className="text-accent font-semibold">elegant, scalable solutions</span>.<br />
               Completed <span className="text-accent font-semibold">Computer Applications</span> at <span className="text-gradient-secondary font-semibold">VIPS Delhi</span> with a focus on <span className="text-accent font-semibold">modern web technologies</span>.
             </div>
-          </div>
+            </div>
 
           {/* Enhanced CTA Buttons */}
           <motion.div
