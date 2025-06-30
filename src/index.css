@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -92,11 +93,16 @@
   }
   
   body {
-    @apply bg-background text-foreground;
-    background: rgb(var(--background));
-    min-height: 100vh;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply font-body bg-white text-foreground transition-colors duration-300;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: linear-gradient(120deg, #181824 0%, #23243a 60%, #181824 100%),
+        radial-gradient(ellipse at 60% 40%, rgba(80, 0, 255, 0.18) 0%, rgba(0,0,0,0) 70%),
+        radial-gradient(ellipse at 30% 80%, rgba(255, 200, 55, 0.12) 0%, rgba(0,0,0,0) 70%);
+      background-blend-mode: lighten, normal;
+    }
   }
   
   html {
@@ -266,6 +272,30 @@
 
   .hover-transition {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .font-typewriter {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .animate-gradient-move {
+    animation: gradient-move 16s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .theme-transition, .theme-transition body {
+    transition:
+      background 1.5s cubic-bezier(0.4,0,0.2,1),
+      background-color 1.5s cubic-bezier(0.4,0,0.2,1),
+      color 1.5s cubic-bezier(0.4,0,0.2,1),
+      border-color 1.5s cubic-bezier(0.4,0,0.2,1),
+      box-shadow 1.5s cubic-bezier(0.4,0,0.2,1),
+      filter 1.5s cubic-bezier(0.4,0,0.2,1),
+      outline-color 1.5s cubic-bezier(0.4,0,0.2,1),
+      text-shadow 1.5s cubic-bezier(0.4,0,0.2,1);
   }
 }
 
@@ -490,4 +520,18 @@
 
 .bg-accent-accent {
   background-color: rgb(var(--accent));
+}
+
+@keyframes gradient-move {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

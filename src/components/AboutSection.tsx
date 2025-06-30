@@ -94,10 +94,10 @@ const AboutSection = () => {
             className="text-center mb-10 sm:mb-16"
             variants={itemVariants}
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-4 sm:mb-6">
               My <span className="text-gradient-amber">Development Approach</span>
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
+            <p className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-3xl mx-auto leading-relaxed px-4 sm:px-0 font-body">
               I build digital solutions that solve real-world problems and create meaningful impact. 
               Each project is an opportunity to apply best practices, modern technologies, and 
               innovative thinking to deliver exceptional results.
@@ -116,16 +116,16 @@ const AboutSection = () => {
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
                     <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-gradient-purple" />
-                    <h3 className="text-xl sm:text-2xl font-bold text-gradient-purple">
+                    <h3 className="text-xl sm:text-2xl font-heading font-bold text-gradient-purple">
                       Full Stack Developer & Problem Solver
                     </h3>
                   </div>
-                  <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4 sm:mb-6">
+                  <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4 sm:mb-6 font-body">
                     I'm a <span className="text-amber-500 font-semibold">dedicated full stack developer</span> who 
                     specializes in creating robust MERN stack applications that drive business value. 
                     My strength lies in translating complex requirements into clean, maintainable code that <em className="text-purple-400">performs exceptionally</em>.
                   </p>
-                  <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4">
+                  <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4 font-body">
                     From <span className="text-gradient-amber font-medium">IoT integrations and sensor data processing</span> to 
                     <span className="text-gradient-purple font-medium"> real-time analytics and data visualization</span>—
                     I excel at bridging the gap between innovative ideas and production-ready solutions.
@@ -147,28 +147,28 @@ const AboutSection = () => {
                 <div className="absolute -top-2 -right-2 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <div className="flex items-center gap-3 mb-4 sm:mb-6">
                   <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
-                  <h4 className="text-lg sm:text-xl font-semibold text-foreground-muted">Education & Certifications</h4>
+                  <h4 className="text-lg sm:text-xl font-heading font-semibold text-foreground-muted">Education & Certifications</h4>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
                   <div className="flex justify-between items-center p-3 bg-background-secondary/5 rounded-lg">
                     <div>
-                      <span className="text-sm sm:text-base text-foreground font-medium">Bachelor of Computer Applications</span>
-                      <div className="text-xs sm:text-sm text-foreground-muted">VIPS Delhi • 2019-2022 • Completed</div>
+                      <span className="text-sm sm:text-base text-foreground font-body font-medium">Bachelor of Computer Applications</span>
+                      <div className="text-xs sm:text-sm text-foreground-muted font-body">VIPS Delhi • 2019-2022 • Completed</div>
                     </div>
                     <div className="text-right">
-                      <span className="text-base sm:text-lg text-foreground font-bold">8.0</span>
-                      <div className="text-xs text-foreground-muted">CGPA</div>
+                      <span className="text-base sm:text-lg text-foreground font-heading font-bold">8.0</span>
+                      <div className="text-xs text-foreground-muted font-body">CGPA</div>
                     </div>
                   </div>
                   <div className="border-t border-background-secondary pt-3 sm:pt-4">
                     <div className="grid gap-2 sm:gap-3">
                       <div className="flex items-center gap-3 p-2 bg-muted/10 rounded-lg">
                         <div className="w-2 h-2 bg-muted rounded-full"></div>
-                        <span className="text-xs sm:text-sm text-foreground-muted font-medium">IBM Frontend Web Development Certified</span>
+                        <span className="text-xs sm:text-sm text-foreground-muted font-body font-medium">IBM Frontend Web Development Certified</span>
                       </div>
                       <div className="flex items-center gap-3 p-2 bg-background-secondary/10 rounded-lg">
                         <div className="w-2 h-2 bg-background-secondary rounded-full"></div>
-                        <span className="text-xs sm:text-sm text-foreground-muted font-medium">Newton School SQL Database Expert</span>
+                        <span className="text-xs sm:text-sm text-foreground-muted font-body font-medium">Newton School SQL Database Expert</span>
                       </div>
                     </div>
                   </div>
@@ -194,10 +194,10 @@ const AboutSection = () => {
                     <div className="mb-3 sm:mb-4">
                       <category.icon className={`w-6 h-6 sm:w-8 sm:h-8 mx-auto ${category.color} group-hover:scale-110 transition-transform duration-300`} />
                     </div>
-                    <h4 className="text-base sm:text-lg font-bold mb-2 text-foreground group-hover:text-gradient-amber transition-colors">
+                    <h4 className="text-base sm:text-lg font-heading font-bold mb-2 text-foreground group-hover:text-gradient-amber transition-colors">
                       {category.title}
                     </h4>
-                    <p className="text-xs text-foreground-muted mb-3 sm:mb-4 italic">
+                    <p className="text-xs text-foreground-muted mb-3 sm:mb-4 italic font-body">
                       {category.description}
                     </p>
                     <div className="space-y-2">

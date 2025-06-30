@@ -163,7 +163,12 @@ export default {
 				'blink-caret': 'blink-caret 0.75s step-end infinite',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
-			}
+			},
+			fontFamily: {
+				heading: ['Space Grotesk', 'sans-serif'],
+				body: ['JetBrains Mono', 'monospace'],
+				mono: ['JetBrains Mono', 'monospace'],
+			},
 		}
 	},
 	plugins: [tailwindcssAnimate],

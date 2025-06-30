@@ -33,12 +33,22 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     
     setThemeState(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
+    // Add smooth transition for theme changes
+    document.documentElement.classList.add('theme-transition');
+    return () => {
+      document.documentElement.classList.remove('theme-transition');
+    };
   }, []);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
+    // Add smooth transition for theme changes
+    document.documentElement.classList.add('theme-transition');
+    setTimeout(() => {
+      document.documentElement.classList.remove('theme-transition');
+    }, 500);
   };
 
   const toggleTheme = () => {

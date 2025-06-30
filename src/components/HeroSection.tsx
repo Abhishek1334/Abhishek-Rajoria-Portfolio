@@ -3,28 +3,46 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ChevronDown, Code2, Sparkles } from 'lucide-react';
+import ParticleBackground from './ParticleBackground';
+
+const typewriterTags = [
+  'Full Stack Developer',
+  'Problem Solver',
+  'UI/UX Enthusiast',
+  'Code Architect',
+  'Team Player',
+];
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [currentRole, setCurrentRole] = useState(0);
+  const [currentTag, setCurrentTag] = useState(0);
+  const [typedTag, setTypedTag] = useState('');
+  const [typing, setTyping] = useState(true);
 
-  const roles = [
-    "Full Stack Developer",
-    "Problem Solver",
-    "Code Architect",
-    "UI/UX Enthusiast"
-  ];
+  // Typewriter effect for tags
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (typing) {
+      if (typedTag.length < typewriterTags[currentTag].length) {
+        timeout = setTimeout(() => {
+          setTypedTag(typewriterTags[currentTag].slice(0, typedTag.length + 1));
+        }, 60);
+      } else {
+        timeout = setTimeout(() => setTyping(false), 1200);
+      }
+    } else {
+      timeout = setTimeout(() => {
+        setTyping(true);
+        setTypedTag('');
+        setCurrentTag((prev) => (prev + 1) % typewriterTags.length);
+      }, 700);
+    }
+    return () => clearTimeout(timeout);
+  }, [typedTag, typing, currentTag]);
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // Animate through different roles
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [roles.length]);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -49,104 +67,59 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 sm:pt-0">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <motion.div
-          className="absolute top-20 left-20 w-48 sm:w-72 h-48 sm:h-72 bg-secondary/3 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-20 w-56 sm:w-80 h-56 sm:h-80 bg-primary/3 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.2, 0.4],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32">
+      {/* Particle Background */}
+      <ParticleBackground />
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-2 sm:px-6 relative z-10">
         <motion.div
-          className="text-center max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto flex flex-col items-center sm:items-start text-center sm:text-left"
           variants={containerVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
         >
-          {/* Greeting */}
-          <motion.div
-            className="mb-4 sm:mb-6"
-            variants={itemVariants}
-          >
-            <span className="text-base sm:text-lg text-foreground-muted flex items-center justify-center gap-2">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
-              Hello! I'm
+          {/* Name Headline */}
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-heading font-bold mb-2 sm:mb-4 bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400 bg-clip-text text-transparent leading-tight sm:leading-[1.1]">
+            Abhishek <span className="inline-block align-middle"><Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-amber-300 animate-bounce" /></span><br />
+            Rajoria
+          </h1>
+
+          {/* Typewriter Tag - now below the name, no background */}
+          <div className="mb-2 sm:mb-4 min-h-[2rem] sm:min-h-[2.5rem]">
+            <span className="text-lg sm:text-2xl md:text-4xl font-mono font-bold text-amber-400">
+              {typedTag}
+              <span className="animate-pulse">|</span>
             </span>
-          </motion.div>
+          </div>
 
-          {/* Name */}
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 sm:mb-8 pt-6 sm:pt-10"
-            variants={itemVariants}
-          >
-            <span className="text-gradient-primary">Abhishek</span>{' '}
-            <span className="text-foreground">Rajoria</span>
-          </motion.h1>
+          <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400 rounded-full mb-4 sm:mb-6" />
 
-          {/* Dynamic Title with Typing Effect */}
-          <motion.div
-            className="mb-6 sm:mb-8"
-            variants={itemVariants}
-          >
-            <div className="text-xl sm:text-2xl md:text-3xl text-foreground-muted font-light mb-3 sm:mb-4">
-              <span className="text-gradient-secondary">
-                {roles[currentRole]}
-              </span>
+          {/* Enhanced Description Card (now transparent) */}
+          <div className="max-w-xs sm:max-w-2xl mx-auto sm:mx-0 mb-6 sm:mb-12 px-2 sm:px-0">
+            <div className="p-0 font-body text-sm sm:text-lg md:text-xl text-foreground leading-relaxed">
+              I specialize in developing high-performance <span className="text-accent font-semibold">MERN stack</span> applications that deliver exceptional <span className="text-accent font-semibold">user experiences</span>.<br />
+              From <span className="text-gradient-secondary font-semibold">IoT integrations</span> to <span className="text-gradient-secondary font-semibold">real-time analytics platforms</span>, I transform complex technical challenges into <span className="text-accent font-semibold">elegant, scalable solutions</span>.<br />
+              Completed <span className="text-accent font-semibold">Computer Applications</span> at <span className="text-gradient-secondary font-semibold">VIPS Delhi</span> with a focus on <span className="text-accent font-semibold">modern web technologies</span>.
             </div>
-            <div className="text-base sm:text-lg md:text-xl text-foreground-muted">
-              Building Scalable Solutions with Modern Technology
-            </div>
-          </motion.div>
-
-          {/* Enhanced Description */}
-          <motion.p
-            className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-12 px-4 sm:px-0"
-            variants={itemVariants}
-          >
-            I specialize in developing high-performance MERN stack applications that deliver exceptional user experiences. 
-            From IoT integrations to real-time analytics platforms, I transform complex technical challenges into elegant, 
-            scalable solutions. Currently pursuing <span className="text-accent">Computer Applications at VIPS Delhi</span> with a focus on modern web technologies.
-          </motion.p>
+          </div>
 
           {/* Enhanced CTA Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16 px-4 sm:px-0"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center sm:justify-start mb-8 sm:mb-16 px-2 sm:px-0 font-body"
             variants={itemVariants}
           >
             <motion.a
               href="#projects"
-              className="btn-primary group w-full sm:w-auto"
+              className="btn-primary group w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-bold shadow-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-amber-400 border-none hover:scale-105 transition-transform"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Code2 className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+              <Code2 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform" />
               View My Work
             </motion.a>
             <motion.a
               href="#contact"
-              className="btn-ghost group w-full sm:w-auto"
+              className="btn-ghost group w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-bold border border-foreground/10 hover:bg-foreground/5 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -156,10 +129,10 @@ const HeroSection = () => {
 
           {/* Scroll Indicator */}
           <motion.div
-            className="flex flex-col items-center"
+            className="flex flex-col items-center mx-auto font-body"
             variants={itemVariants}
           >
-            <span className="text-xs sm:text-sm text-foreground-muted mb-3 sm:mb-4">
+            <span className="text-base sm:text-xl text-foreground-muted mb-2 sm:mb-4">
               Ready for the journey? ✨
             </span>
             <motion.div
@@ -171,33 +144,6 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Floating Elements */}
-      <motion.div
-        className="absolute top-1/3 left-4 sm:left-10 w-3 h-3 sm:w-4 sm:h-4 bg-secondary/20 rounded-full"
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0.3, 0.8, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 right-4 sm:right-16 w-2 h-2 sm:w-3 sm:h-3 bg-primary/20 rounded-full"
-        animate={{
-          y: [0, 15, 0],
-          opacity: [0.4, 0.9, 0.4],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
     </section>
   );
 };

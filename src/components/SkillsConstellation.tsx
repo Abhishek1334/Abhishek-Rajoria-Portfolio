@@ -326,16 +326,16 @@ const SkillsConstellation = () => {
 
     return (
       <div className="w-full space-y-6">
-          <motion.div 
+        <motion.div 
           className="text-center mb-4"
           initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-xl font-bold text-gradient-primary mb-2">Tech Arsenal</h2>
           <p className="text-foreground-muted text-xs">My technical skills organized by category</p>
-          </motion.div>
+        </motion.div>
         <div className="flex justify-center gap-2 mb-2">
           {mobileCategories.map(cat => (
             <button
@@ -351,37 +351,34 @@ const SkillsConstellation = () => {
             </button>
           ))}
         </div>
-          <motion.div 
+        <motion.div 
           className="grid grid-cols-3 gap-2"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          viewport={{ once: true }}
+        >
           {groupedSkills[mobileCategory].map((skill, skillIndex) => (
-              <motion.div
-                key={skill.id}
-              className="group relative bg-muted rounded-lg p-2 border border-border hover:border-primary transition-all duration-200 cursor-pointer"
+            <motion.div
+              key={skill.id}
+              className="group relative bg-muted rounded-lg p-2 border border-border transition-all duration-200"
               initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: skillIndex * 0.03 }}
-                viewport={{ once: true }}
-              whileHover={{ scale: 1.07, y: -1 }}
-                whileTap={{ scale: 0.95 }}
-              onClick={() => handleSkillClick(skill)}
+              viewport={{ once: true }}
               style={{ boxShadow: `0 2px 8px ${categories[skill.category].color}15` }}
-              >
+            >
               <div className="flex items-center justify-center mb-1">
                 <div 
-                  className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110"
+                  className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
                   style={{
                     background: `radial-gradient(circle at 30% 30%, ${categories[skill.category].color}FF, ${categories[skill.category].color}AA)`,
                     boxShadow: `0 0 10px ${categories[skill.category].color}40`
                   }}
                 >
                   <skill.icon className="w-4 h-4 text-foreground" />
-                    </div>
-                  </div>
+                </div>
+              </div>
               <div className="text-center">
                 <h4 className="font-semibold text-xs text-foreground mb-1">{skill.name}</h4>
                 <div className="flex items-center justify-center gap-1">
@@ -396,14 +393,14 @@ const SkillsConstellation = () => {
                         }}
                       />
                     ))}
-                    </div>
-                  <span className="text-[10px] text-foreground-muted font-medium ml-1">{skill.level}/10</span>
                   </div>
+                  <span className="text-[10px] text-foreground-muted font-medium ml-1">{skill.level}/10</span>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     );
   };
 

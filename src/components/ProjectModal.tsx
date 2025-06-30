@@ -175,14 +175,14 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
 
   if (isMobile) {
     // Enhanced mobile modal with more details
-    return (
-      <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+  return (
+    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
         <div className="fixed inset-0 bg-gradient-to-br from-background via-muted to-background-secondary/90 backdrop-blur-md" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center p-1 overflow-y-auto">
           <div className="w-full max-w-md my-2">
             <Dialog.Panel className="glass-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden p-0 max-h-[90vh] overflow-y-auto bg-gradient-to-br from-background via-muted to-background-secondary/90">
               {/* Enhanced Responsive Header */}
-              <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10">
+            <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-amber-500/10 border-b border-white/10">
                 <div className="p-4 flex flex-col gap-2">
                   {/* Title and Close Button Row */}
                   <div className="flex items-start justify-between gap-3 mb-2">
@@ -200,7 +200,7 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                     </button>
                   </div>
                   {/* Action Buttons Row */}
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
                     {project.liveUrl && (
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1 px-3 py-2 text-xs flex items-center justify-center gap-2">
                         <ExternalLink className="w-4 h-4" />
@@ -441,16 +441,16 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                       <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex flex-col gap-1 sm:gap-2 z-10">
                         <button onClick={handleZoomIn} className="bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary group" title="Zoom In">
                           <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary transition-colors" />
-                        </button>
+                                    </button>
                         <button onClick={handleZoomOut} className="bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary group" title="Zoom Out">
                           <ZoomOut className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary transition-colors" />
-                        </button>
+                                    </button>
                         {isZoomed && (
                           <button onClick={handleResetZoom} className="bg-muted border border-border p-2 sm:p-3 rounded-md transition-colors hover:bg-primary/10 hover:text-primary group" title="Reset Zoom">
                             <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary transition-colors" />
-                          </button>
+                                    </button>
                         )}
-                      </div>
+                                  </div>
                       {/* Media Info */}
                       <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
                         <div className="flex items-center justify-between">
@@ -494,7 +494,7 @@ const ProjectModal = memo(({ isOpen, onClose, project }: ProjectModalProps) => {
                           </div>
                         )}
                       </div>
-                    </div>
+                  </div>
                   )}
                 </div>
               </div>

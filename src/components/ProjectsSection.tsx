@@ -130,16 +130,16 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
         {/* Header */}
         <div className="space-y-2">
           <div className="flex items-start justify-between">
-            <h3 className="text-xl font-bold text-gradient-amber">
+            <h3 className="text-xl font-heading font-bold text-gradient-amber">
               {project.title}
             </h3>
             <ArrowUpRight className="w-5 h-5 text-foreground-muted group-hover:text-amber-500 transition-colors" />
           </div>
-          <p className="text-foreground-muted text-sm font-medium">{project.subtitle}</p>
+          <p className="text-foreground-muted text-sm font-body font-medium">{project.subtitle}</p>
         </div>
 
         {/* Description */}
-        <p className="text-sm text-foreground-muted leading-relaxed line-clamp-2">
+        <p className="text-sm text-foreground-muted leading-relaxed line-clamp-2 font-body">
           {project.description}
         </p>
 
@@ -148,13 +148,13 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
           {project.tags.slice(0, 6).map((tag, index) => (
             <span
               key={index}
-              className="px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20"
+              className="px-3 py-1 text-xs font-body font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20"
             >
               {tag}
             </span>
           ))}
           {project.tags.length > 6 && (
-            <span className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 text-foreground-muted border border-white/10">
+            <span className="px-3 py-1 text-xs font-body font-medium rounded-full bg-white/5 text-foreground-muted border border-white/10">
               +{project.tags.length - 6}
             </span>
           )}
@@ -165,7 +165,7 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
           {project.highlights.slice(0, 3).map((highlight, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-3 text-sm text-foreground-muted"
+              className="flex items-center gap-3 text-sm text-foreground-muted font-body"
             >
               <div className="w-2 h-2 rounded-full bg-amber-500" />
               <span className="font-medium">{highlight}</span>
@@ -180,7 +180,7 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 btn-primary text-sm py-2 text-center"
+              className="flex-1 btn-primary text-sm py-2 text-center font-body"
               onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink className="inline w-4 h-4 mr-2" />
@@ -192,7 +192,7 @@ const ProjectCard = memo(({ project, onSelect }: { project: Project; onSelect: (
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost text-sm py-2 px-4"
+              className="btn-ghost text-sm py-2 px-4 font-body"
               onClick={(e) => e.stopPropagation()}
             >
               <Github className="inline w-4 h-4 mr-2" />
