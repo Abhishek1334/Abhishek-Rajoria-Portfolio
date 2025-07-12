@@ -17,7 +17,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: 'Location',
-    value: 'Rohini New Delhi, India',
+    value: 'New Delhi, India',
     link: '#'
   }
 ];
