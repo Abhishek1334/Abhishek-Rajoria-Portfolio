@@ -5,19 +5,19 @@ const socialLinks = [
   {
     icon: Github,
     label: 'GitHub',
-    link: 'https://github.com/abhishekrajoria',
+    link: 'https://github.com/Abhishek1334',
     color: 'hover:text-white'
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    link: 'https://linkedin.com/in/abhishek-rajoria',
+    link: 'https://linkedin.com/in/Abhishekrajoria',
     color: 'hover:text-blue-500'
   },
   {
     icon: Twitter,
     label: 'Twitter',
-    link: 'https://twitter.com/abhishekrajoria',
+    link: 'https://x.com/ARajoria1334',
     color: 'hover:text-cyan-500'
   }
 ];
