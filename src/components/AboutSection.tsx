@@ -153,7 +153,7 @@ const AboutSection = () => {
                   <div className="flex justify-between items-center p-3 bg-background-secondary/5 rounded-lg">
                     <div>
                       <span className="text-sm sm:text-base text-foreground font-body font-medium">Bachelor of Computer Applications</span>
-                      <div className="text-xs sm:text-sm text-foreground-muted font-body">VIPS Delhi • 2019-2022 • Completed</div>
+                      <div className="text-xs sm:text-sm text-foreground-muted font-body">VIPS Delhi • 2022-2025 • Completed</div>
                     </div>
                     <div className="text-right">
                       <span className="text-base sm:text-lg text-foreground font-heading font-bold">8.0</span>
