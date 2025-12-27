@@ -1,4 +1,5 @@
-import { useState, createContext, useContext } from 'react';
+import { useState } from 'react';
+import { VisitorModalContext } from '../contexts/VisitorModalContext';
 
 export type VisitorModalData = {
   name?: string;
@@ -10,14 +11,6 @@ interface VisitorInfoModalProps {
   onSubmit: (data: VisitorModalData) => void;
   onSkip: () => void;
 }
-
-export const VisitorModalContext = createContext<{
-  isVisitorModalOpen: boolean;
-  setVisitorModalOpen: (open: boolean) => void;
-}>({
-  isVisitorModalOpen: false,
-  setVisitorModalOpen: () => {},
-});
 
 const VisitorInfoModal = ({ onSubmit, onSkip }: VisitorInfoModalProps) => {
   const [name, setName] = useState('');

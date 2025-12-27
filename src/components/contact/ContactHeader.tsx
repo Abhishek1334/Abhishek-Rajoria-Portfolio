@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 interface ContactHeaderProps {
-  containerVariants: any;
-  itemVariants: any;
+  containerVariants: Variants;
+  itemVariants: Variants;
   isVisible: boolean;
 }
 

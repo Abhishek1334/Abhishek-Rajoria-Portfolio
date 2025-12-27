@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 interface VisitorInfo {
   timestamp: string;
@@ -73,7 +73,7 @@ export const useVisitorTracking = (userData?: { name?: string; email?: string; h
     }
   };
 
-  const trackVisitor = async () => {
+  const trackVisitor = useCallback(async () => {
     if (hasTracked) return;
 
     try {
@@ -102,7 +102,7 @@ export const useVisitorTracking = (userData?: { name?: string; email?: string; h
     } catch (error) {
       console.error('Error tracking visitor:', error);
     }
-  };
+  }, [hasTracked, userData]);
 
   useEffect(() => {
     // Only run if userData is present (modal submitted or skipped)
@@ -118,7 +118,7 @@ export const useVisitorTracking = (userData?: { name?: string; email?: string; h
     } else {
       setHasTracked(true);
     }
-  }, [userData]);
+  }, [userData, trackVisitor]);
 
   return { hasTracked };
 }; 

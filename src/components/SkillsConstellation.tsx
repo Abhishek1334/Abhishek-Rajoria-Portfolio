@@ -322,7 +322,7 @@ const SkillsConstellation = () => {
         groups[skill.category].push(skill);
       });
       return groups;
-    }, [skills]);
+    }, []);
 
     return (
       <div className="w-full space-y-6">

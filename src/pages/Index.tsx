@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
+import WorkExperienceSection from '../components/WorkExperienceSection';
 import SkillsConstellation from '../components/SkillsConstellation';
 import ProjectsSection from '../components/ProjectsSection';
 import CertificateSection from '../components/CertificateSection';
@@ -10,9 +11,7 @@ import ContactSection from '../components/ContactSection';
 import ResumeModal from '../components/ResumeModal';
 import MobileFloatingNav from '../components/MobileFloatingNav';
 import ThemeToggle from '../components/ThemeToggle';
-import VisitorInfoModal, { VisitorModalData, VisitorModalContext } from '../components/VisitorInfoModal';
 
-import { useVisitorTracking } from '../hooks/useVisitorTracking';
 import { Toaster } from '@/components/ui/sonner';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
@@ -20,13 +19,6 @@ import { useState } from 'react';
 const Index = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-  const [visitorModalData, setVisitorModalData] = useState<VisitorModalData | null>(null);
-  const [showVisitorModal, setShowVisitorModal] = useState(() => {
-    return typeof window !== 'undefined' && !localStorage.getItem('portfolio_visit_tracked');
-  });
-  
-  // Only track visitor after modal is submitted or skipped
-  useVisitorTracking(visitorModalData || undefined);
 
   const handleHireMe = () => {
     document.getElementById('contact')?.scrollIntoView({ 
@@ -37,6 +29,7 @@ const Index = () => {
 
   const navigationLinks = [
     { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#work-experience' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
     { label: 'Certificates', href: '#certificates' },
@@ -54,29 +47,15 @@ const Index = () => {
     }
   };
 
-  const handleVisitorModalSubmit = (data: VisitorModalData) => {
-    setVisitorModalData(data);
-    setShowVisitorModal(false);
-  };
-  const handleVisitorModalSkip = () => {
-    setVisitorModalData({});
-    setShowVisitorModal(false);
-  };
 
   return (
-    <VisitorModalContext.Provider value={{ isVisitorModalOpen: showVisitorModal, setVisitorModalOpen: setShowVisitorModal }}>
     <motion.div
       className="min-h-screen bg-background"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-        {showVisitorModal && (
-          <VisitorInfoModal onSubmit={handleVisitorModalSubmit} onSkip={handleVisitorModalSkip} />
-        )}
-
       {/* Navigation */}
-        {!showVisitorModal && (
       <motion.nav
             className="hidden md:block fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
         initial={{ y: -100 }}
@@ -186,26 +165,28 @@ const Index = () => {
           </motion.div>
         </div>
       </motion.nav>
-        )}
 
       {/* Main Content */}
       <main>
         <section id="hero">
           <HeroSection />
         </section>
-          <section id="about" className="scroll-mt-16">
+        <section id="about" className="scroll-mt-16">
           <AboutSection />
         </section>
-          <section id="skills" className="scroll-mt-16">
+        <section id="work-experience" className="scroll-mt-16">
+          <WorkExperienceSection />
+        </section>
+        <section id="skills" className="scroll-mt-16">
           <SkillsConstellation />
         </section>
-          <section id="projects" className="scroll-mt-16">
+        <section id="projects" className="scroll-mt-16">
           <ProjectsSection />
         </section>
-          <section id="certificates" className="scroll-mt-16">
-            <CertificateSection />
-          </section>
-          <section id="contact" className="scroll-mt-16">
+        <section id="certificates" className="scroll-mt-16">
+          <CertificateSection />
+        </section>
+        <section id="contact" className="scroll-mt-16">
           <ContactSection />
         </section>
       </main>
@@ -259,21 +240,18 @@ const Index = () => {
       </motion.footer>
 
         {/* Floating nav */}
-        {!showVisitorModal && (
-          <div className="block md:hidden">
-            <MobileFloatingNav onResumeClick={() => setIsResumeModalOpen(true)} />
-          </div>
-        )}
-      
+        <div className="block md:hidden">
+          <MobileFloatingNav onResumeClick={() => setIsResumeModalOpen(true)} />
+        </div>
+
       {/* Resume Modal */}
-      <ResumeModal 
-        isOpen={isResumeModalOpen} 
-        onClose={() => setIsResumeModalOpen(false)} 
-      />
-      
+      {isResumeModalOpen && (
+        <ResumeModal isOpen={isResumeModalOpen} onClose={() => setIsResumeModalOpen(false)} />
+      )}
+
+      {/* Toaster */}
       <Toaster />
     </motion.div>
-    </VisitorModalContext.Provider>
   );
 };
 

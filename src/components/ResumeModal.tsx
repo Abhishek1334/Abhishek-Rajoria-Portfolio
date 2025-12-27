@@ -14,9 +14,9 @@ const ResumeModal = memo(({ isOpen, onClose }: ResumeModalProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Convert Google Drive view link to embed link
-  const resumeEmbedUrl = 'https://drive.google.com/file/d/1UchzGFtq72KDwOsg8af5W2NKQDvoRi-J/preview';
-  const resumeDownloadUrl = 'https://drive.google.com/uc?export=download&id=1UchzGFtq72KDwOsg8af5W2NKQDvoRi-J';
-  const resumeViewUrl = 'https://drive.google.com/file/d/1UchzGFtq72KDwOsg8af5W2NKQDvoRi-J/view?usp=drive_link';
+  const resumeEmbedUrl = 'https://drive.google.com/file/d/1W87w3PvNuLaTXddWFEFo9Rc8eTn_UCw9/preview';
+  const resumeDownloadUrl = 'https://drive.google.com/uc?export=download&id=1W87w3PvNuLaTXddWFEFo9Rc8eTn_UCw9';
+  const resumeViewUrl = 'https://drive.google.com/file/d/1W87w3PvNuLaTXddWFEFo9Rc8eTn_UCw9/view?usp=sharing';
 
   const handleLoad = () => {
     setIsLoading(false);
