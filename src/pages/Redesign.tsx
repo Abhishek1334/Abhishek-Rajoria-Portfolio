@@ -527,6 +527,9 @@ const Redesign = () => {
               <h2 className="ed-display" style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)', maxWidth: '18ch' }}>
                 Let&rsquo;s build something worth shipping.
               </h2>
+              <p className="ed-lead" style={{ marginTop: 20, color: 'var(--ink-soft)', maxWidth: '50ch' }}>
+                Fast and <span className="ed-stat">AI-augmented</span>, Claude Code and Cursor for leverage, tested before every push.
+              </p>
             </Reveal>
             <Reveal delay={120}>
               <div className="ed-contact-grid">
