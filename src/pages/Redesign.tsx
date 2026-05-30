@@ -82,9 +82,10 @@ const projects: Project[] = [
 const experience = {
   company: 'PRNK Infotech',
   period: 'Aug 2025 – May 2026',
+  months: '10 mos',
   roles: [
-    { title: 'Software Developer', period: 'Feb 2026 – May 2026', note: 'Promoted from intern' },
-    { title: 'Frontend Developer Intern', period: 'Aug 2025 – Feb 2026', note: '' },
+    { title: 'Software Developer', period: 'Feb 2026 – May 2026', months: '4 mos', note: 'Promoted from intern' },
+    { title: 'Frontend Developer Intern', period: 'Aug 2025 – Feb 2026', months: '7 mos', note: '' },
   ],
   bullets: [
     'Built a Google Ads SaaS analytics dashboard end to end for a client, owning UI design, API, and full-stack delivery single-handedly; it became the client’s primary operational tool, per the founder’s LinkedIn recommendation.',
@@ -96,7 +97,7 @@ const experience = {
 
 const skills: [string, string][] = [
   ['Languages', 'TypeScript, JavaScript'],
-  ['Frontend', 'Next.js (App Router), React 19, Vite, Tailwind CSS, shadcn/ui, Radix UI, Framer Motion, React Konva, Recharts'],
+  ['Frontend', 'Next.js, React 19, Vite, Tailwind CSS, shadcn/ui, Radix UI, Framer Motion, React Konva, Recharts'],
   ['Mobile', 'React Native, Expo, Expo Router, NativeWind'],
   ['State & Data', 'TanStack Query, Zustand, Redux Toolkit, Axios, React Hook Form'],
   ['Backend & APIs', 'Node.js, Express.js, REST, JWT, Session, OTP, API-Key auth, CSRF, Bcrypt.js'],
@@ -140,15 +141,24 @@ const nav = [
 ];
 
 const Redesign = () => {
+  const [open, setOpen] = useState<Set<string>>(() => new Set(['01']));
+  const toggle = (n: string) =>
+    setOpen((prev) => {
+      const next = new Set(prev);
+      if (next.has(n)) next.delete(n);
+      else next.add(n);
+      return next;
+    });
+
   return (
     <div className="editorial">
       {/* Nav */}
       <header
         className="sticky top-0 z-40"
-        style={{ background: 'oklch(0.977 0.006 84 / 0.82)', backdropFilter: 'saturate(120%) blur(8px)', borderBottom: '1px solid var(--line)' }}
+        style={{ background: 'var(--paper-trans)', backdropFilter: 'saturate(140%) blur(10px)', WebkitBackdropFilter: 'saturate(140%) blur(10px)', borderBottom: '1px solid var(--line)' }}
       >
         <div className="ed-shell flex items-center justify-between" style={{ height: 64 }}>
-          <a href="#top" className="ed-mono" style={{ fontWeight: 500, letterSpacing: '0.02em' }}>
+          <a href="#top" className="ed-mono" style={{ fontWeight: 500, letterSpacing: '0.02em', color: 'var(--ink)' }}>
             Abhishek Rajoria
           </a>
           <nav className="hidden md:flex items-center" style={{ gap: 28 }}>
@@ -169,14 +179,14 @@ const Redesign = () => {
 
       <main id="top">
         {/* Hero */}
-        <section className="ed-section" style={{ paddingTop: 96 }}>
+        <section className="ed-section" style={{ paddingTop: 92 }}>
           <div className="ed-shell">
             <Reveal>
               <p className="ed-label" style={{ marginBottom: 28 }}>Full-stack engineer · New Delhi</p>
             </Reveal>
             <Reveal delay={80}>
               <h1 className="ed-display" style={{ fontSize: 'clamp(2.6rem, 7vw, 5.2rem)', maxWidth: '16ch' }}>
-                I build and ship production web and mobile products.
+                I build and <em>ship</em> production web and mobile products.
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -198,6 +208,22 @@ const Redesign = () => {
                 </span>
               </div>
             </Reveal>
+            <Reveal delay={320}>
+              <div className="ed-spec" style={{ marginTop: 56, maxWidth: 720 }}>
+                <div>
+                  <span className="k">Based in</span>
+                  <span className="v">New Delhi, India</span>
+                </div>
+                <div>
+                  <span className="k">Focus</span>
+                  <span className="v">Web &amp; mobile products</span>
+                </div>
+                <div>
+                  <span className="k">Currently</span>
+                  <span className="v">Software Developer, PRNK Infotech</span>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -207,49 +233,60 @@ const Redesign = () => {
         <section id="work" className="ed-section" style={{ scrollMarginTop: 64 }}>
           <div className="ed-shell">
             <Reveal>
-              <div className="flex items-baseline justify-between" style={{ marginBottom: 56 }}>
+              <div className="ed-sechead" style={{ marginBottom: 36 }}>
+                <span className="ed-num">§ 01</span>
                 <h2 className="ed-label">Selected work</h2>
-                <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>3 of many</span>
+                <span className="ed-rule-flex" />
+                <span className="ed-mono" style={{ fontSize: '0.76rem', color: 'var(--muted)' }}>tap to expand</span>
               </div>
             </Reveal>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 88 }}>
-              {projects.map((p, i) => (
-                <Reveal key={p.n}>
-                  <article className={`ed-work ${i % 2 === 1 ? 'is-rev' : ''}`}>
-                    <div className="ed-work-text">
-                      <div className="flex items-baseline" style={{ gap: 16 }}>
-                        <span className="ed-mono" style={{ color: 'var(--accent)', fontSize: '0.95rem' }}>{p.n}</span>
-                        <h3 className="ed-display" style={{ fontSize: 'clamp(1.9rem, 3.4vw, 2.6rem)', fontWeight: 500 }}>{p.title}</h3>
-                      </div>
-                      <p className="ed-serif" style={{ marginTop: 6, fontSize: '1.18rem', fontStyle: 'italic', color: 'var(--ink-soft)' }}>
-                        {p.tagline}
-                      </p>
-                      <p style={{ marginTop: 18, color: 'var(--ink-soft)', maxWidth: '46ch' }}>{p.blurb}</p>
-                      <ul style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                        {p.points.map((pt, k) => (
-                          <li key={k} className="flex" style={{ gap: 12, color: 'var(--ink)', fontSize: '0.96rem', lineHeight: 1.55 }}>
-                            <span aria-hidden style={{ color: 'var(--accent)', lineHeight: 1.55 }}>–</span>
-                            <span style={{ maxWidth: '44ch' }}>{pt}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="ed-tag" style={{ marginTop: 18, color: 'var(--muted)' }}>{p.tech}</p>
-                      <div className="flex items-center" style={{ gap: 22, marginTop: 22 }}>
-                        <a href={p.live} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Live ↗</a>
-                        <a href={p.code} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Code ↗</a>
-                        <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)', marginLeft: 'auto' }}>{p.meta}</span>
-                      </div>
+            <Reveal>
+              <div>
+                {projects.map((p) => {
+                  const isOpen = open.has(p.n);
+                  return (
+                    <div className="ed-acc" key={p.n}>
+                      <button className="ed-acc-head" aria-expanded={isOpen} onClick={() => toggle(p.n)}>
+                        <span className="ed-acc-num">{p.n}</span>
+                        <span className="ed-acc-title">{p.title}</span>
+                        <span className="ed-acc-tag">{p.tagline}</span>
+                        <span className="ed-acc-meta">{p.meta}</span>
+                        <span className="ed-acc-ind" aria-hidden>{isOpen ? '–' : '+'}</span>
+                      </button>
+                      {isOpen && (
+                        <div className="ed-acc-panel">
+                          <div className="ed-acc-panel-inner">
+                            <div>
+                              <p className="ed-serif" style={{ fontSize: '1.16rem', fontStyle: 'italic', color: 'var(--ink-soft)' }}>
+                                {p.tagline}
+                              </p>
+                              <p style={{ marginTop: 14, color: 'var(--ink-soft)', maxWidth: '46ch' }}>{p.blurb}</p>
+                              <ul style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                                {p.points.map((pt, k) => (
+                                  <li key={k} className="flex" style={{ gap: 12, color: 'var(--ink)', fontSize: '0.95rem', lineHeight: 1.55 }}>
+                                    <span aria-hidden style={{ color: 'var(--accent)' }}>–</span>
+                                    <span style={{ maxWidth: '44ch' }}>{pt}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                              <p className="ed-tag" style={{ marginTop: 18 }}>{p.tech}</p>
+                              <div className="flex items-center" style={{ gap: 22, marginTop: 22 }}>
+                                <a href={p.live} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Live ↗</a>
+                                <a href={p.code} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Code ↗</a>
+                              </div>
+                            </div>
+                            <a href={p.live} target="_blank" rel="noopener noreferrer" className="ed-frame ed-shot" style={{ display: 'block' }}>
+                              <img src={p.shot} alt={p.alt} loading="lazy" decoding="async" />
+                            </a>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    <div className="ed-work-shot">
-                      <a href={p.live} target="_blank" rel="noopener noreferrer" className="ed-frame ed-shot" style={{ display: 'block' }}>
-                        <img src={p.shot} alt={p.alt} loading="lazy" decoding="async" />
-                      </a>
-                    </div>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
+                  );
+                })}
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -260,20 +297,27 @@ const Redesign = () => {
           <div className="ed-shell">
             <div className="ed-aside">
               <Reveal>
-                <h2 className="ed-label">Experience</h2>
+                <div className="ed-aside-label">
+                  <span className="ed-num">§ 02</span>
+                  <h2 className="ed-label">Experience</h2>
+                </div>
               </Reveal>
               <Reveal delay={80}>
                 <div>
                   <div className="flex flex-wrap items-baseline justify-between" style={{ gap: 8 }}>
                     <h3 className="ed-display" style={{ fontSize: '1.9rem', fontWeight: 500 }}>{experience.company}</h3>
-                    <span className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>{experience.period}</span>
+                    <span className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>
+                      {experience.period} · {experience.months}
+                    </span>
                   </div>
                   <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 6 }}>
                     {experience.roles.map((r) => (
                       <div key={r.title} className="flex flex-wrap items-baseline" style={{ gap: 12 }}>
                         <span style={{ fontWeight: 500 }}>{r.title}</span>
                         {r.note && <span className="ed-mono" style={{ fontSize: '0.72rem', color: 'var(--accent)' }}>{r.note}</span>}
-                        <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)', marginLeft: 'auto' }}>{r.period}</span>
+                        <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)', marginLeft: 'auto' }}>
+                          {r.period} · {r.months}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -298,17 +342,31 @@ const Redesign = () => {
           <div className="ed-shell">
             <div className="ed-aside">
               <Reveal>
-                <h2 className="ed-label">Skills</h2>
+                <div className="ed-aside-label">
+                  <span className="ed-num">§ 03</span>
+                  <h2 className="ed-label">Skills</h2>
+                </div>
               </Reveal>
               <Reveal delay={80}>
-                <dl style={{ display: 'flex', flexDirection: 'column' }}>
-                  {skills.map(([k, v]) => (
-                    <div key={k} className="ed-skill-row">
-                      <dt className="ed-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)', letterSpacing: '0.02em' }}>{k}</dt>
-                      <dd style={{ margin: 0, color: 'var(--ink)' }}>{v}</dd>
-                    </div>
-                  ))}
-                </dl>
+                <div className="ed-skills">
+                  {skills.map(([k, v], i) => {
+                    const items = v.split(', ');
+                    return (
+                      <div key={k}>
+                        <div className="ed-skill-grp-h">
+                          <span className="n">{String(i + 1).padStart(2, '0')}</span>
+                          <span className="l">{k}</span>
+                          <span className="c">{String(items.length).padStart(2, '0')}</span>
+                        </div>
+                        <div className="ed-skill-tokens">
+                          {items.map((s) => (
+                            <span key={s} className="ed-token">{s}</span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </Reveal>
             </div>
           </div>
@@ -321,7 +379,10 @@ const Redesign = () => {
           <div className="ed-shell">
             <div className="ed-aside">
               <Reveal>
-                <h2 className="ed-label">Education</h2>
+                <div className="ed-aside-label">
+                  <span className="ed-num">§ 04</span>
+                  <h2 className="ed-label">Education</h2>
+                </div>
               </Reveal>
               <Reveal delay={80}>
                 <div className="flex flex-wrap items-baseline justify-between" style={{ gap: 8 }}>
@@ -342,7 +403,7 @@ const Redesign = () => {
         <section id="contact" style={{ scrollMarginTop: 64, background: 'var(--paper-2)', borderTop: '1px solid var(--line)' }}>
           <div className="ed-shell ed-section">
             <Reveal>
-              <p className="ed-label" style={{ marginBottom: 24 }}>Contact</p>
+              <p className="ed-label" style={{ marginBottom: 24 }}>§ 05 · Contact</p>
               <h2 className="ed-display" style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)', maxWidth: '18ch' }}>
                 Let&rsquo;s build something worth shipping.
               </h2>
