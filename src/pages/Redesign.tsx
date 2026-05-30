@@ -88,10 +88,10 @@ const experience = {
     { title: 'Frontend Developer Intern', period: 'Aug 2025 – Feb 2026', months: '7 mos', note: '' },
   ],
   bullets: [
-    'Built a Google Ads SaaS analytics dashboard end to end for a client, owning UI design, API, and full-stack delivery single-handedly; it became the client’s primary operational tool, per the founder’s LinkedIn recommendation.',
-    'Led the frontend of MinoriLabs: audited the codebase, fixed broken filters, dashboards, and API integrations, and ran a ten-day sprint coordinating frontend devs, backend engineers, and the client directly, delivered before deadline.',
-    'Shipped production frontends across 5+ products in Next.js 15/16 (App Router), React 19, and TypeScript: Freshbuyzar grocery (web and a React Native app), QR Code Creator SaaS, Riders Choice, MinoriLabs, and the Google Ads SaaS.',
-    'Integrated Stripe and Razorpay end to end; improved Lighthouse from 50 to 95 via Promise.all parallelization and server components; reached 538/538 Vitest coverage on qrcodecreator-fe, with Playwright e2e before every push.',
+    <>Built a Google Ads SaaS analytics dashboard <span className="ed-stat">end to end</span> for a client, owning UI design, API, and full-stack delivery <span className="ed-stat">single-handedly</span>; it became the client’s primary operational tool, per the founder’s LinkedIn recommendation.</>,
+    <>Led the frontend of <span className="ed-stat">MinoriLabs</span>: audited the codebase, fixed broken filters, dashboards, and API integrations, and ran a <span className="ed-stat">ten-day sprint</span> coordinating frontend devs, backend engineers, and the client directly, delivered before deadline.</>,
+    <>Shipped production frontends across <span className="ed-stat">5+ products</span> in Next.js 15/16 (App Router), React 19, and TypeScript: Freshbuyzar grocery (web and a React Native app), QR Code Creator SaaS, Riders Choice, MinoriLabs, and the Google Ads SaaS.</>,
+    <>Integrated <span className="ed-stat">Stripe and Razorpay</span> end to end; improved Lighthouse <span className="ed-stat">from 50 to 95</span> via Promise.all parallelization and server components; reached <span className="ed-stat">538/538</span> Vitest coverage on qrcodecreator-fe, with Playwright e2e before every push.</>,
   ],
 };
 
@@ -162,6 +162,22 @@ function WordsReveal({ words }: { words: Word[] }) {
 }
 
 const headlineWords: Word[] = ['I', 'build', 'and', { em: 'ship' }, 'production', 'web', 'and', 'mobile', 'products.'];
+
+// screenshot framed as a live browser window
+function BrowserShot({ href, src, alt, eager = false }: { href: string; src: string; alt: string; eager?: boolean }) {
+  const url = href.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="ed-browser">
+      <div className="ed-browser-bar">
+        <span className="ed-browser-dots"><i /><i /><i /></span>
+        <span className="ed-browser-url">{url}</span>
+      </div>
+      <div className="ed-shot">
+        <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+      </div>
+    </a>
+  );
+}
 
 const tickerItems = [
   'Next.js', 'React 19', 'React Native', 'TypeScript', 'Node.js', 'Express',
@@ -283,12 +299,10 @@ const Redesign = () => {
               </Reveal>
               <Reveal delay={220}>
                 <div>
-                  <a href="https://market-pulse-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="ed-frame ed-shot" style={{ display: 'block' }}>
-                    <img src={marketPulseShot} alt="MarketPulse, featured project" loading="eager" decoding="async" />
-                  </a>
+                  <BrowserShot href="https://market-pulse-two.vercel.app/" src={marketPulseShot} alt="MarketPulse, featured project" eager />
                   <div className="ed-hero-cap">
                     <span className="ed-eyebrow">Featured</span>
-                    <span>MarketPulse — stock analytics with an AI assistant</span>
+                    <span>MarketPulse, stock analytics with an AI assistant</span>
                   </div>
                 </div>
               </Reveal>
@@ -377,9 +391,7 @@ const Redesign = () => {
                                 <a href={p.code} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Code ↗</a>
                               </div>
                             </div>
-                            <a href={p.live} target="_blank" rel="noopener noreferrer" className="ed-frame ed-shot" style={{ display: 'block' }}>
-                              <img src={p.shot} alt={p.alt} loading="lazy" decoding="async" />
-                            </a>
+                            <BrowserShot href={p.live} src={p.shot} alt={p.alt} />
                           </div>
                         </div>
                       )}
@@ -396,43 +408,42 @@ const Redesign = () => {
         {/* Experience */}
         <section id="experience" className="ed-section" style={{ scrollMarginTop: 64 }}>
           <div className="ed-shell">
-            <div className="ed-aside">
-              <Reveal>
-                <div className="ed-aside-label">
-                  <span className="ed-num">§ 02</span>
-                  <h2 className="ed-label">Experience</h2>
+            <Reveal>
+              <div className="ed-sechead" style={{ marginBottom: 40 }}>
+                <span className="ed-num">§ 02</span>
+                <h2 className="ed-label">Experience</h2>
+                <span className="ed-rule-flex" />
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
+              <div>
+                <div className="flex flex-wrap items-baseline justify-between" style={{ gap: 10 }}>
+                  <h3 className="ed-display" style={{ fontSize: 'clamp(1.7rem, 3vw, 2.3rem)' }}>{experience.company}</h3>
+                  <span className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>
+                    {experience.period} · {experience.months}
+                  </span>
                 </div>
-              </Reveal>
-              <Reveal delay={80}>
-                <div>
-                  <div className="flex flex-wrap items-baseline justify-between" style={{ gap: 8 }}>
-                    <h3 className="ed-display" style={{ fontSize: '1.9rem', fontWeight: 500 }}>{experience.company}</h3>
-                    <span className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>
-                      {experience.period} · {experience.months}
-                    </span>
-                  </div>
-                  <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {experience.roles.map((r) => (
-                      <div key={r.title} className="flex flex-wrap items-baseline" style={{ gap: 12 }}>
-                        <span style={{ fontWeight: 500 }}>{r.title}</span>
-                        {r.note && <span className="ed-mono" style={{ fontSize: '0.72rem', color: 'var(--accent)' }}>{r.note}</span>}
-                        <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)', marginLeft: 'auto' }}>
-                          {r.period} · {r.months}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <ul style={{ marginTop: 26, display: 'flex', flexDirection: 'column', gap: 16 }}>
-                    {experience.bullets.map((b, k) => (
-                      <li key={k} className="flex" style={{ gap: 14, color: 'var(--ink-soft)', lineHeight: 1.6 }}>
-                        <span aria-hidden style={{ color: 'var(--accent)' }}>–</span>
-                        <span style={{ maxWidth: '62ch' }}>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 760 }}>
+                  {experience.roles.map((r) => (
+                    <div key={r.title} className="flex flex-wrap items-baseline" style={{ gap: 12 }}>
+                      <span style={{ fontWeight: 500 }}>{r.title}</span>
+                      {r.note && <span className="ed-mono" style={{ fontSize: '0.72rem', color: 'var(--accent)' }}>{r.note}</span>}
+                      <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)', marginLeft: 'auto' }}>
+                        {r.period} · {r.months}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              </Reveal>
-            </div>
+                <ul className="ed-exp-bullets" style={{ marginTop: 34 }}>
+                  {experience.bullets.map((b, k) => (
+                    <li key={k} className="flex" style={{ gap: 14, color: 'var(--ink-soft)', lineHeight: 1.62 }}>
+                      <span aria-hidden style={{ color: 'var(--accent)', flex: '0 0 auto' }}>–</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -441,16 +452,16 @@ const Redesign = () => {
         {/* Skills */}
         <section id="skills" className="ed-section" style={{ scrollMarginTop: 64 }}>
           <div className="ed-shell">
-            <div className="ed-aside">
-              <Reveal>
-                <div className="ed-aside-label">
-                  <span className="ed-num">§ 03</span>
-                  <h2 className="ed-label">Skills</h2>
-                </div>
-              </Reveal>
-              <Reveal delay={80}>
-                <div className="ed-skills">
-                  {skills.map(([k, v], i) => {
+            <Reveal>
+              <div className="ed-sechead" style={{ marginBottom: 40 }}>
+                <span className="ed-num">§ 03</span>
+                <h2 className="ed-label">Skills</h2>
+                <span className="ed-rule-flex" />
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="ed-skills">
+                {skills.map(([k, v], i) => {
                     const items = v.split(', ');
                     return (
                       <div key={k}>
@@ -469,34 +480,32 @@ const Redesign = () => {
                   })}
                 </div>
               </Reveal>
-            </div>
           </div>
         </section>
 
         <hr className="ed-rule" />
 
         {/* Education */}
-        <section className="ed-section" style={{ paddingBlock: 72 }}>
+        <section className="ed-section" style={{ paddingBlock: 64 }}>
           <div className="ed-shell">
-            <div className="ed-aside">
-              <Reveal>
-                <div className="ed-aside-label">
-                  <span className="ed-num">§ 04</span>
-                  <h2 className="ed-label">Education</h2>
+            <Reveal>
+              <div className="ed-sechead" style={{ marginBottom: 32 }}>
+                <span className="ed-num">§ 04</span>
+                <h2 className="ed-label">Education</h2>
+                <span className="ed-rule-flex" />
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="flex flex-wrap items-baseline justify-between" style={{ gap: 8 }}>
+                <div>
+                  <p style={{ fontWeight: 500, fontSize: '1.05rem' }}>BCA, Vivekananda Institute of Professional Studies</p>
+                  <p className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: 6 }}>
+                    New Delhi · CGPA 8.0 · IBM Frontend &amp; Newton School SQL certified
+                  </p>
                 </div>
-              </Reveal>
-              <Reveal delay={80}>
-                <div className="flex flex-wrap items-baseline justify-between" style={{ gap: 8 }}>
-                  <div>
-                    <p style={{ fontWeight: 500 }}>BCA, Vivekananda Institute of Professional Studies</p>
-                    <p className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: 4 }}>
-                      New Delhi · CGPA 8.0 · IBM Frontend &amp; Newton School SQL certified
-                    </p>
-                  </div>
-                  <span className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>2022–2025</span>
-                </div>
-              </Reveal>
-            </div>
+                <span className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>2022–2025</span>
+              </div>
+            </Reveal>
           </div>
         </section>
 
