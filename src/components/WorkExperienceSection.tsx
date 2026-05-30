@@ -28,24 +28,23 @@ const WorkExperienceSection = () => {
   const workExperiences = [
     {
       id: 'prnk-infotech',
-      company: 'PRNK Infotech (Algobeat)',
-      position: 'Frontend Developer Intern',
+      company: 'PRNK Infotech',
       location: 'Delhi, India',
-      duration: 'Aug 2025 – Present',
-      type: 'Internship',
-      logo: '/company-logos/prnk-infotech.png',
+      duration: 'Aug 2025 – May 2026',
+      type: 'Full-time',
       website: 'https://prnkinfotech.com',
-      description: 'Worked as a frontend engineer with ownership beyond intern scope, leading delivery of complex, client-facing dashboards under aggressive deadlines.',
-      responsibilities: [
-        'Led frontend delivery for multiple production-grade applications, taking features from requirements to final demo and handover.',
-        'Acted as the primary frontend point of contact, running demos, handling feedback, negotiating scope, and coordinating fast iterations.',
-        'Reviewed and refactored large codebases, identified UX/architecture issues, and drove fixes across sprints.',
-        'Collaborated closely with backend engineers and team leads to align APIs, resolve edge cases, and unblock development.',
-        'Guided and supported other developers through task breakdowns, PR reviews, and merge-conflict resolution.',
-        'Built data-heavy UI systems (reports, charts, filters, forms) with strong validation, error handling, and export workflows.',
-        'Owned testing, bug triage, and production readiness, including critical fixes outside working hours to meet deadlines.'
+      roles: [
+        { title: 'Software Developer', duration: 'Feb 2026 – May 2026', note: 'Promoted from intern' },
+        { title: 'Frontend Developer Intern', duration: 'Aug 2025 – Feb 2026', note: '' }
       ],
-      technologies: ['React', 'TypeScript', 'Next.js', 'Redux Toolkit', 'Tailwind CSS', 'REST APIs', 'Git', 'TanStack Query', 'Charting Libraries']
+      description: 'Promoted from intern to Software Developer. Shipped production frontends across 5+ products — spanning web, admin, and mobile — including a Google Ads SaaS dashboard built end-to-end and a MinoriLabs delivery sprint led directly with the client.',
+      responsibilities: [
+        'Built a Google Ads SaaS analytics dashboard end-to-end for a client — owned UI design, API, and full stack delivery single-handedly; became the client\'s primary operational tool (per founder\'s LinkedIn recommendation).',
+        'Led frontend of MinoriLabs: audited codebase, fixed broken filters/dashboards/API integrations, and ran a 10-day sprint coordinating frontend devs, backend engineers, and the client directly — delivered before deadline.',
+        'Shipped production frontends across 5+ products in Next.js 15/16 (App Router) + React 19 + TypeScript: Freshbuyzar grocery (web + RN mobile app), QR Code Creator SaaS, Riders Choice e-commerce, MinoriLabs, Google Ads SaaS.',
+        'Integrated Stripe + Razorpay end-to-end; improved Lighthouse 50 → 95 via Promise.all parallelization + server components; Vitest coverage 538/538 on qrcodecreator-fe; Playwright e2e before every push.'
+      ],
+      technologies: ['Next.js 15/16', 'React 19', 'TypeScript', 'React Native', 'Expo', 'TanStack Query', 'Stripe', 'Razorpay', 'Django DRF', 'Vitest', 'Playwright', 'Tailwind CSS']
     }
   ];
 
@@ -140,43 +139,45 @@ const WorkExperienceSection = () => {
                   <div className="relative z-10">
                     {/* Header */}
                     <div className="flex flex-col gap-4 mb-4">
-                      {/* Company Name with Logo */}
-                      <div className="flex items-center justify-between gap-4">
+                      {/* Company Name + Overall Duration */}
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <div className="flex-1 pr-2">
                           <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gradient-amber mb-1 leading-tight">
                             {experience.company}
                           </h3>
+                          <div className="flex items-center gap-2 text-foreground-muted">
+                            <MapPin className="w-4 h-4 flex-shrink-0" />
+                            <span className="text-sm">{experience.location}</span>
+                          </div>
                         </div>
-                        
-                      </div>
-                      
-                      {/* Position and Location */}
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-foreground-muted">
-                        <div className="flex items-center gap-2">
-                          <Briefcase className="w-4 h-4 flex-shrink-0" />
-                          <span className="font-semibold">{experience.position}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4 flex-shrink-0" />
-                          <span>{experience.location}</span>
-                        </div>
-                      </div>
-                      
-                      {/* Date and Type */}
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                         <div className="flex items-center gap-2 px-3 py-1 bg-amber-500/20 rounded-full border border-amber-500/30 w-fit">
                           <Calendar className="w-4 h-4 text-amber-500 flex-shrink-0" />
                           <span className="text-sm font-medium text-amber-400">{experience.duration}</span>
                         </div>
-                        <span className="text-xs px-2 py-1 bg-purple-500/20 rounded-full text-purple-400 font-medium whitespace-nowrap w-fit">
-                          {experience.type}
-                        </span>
+                      </div>
+
+                      {/* Roles */}
+                      <div className="flex flex-col gap-2">
+                        {experience.roles.map((role, roleIndex) => (
+                          <div key={roleIndex} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                            <div className="flex items-center gap-2 text-foreground">
+                              <Briefcase className="w-4 h-4 flex-shrink-0 text-amber-500" />
+                              <span className="font-semibold">{role.title}</span>
+                              {role.note && (
+                                <span className="text-xs px-2 py-0.5 bg-purple-500/20 rounded-full text-purple-400 font-medium whitespace-nowrap">
+                                  {role.note}
+                                </span>
+                              )}
+                            </div>
+                            <span className="text-sm text-foreground-muted sm:ml-auto">{role.duration}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
 
                     {/* Description */}
                     <p className="text-foreground-muted leading-relaxed mb-4 font-body">
-                      Worked as a frontend engineer with <span className="font-bold text-foreground font-extrabold">ownership beyond intern scope</span>, leading delivery of complex, client-facing dashboards under aggressive deadlines.
+                      {experience.description}
                     </p>
 
                     {/* Responsibilities */}
@@ -185,27 +186,9 @@ const WorkExperienceSection = () => {
                       Impact & Responsibilities
                     </h4>
                     <ul className="list-disc pl-5 text-foreground-muted space-y-2 mb-4 font-body">
-                      <li>
-                        <span className="font-bold text-foreground font-extrabold">Led frontend delivery</span> for multiple production-grade applications, taking features from requirements to final demo and handover.
-                      </li>
-                      <li>
-                        Acted as the <span className="font-bold text-foreground font-extrabold">primary frontend point of contact</span>, running demos, handling feedback, negotiating scope, and coordinating fast iterations.
-                      </li>
-                      <li>
-                        <span className="font-bold text-foreground font-extrabold">Reviewed and refactored large codebases</span>, identified UX/architecture issues, and drove fixes across sprints.
-                      </li>
-                      <li>
-                        Collaborated closely with <span className="font-bold text-foreground font-extrabold">backend engineers and team leads</span> to align APIs, resolve edge cases, and unblock development.
-                      </li>
-                      <li>
-                        <span className="font-bold text-foreground font-extrabold">Guided and supported other developers</span> through task breakdowns, PR reviews, and merge-conflict resolution.
-                      </li>
-                      <li>
-                        Built <span className="font-bold text-foreground font-extrabold">data-heavy UI systems</span> (reports, charts, filters, forms) with strong validation, error handling, and export workflows.
-                      </li>
-                      <li>
-                        Owned <span className="font-bold text-foreground font-extrabold">testing, bug triage, and production readiness</span>, including critical fixes outside working hours to meet deadlines.
-                      </li>
+                      {experience.responsibilities.map((item, itemIndex) => (
+                        <li key={itemIndex}>{item}</li>
+                      ))}
                     </ul>
 
                     {/* Technologies */}

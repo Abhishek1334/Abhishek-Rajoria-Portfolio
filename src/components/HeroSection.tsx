@@ -97,9 +97,9 @@ const HeroSection = () => {
           {/* Enhanced Description Card (now transparent) */}
           <div className="max-w-xs sm:max-w-2xl mx-auto sm:mx-0 mb-6 sm:mb-12 px-2 sm:px-0">
             <div className="p-0 font-body text-sm sm:text-lg md:text-xl text-foreground leading-relaxed">
-              I specialize in developing high-performance <span className="text-accent font-semibold">MERN stack</span> applications that deliver exceptional <span className="text-accent font-semibold">user experiences</span>.<br />
-              From <span className="text-gradient-secondary font-semibold">IoT integrations</span> to <span className="text-gradient-secondary font-semibold">real-time analytics platforms</span>, I transform complex technical challenges into <span className="text-accent font-semibold">elegant, scalable solutions</span>.<br />
-              Completed <span className="text-accent font-semibold">Computer Applications</span> at <span className="text-gradient-secondary font-semibold">VIPS Delhi</span> with a focus on <span className="text-accent font-semibold">modern web technologies</span>.
+              I build and ship production web and mobile apps with <span className="text-accent font-semibold">Next.js App Router</span>, <span className="text-accent font-semibold">React 19</span>, and <span className="text-accent font-semibold">React Native</span>.<br />
+              From <span className="text-gradient-secondary font-semibold">Stripe payment flows</span> to <span className="text-gradient-secondary font-semibold">AI assistants with tool-calling</span>, I take features from requirements to deployed product.<br />
+              Completed <span className="text-accent font-semibold">Computer Applications</span> at <span className="text-gradient-secondary font-semibold">VIPS Delhi</span>. Currently open to <span className="text-accent font-semibold">full-stack and frontend roles</span>.
             </div>
             </div>
 

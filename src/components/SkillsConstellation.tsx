@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiJavascript, 
-  SiHtml5, SiCss3, SiRedux, SiNodedotjs, SiExpress, 
-  SiPython, SiFastapi, SiJsonwebtokens, SiMongodb, 
-  SiPostgresql, SiSupabase, SiFirebase, SiGit, SiGithub, 
-  SiDocker, SiVercel, SiGraphql, SiVite
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiJavascript,
+  SiNodedotjs, SiExpress, SiJsonwebtokens, SiMongodb,
+  SiPostgresql, SiGit, SiGithub, SiDocker, SiVercel, SiVite
 } from 'react-icons/si';
-import { Globe, Key, Code2, Database } from 'lucide-react';
+import {
+  Globe, Database, Component, Wand2, Smartphone, Rocket,
+  Leaf, Layers, Boxes, CreditCard, FlaskConical, TestTube, Lock
+} from 'lucide-react';
 
 interface Skill {
   id: string;
@@ -56,67 +57,71 @@ const SkillsConstellation = () => {
 
   // Skills data
   const allSkills: Omit<Skill, 'x' | 'y' | 'vx' | 'vy' | 'connections'>[] = useMemo(() => [
-    { id: 'react', name: 'React', level: 8, category: 'frontend', icon: SiReact },
-    { id: 'nextjs', name: 'Next.js', level: 4, category: 'frontend', icon: SiNextdotjs },
-    { id: 'typescript', name: 'TypeScript', level: 4, category: 'frontend', icon: SiTypescript },
-    { id: 'tailwind', name: 'Tailwind CSS', level: 8, category: 'frontend', icon: SiTailwindcss },
-    { id: 'javascript', name: 'JavaScript', level: 8, category: 'frontend', icon: SiJavascript },
-    { id: 'html', name: 'HTML5', level: 9, category: 'frontend', icon: SiHtml5 },
-    { id: 'css', name: 'CSS3', level: 9, category: 'frontend', icon: SiCss3 },
-    { id: 'redux', name: 'Redux', level: 6, category: 'frontend', icon: SiRedux },
-    { id: 'zustand', name: 'Zustand', level: 7, category: 'frontend', icon: Database },
-    
+    { id: 'typescript', name: 'TypeScript', level: 9, category: 'frontend', icon: SiTypescript },
+    { id: 'javascript', name: 'JavaScript', level: 9, category: 'frontend', icon: SiJavascript },
+    { id: 'nextjs', name: 'Next.js', level: 8, category: 'frontend', icon: SiNextdotjs },
+    { id: 'react', name: 'React', level: 9, category: 'frontend', icon: SiReact },
+    { id: 'vite', name: 'Vite', level: 8, category: 'frontend', icon: SiVite },
+    { id: 'tailwind', name: 'Tailwind CSS', level: 9, category: 'frontend', icon: SiTailwindcss },
+    { id: 'shadcn', name: 'shadcn/ui', level: 8, category: 'frontend', icon: Component },
+    { id: 'framer', name: 'Framer Motion', level: 8, category: 'frontend', icon: Wand2 },
+    { id: 'reactnative', name: 'React Native', level: 7, category: 'frontend', icon: Smartphone },
+    { id: 'expo', name: 'Expo', level: 7, category: 'frontend', icon: Rocket },
+
     { id: 'nodejs', name: 'Node.js', level: 8, category: 'backend', icon: SiNodedotjs },
     { id: 'express', name: 'Express.js', level: 8, category: 'backend', icon: SiExpress },
-    { id: 'python', name: 'Python', level: 4, category: 'backend', icon: SiPython },
-    { id: 'fastapi', name: 'FastAPI', level: 2, category: 'backend', icon: SiFastapi },
-    { id: 'jwt', name: 'JWT', level: 7, category: 'backend', icon: SiJsonwebtokens },
-    { id: 'oauth', name: 'OAuth', level: 7, category: 'backend', icon: Key },
     { id: 'restapi', name: 'REST API', level: 8, category: 'backend', icon: Globe },
-    { id: 'graphql', name: 'GraphQL', level: 5, category: 'backend', icon: SiGraphql },
-    
-    { id: 'mongodb', name: 'MongoDB', level: 7, category: 'database', icon: SiMongodb },
+    { id: 'jwt', name: 'JWT', level: 8, category: 'backend', icon: SiJsonwebtokens },
+    { id: 'bcrypt', name: 'Bcrypt.js', level: 7, category: 'backend', icon: Lock },
+
     { id: 'postgresql', name: 'PostgreSQL', level: 7, category: 'database', icon: SiPostgresql },
-    { id: 'supabase', name: 'Supabase', level: 6, category: 'database', icon: SiSupabase },
-    { id: 'firebase', name: 'Firebase', level: 6, category: 'database', icon: SiFirebase },
-    
-    { id: 'git', name: 'Git', level: 7, category: 'tools', icon: SiGit },
-    { id: 'github', name: 'GitHub', level: 7, category: 'tools', icon: SiGithub },
-    { id: 'docker', name: 'Docker', level: 5, category: 'tools', icon: SiDocker },
-    { id: 'vscode', name: 'VS Code', level: 8, category: 'tools', icon: Code2 },
-    { id: 'vercel', name: 'Vercel', level: 6, category: 'tools', icon: SiVercel },
+    { id: 'mongodb', name: 'MongoDB', level: 8, category: 'database', icon: SiMongodb },
+    { id: 'mongoose', name: 'Mongoose', level: 8, category: 'database', icon: Leaf },
+    { id: 'mysql', name: 'MySQL', level: 6, category: 'database', icon: Database },
+
+    { id: 'git', name: 'Git', level: 8, category: 'tools', icon: SiGit },
+    { id: 'github', name: 'GitHub', level: 8, category: 'tools', icon: SiGithub },
+    { id: 'vercel', name: 'Vercel', level: 8, category: 'tools', icon: SiVercel },
+    { id: 'docker', name: 'Docker', level: 6, category: 'tools', icon: SiDocker },
+    { id: 'tanstack', name: 'TanStack Query', level: 8, category: 'tools', icon: Layers },
+    { id: 'zustand', name: 'Zustand', level: 8, category: 'tools', icon: Boxes },
+    { id: 'stripe', name: 'Stripe', level: 7, category: 'tools', icon: CreditCard },
+    { id: 'vitest', name: 'Vitest', level: 7, category: 'tools', icon: FlaskConical },
+    { id: 'playwright', name: 'Playwright', level: 7, category: 'tools', icon: TestTube },
   ], []);
 
   const initialSkills: Skill[] = useMemo(() => [
-    { id: 'react', name: 'React', level: 8, category: 'frontend', icon: SiReact, x: 250, y: 300, vx: 0, vy: 0, connections: ['javascript', 'typescript', 'nextjs', 'redux', 'zustand'] },
-    { id: 'nextjs', name: 'Next.js', level: 4, category: 'frontend', icon: SiNextdotjs, x: 350, y: 200, vx: 0, vy: 0, connections: ['react', 'typescript', 'vercel'] },
-    { id: 'typescript', name: 'TypeScript', level: 4, category: 'frontend', icon: SiTypescript, x: 150, y: 400, vx: 0, vy: 0, connections: ['javascript', 'react', 'nodejs', 'zustand'] },
-    { id: 'tailwind', name: 'Tailwind', level: 8, category: 'frontend', icon: SiTailwindcss, x: 180, y: 200, vx: 0, vy: 0, connections: ['css', 'react'] },
-    { id: 'javascript', name: 'JavaScript', level: 8, category: 'frontend', icon: SiJavascript, x: 280, y: 450, vx: 0, vy: 0, connections: ['react', 'nodejs', 'typescript', 'redux'] },
-    { id: 'html', name: 'HTML5', level: 9, category: 'frontend', icon: SiHtml5, x: 120, y: 300, vx: 0, vy: 0, connections: ['css', 'javascript'] },
-    { id: 'css', name: 'CSS3', level: 9, category: 'frontend', icon: SiCss3, x: 150, y: 500, vx: 0, vy: 0, connections: ['html', 'tailwind'] },
-    { id: 'redux', name: 'Redux', level: 6, category: 'frontend', icon: SiRedux, x: 380, y: 350, vx: 0, vy: 0, connections: ['react', 'javascript'] },
-    { id: 'zustand', name: 'Zustand', level: 7, category: 'frontend', icon: Database, x: 320, y: 280, vx: 0, vy: 0, connections: ['react', 'typescript'] },
-    
+    { id: 'typescript', name: 'TypeScript', level: 9, category: 'frontend', icon: SiTypescript, x: 150, y: 420, vx: 0, vy: 0, connections: ['javascript', 'react', 'nodejs'] },
+    { id: 'javascript', name: 'JavaScript', level: 9, category: 'frontend', icon: SiJavascript, x: 290, y: 440, vx: 0, vy: 0, connections: ['react', 'nodejs', 'typescript'] },
+    { id: 'nextjs', name: 'Next.js', level: 8, category: 'frontend', icon: SiNextdotjs, x: 350, y: 200, vx: 0, vy: 0, connections: ['react', 'typescript', 'vercel'] },
+    { id: 'react', name: 'React', level: 9, category: 'frontend', icon: SiReact, x: 250, y: 300, vx: 0, vy: 0, connections: ['javascript', 'typescript', 'nextjs', 'vite', 'tailwind'] },
+    { id: 'vite', name: 'Vite', level: 8, category: 'frontend', icon: SiVite, x: 130, y: 320, vx: 0, vy: 0, connections: ['react', 'vercel'] },
+    { id: 'tailwind', name: 'Tailwind', level: 9, category: 'frontend', icon: SiTailwindcss, x: 180, y: 210, vx: 0, vy: 0, connections: ['react', 'shadcn'] },
+    { id: 'shadcn', name: 'shadcn/ui', level: 8, category: 'frontend', icon: Component, x: 380, y: 330, vx: 0, vy: 0, connections: ['tailwind', 'framer'] },
+    { id: 'framer', name: 'Framer Motion', level: 8, category: 'frontend', icon: Wand2, x: 320, y: 560, vx: 0, vy: 0, connections: ['react', 'shadcn'] },
+    { id: 'reactnative', name: 'React Native', level: 7, category: 'frontend', icon: Smartphone, x: 200, y: 560, vx: 0, vy: 0, connections: ['react', 'expo'] },
+    { id: 'expo', name: 'Expo', level: 7, category: 'frontend', icon: Rocket, x: 410, y: 470, vx: 0, vy: 0, connections: ['reactnative', 'vercel'] },
+
     { id: 'nodejs', name: 'Node.js', level: 8, category: 'backend', icon: SiNodedotjs, x: 700, y: 300, vx: 0, vy: 0, connections: ['javascript', 'express', 'mongodb', 'restapi'] },
-    { id: 'express', name: 'Express.js', level: 8, category: 'backend', icon: SiExpress, x: 850, y: 250, vx: 0, vy: 0, connections: ['nodejs', 'jwt', 'mongodb', 'restapi', 'oauth'] },
-    { id: 'python', name: 'Python', level: 4, category: 'backend', icon: SiPython, x: 600, y: 450, vx: 0, vy: 0, connections: ['fastapi'] },
-    { id: 'fastapi', name: 'FastAPI', level: 2, category: 'backend', icon: SiFastapi, x: 650, y: 550, vx: 0, vy: 0, connections: ['python', 'restapi'] },
-    { id: 'jwt', name: 'JWT', level: 7, category: 'backend', icon: SiJsonwebtokens, x: 780, y: 400, vx: 0, vy: 0, connections: ['express', 'nodejs', 'oauth'] },
-    { id: 'oauth', name: 'OAuth', level: 7, category: 'backend', icon: Key, x: 750, y: 180, vx: 0, vy: 0, connections: ['jwt', 'express', 'firebase'] },
-    { id: 'restapi', name: 'REST API', level: 8, category: 'backend', icon: Globe, x: 820, y: 350, vx: 0, vy: 0, connections: ['nodejs', 'express', 'fastapi', 'graphql'] },
-    { id: 'graphql', name: 'GraphQL', level: 5, category: 'backend', icon: SiGraphql, x: 900, y: 400, vx: 0, vy: 0, connections: ['restapi', 'nodejs'] },
-    
-    { id: 'mongodb', name: 'MongoDB', level: 7, category: 'database', icon: SiMongodb, x: 1000, y: 300, vx: 0, vy: 0, connections: ['nodejs', 'express'] },
-    { id: 'postgresql', name: 'PostgreSQL', level: 7, category: 'database', icon: SiPostgresql, x: 1100, y: 200, vx: 0, vy: 0, connections: ['supabase'] },
-    { id: 'supabase', name: 'Supabase', level: 6, category: 'database', icon: SiSupabase, x: 1200, y: 150, vx: 0, vy: 0, connections: ['postgresql', 'firebase'] },
-    { id: 'firebase', name: 'Firebase', level: 6, category: 'database', icon: SiFirebase, x: 950, y: 150, vx: 0, vy: 0, connections: ['oauth', 'supabase'] },
-    
-    { id: 'git', name: 'Git', level: 7, category: 'tools', icon: SiGit, x: 450, y: 600, vx: 0, vy: 0, connections: ['github', 'vscode'] },
-    { id: 'github', name: 'GitHub', level: 7, category: 'tools', icon: SiGithub, x: 600, y: 650, vx: 0, vy: 0, connections: ['git', 'vercel'] },
-    { id: 'docker', name: 'Docker', level: 5, category: 'tools', icon: SiDocker, x: 850, y: 550, vx: 0, vy: 0, connections: ['nodejs'] },
-    { id: 'vscode', name: 'VS Code', level: 8, category: 'tools', icon: Code2, x: 350, y: 650, vx: 0, vy: 0, connections: ['git'] },
-    { id: 'vercel', name: 'Vercel', level: 6, category: 'tools', icon: SiVercel, x: 750, y: 650, vx: 0, vy: 0, connections: ['github', 'nextjs'] },
+    { id: 'express', name: 'Express.js', level: 8, category: 'backend', icon: SiExpress, x: 850, y: 250, vx: 0, vy: 0, connections: ['nodejs', 'jwt', 'restapi', 'bcrypt'] },
+    { id: 'restapi', name: 'REST API', level: 8, category: 'backend', icon: Globe, x: 800, y: 400, vx: 0, vy: 0, connections: ['nodejs', 'express'] },
+    { id: 'jwt', name: 'JWT', level: 8, category: 'backend', icon: SiJsonwebtokens, x: 700, y: 460, vx: 0, vy: 0, connections: ['express', 'bcrypt'] },
+    { id: 'bcrypt', name: 'Bcrypt.js', level: 7, category: 'backend', icon: Lock, x: 880, y: 470, vx: 0, vy: 0, connections: ['jwt', 'express'] },
+
+    { id: 'postgresql', name: 'PostgreSQL', level: 7, category: 'database', icon: SiPostgresql, x: 1120, y: 210, vx: 0, vy: 0, connections: ['mysql'] },
+    { id: 'mongodb', name: 'MongoDB', level: 8, category: 'database', icon: SiMongodb, x: 1000, y: 300, vx: 0, vy: 0, connections: ['nodejs', 'mongoose'] },
+    { id: 'mongoose', name: 'Mongoose', level: 8, category: 'database', icon: Leaf, x: 1180, y: 330, vx: 0, vy: 0, connections: ['mongodb'] },
+    { id: 'mysql', name: 'MySQL', level: 6, category: 'database', icon: Database, x: 1020, y: 150, vx: 0, vy: 0, connections: ['postgresql'] },
+
+    { id: 'git', name: 'Git', level: 8, category: 'tools', icon: SiGit, x: 450, y: 620, vx: 0, vy: 0, connections: ['github', 'vercel'] },
+    { id: 'github', name: 'GitHub', level: 8, category: 'tools', icon: SiGithub, x: 600, y: 660, vx: 0, vy: 0, connections: ['git', 'vercel'] },
+    { id: 'vercel', name: 'Vercel', level: 8, category: 'tools', icon: SiVercel, x: 760, y: 650, vx: 0, vy: 0, connections: ['github', 'nextjs', 'vite'] },
+    { id: 'docker', name: 'Docker', level: 6, category: 'tools', icon: SiDocker, x: 900, y: 600, vx: 0, vy: 0, connections: ['nodejs'] },
+    { id: 'tanstack', name: 'TanStack Query', level: 8, category: 'tools', icon: Layers, x: 1050, y: 560, vx: 0, vy: 0, connections: ['react', 'restapi'] },
+    { id: 'zustand', name: 'Zustand', level: 8, category: 'tools', icon: Boxes, x: 520, y: 540, vx: 0, vy: 0, connections: ['react'] },
+    { id: 'stripe', name: 'Stripe', level: 7, category: 'tools', icon: CreditCard, x: 1180, y: 620, vx: 0, vy: 0, connections: ['express'] },
+    { id: 'vitest', name: 'Vitest', level: 7, category: 'tools', icon: FlaskConical, x: 1080, y: 690, vx: 0, vy: 0, connections: ['playwright'] },
+    { id: 'playwright', name: 'Playwright', level: 7, category: 'tools', icon: TestTube, x: 950, y: 690, vx: 0, vy: 0, connections: ['vitest'] },
   ], []);
 
   const categories = useMemo(() => ({

@@ -240,137 +240,45 @@ const ProjectsSection = () => {
 
   const projects: Project[] = [
     {
-      id: 'stayfinder',
-      title: 'StayFinder',
-      subtitle: 'Airbnb-Inspired Property Booking Platform',
-      description: 'StayFinder is a full-stack web application inspired by Airbnb, built as an internship assignment. It allows users to list, search, and book properties for short-term or long-term stays, demonstrating end-to-end development skills.',
-      image: '/StayFinder.png',
-      tags: ['React', 'TypeScript', 'Redux Toolkit', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe', 'Vite'],
-      liveUrl: 'https://stayfinder-eta.vercel.app/',
-      githubUrl: 'https://github.com/Abhishek1334/StayFinder',
-      highlights: [
-        'Property Search & Filters',
-        'Booking System',
-        'Host Dashboard',
-        'Payment Integration',
-        'Authentication System',
-        'Responsive Design',
-        'Property Management',
-        'Modern UI/UX'
-      ],
-      detailedContent: {
-        overview: 'StayFinder is a full-stack web application inspired by Airbnb, built as an internship assignment. It allows users to list, search, and book properties for short-term or long-term stays, demonstrating end-to-end development skills across frontend, backend, and database layers.',
-        features: [
-          'Property browsing with image galleries, location, and pricing',
-          'Detailed property pages with descriptions, amenities, and availability calendar',
-          'Advanced search and filtering by location, price range, and dates',
-          'User authentication with registration and login validation',
-          'Complete booking flow with date selection and confirmation',
-          'User profile for managing bookings and reservations',
-          'Host dashboard for property management',
-          'CRUD operations for property listings',
-          'Mock payment integration with Stripe',
-          'Responsive design optimized for all devices',
-          'RESTful API endpoints for all major operations',
-          'Secure JWT-based authentication',
-          'Modern UI inspired by Airbnb and contemporary design trends'
-        ],
-        techStack: [
-          'React + TypeScript',
-          'Redux Toolkit for state management',
-          'Vite for fast development',
-          'Tailwind CSS for styling',
-          'Node.js + Express backend',
-          'MongoDB with Mongoose ODM',
-          'JWT authentication',
-          'bcrypt for password security',
-          'Stripe for payment processing',
-          'Vercel for frontend deployment',
-          'Render for backend hosting'
-        ],
-        highlights: [
-          'Full-stack development with modern React and Node.js',
-          'Type-safe development with TypeScript',
-          'Scalable state management with Redux Toolkit',
-          'Secure authentication with JWT and bcrypt',
-          'Payment processing integration with Stripe',
-          'Responsive, mobile-first design approach',
-          'RESTful API design and implementation',
-          'Database modeling and optimization',
-          'Cloud deployment and hosting',
-          'Modern UI/UX inspired by industry leaders'
-        ]
-      },
-      media: [
-        { type: 'image', url: stayFinderHomepage, alt: 'StayFinder Homepage' },
-        { type: 'image', url: stayFinderDashboard, alt: 'Dashboard' },
-        { type: 'image', url: stayFinderMyListings, alt: 'My Listings' },
-        { type: 'image', url: stayFinderExplore, alt: 'Explore Properties' },
-        { type: 'image', url: stayFinderCreateListings, alt: 'Create Listings' },
-        { type: 'image', url: stayFinderMyBookings, alt: 'My Bookings' }
-      ]
-    },
-    {
       id: 'festify',
       title: 'Festify',
-      subtitle: 'Local Event Aggregator App',
-      description: 'Festify is a local event aggregator platform where users can discover, create, RSVP, and manage events. It supports QR code-based ticketing, a complete check-in system for organizers, and a clean, modern user interface.',
+      subtitle: 'IoT-Enabled Event Ticketing Platform',
+      description: 'Full-stack event platform with dual-mode check-in — ESP8266 + RC522 RFID hardware and an html5-qrcode browser scanner feeding the same Express controller. Solo build, deployed end-to-end.',
       image: '/Festify.png',
-      tags: ['React.js', 'Vite', 'Context API', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Bcrypt.js', 'Multer', 'Cloudinary', 'qrcode.react', 'Html5Qrcode'],
+      tags: ['React 19', 'Vite', 'Tailwind CSS', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Cloudinary', 'TanStack Query', 'ESP8266/RC522', 'html5-qrcode'],
       liveUrl: 'https://festify-tau.vercel.app/',
-      githubUrl: 'https://github.com/Abhishek1334/Festify',
+      githubUrl: 'https://github.com/Abhishek1334/festify',
       highlights: [
-        'JWT Authentication',
-        'Event Management',
-        'QR Code Ticketing',
-        'Organizer Dashboard',
-        'RSVP Management',
-        'Image Uploads',
-        'Event Search & Filter',
-        'QR Code Scanner',
-        'Cloud-based NoSQL Database',
-        'Modern UI/UX'
+        'Dual-mode QR + RFID check-in',
+        'httpOnly cookie + Bearer auth',
+        'Single Vercel SPA + Express',
+        'Serverless Mongoose connection reuse',
+        'TanStack Query across 11 pages'
       ],
       detailedContent: {
-        overview: 'Festify is a local event aggregator platform where users can discover, create, RSVP, and manage events. It supports QR code-based ticketing, a complete check-in system for organizers, and a clean, modern user interface.',
+        overview: 'Full-stack event platform with dual-mode check-in — ESP8266 + RC522 RFID hardware and an html5-qrcode browser scanner feeding the same Express controller. Solo build, deployed end-to-end on Vercel.',
         features: [
-          'JWT Authentication for secure login/signup',
-          'Event Management: Create, Edit, Delete Events (Organizers)',
-          'Ticketing System with QR Code Generation',
-          'Image Uploads via Multer + Cloudinary',
-          'Event Search & Filter by category',
-          'Organizer Dashboard with check-ins details',
-          'QR Code Scanner using Html5Qrcode for attendee verification',
-          'RSVP Management in user profile',
-          'Protected Routes',
-          'Manual Ticket ID Check-in Support',
-          'Event Image Uploads',
-          'Cloud-based NoSQL Database',
-          'Modern UI Styling with Tailwind CSS',
-          'REST API Backend',
-          'Frontend SPA',
-          'Deployment on Vercel (Frontend), Railway (Backend), MongoDB Atlas (DB), Cloudinary (Images)'
+          'Dual-mode check-in: same /api/tickets/verify handles QR browser scans and ESP8266 RFID UID taps; binding established at ticket-issue time.',
+          'Migrated auth from localStorage JWT to httpOnly cookie + Bearer fallback; same-origin Vercel deploy eliminates CORS preflight; middleware reads cookie first then header.',
+          'Vite SPA + Express as single Vercel project; Mongoose connection cached on global._mongoose for serverless warm-reuse; standardized 11 pages on TanStack Query (~200 LOC removed).'
         ],
         techStack: [
-          'React.js + Vite + Context API',
+          'React 19',
+          'Vite',
           'Tailwind CSS',
-          'Node.js + Express.js',
-          'MongoDB + Mongoose',
-          'JWT & Bcrypt.js',
-          'Multer + Cloudinary',
-          'qrcode.react',
-          'Html5Qrcode Scanner'
+          'Express',
+          'MongoDB',
+          'Mongoose',
+          'JWT (cookie + Bearer)',
+          'Cloudinary',
+          'TanStack Query',
+          'ESP8266 / RC522',
+          'html5-qrcode'
         ],
         highlights: [
-          'JWT-based Auth',
-          'Protected Routes',
-          'Event Creation & Editing (Organizers)',
-          'QR Code Ticket Generation on RSVP',
-          'RSVP Tracking in User Profile',
-          'Dashboard for Event & Attendee Management',
-          'QR Code Scanner for Check-ins (Html5Qrcode)',
-          'Manual Ticket ID Check-in Support',
-          'Event Image Uploads (Multer + Cloudinary)'
+          'Dual-mode check-in: same /api/tickets/verify handles QR browser scans and ESP8266 RFID UID taps; binding established at ticket-issue time.',
+          'Migrated auth from localStorage JWT to httpOnly cookie + Bearer fallback; same-origin Vercel deploy eliminates CORS preflight; middleware reads cookie first then header.',
+          'Vite SPA + Express as single Vercel project; Mongoose connection cached on global._mongoose for serverless warm-reuse; standardized 11 pages on TanStack Query (~200 LOC removed).'
         ]
       },
       media: [
@@ -391,68 +299,44 @@ const ProjectsSection = () => {
     },
     {
       id: 'marketpulse',
-      title: 'Market Pulse',
-      subtitle: 'Advanced Stock Market Analytics Dashboard',
-      description: 'Market Pulse is a cutting-edge stock market analytics dashboard that empowers users with real-time market insights, beautiful data visualizations, and customizable analysis tools — all in a lightning-fast, responsive interface with light/dark mode support.',
+      title: 'MarketPulse',
+      subtitle: 'Stock Analytics SPA with AI Assistant',
+      description: 'Real-time stock-tracking SPA with watchlists, live-price portfolio, technical-indicator charts, and a Gemini-powered AI assistant grounded in the user\'s actual portfolio data via tool-calling.',
       image: '/MarketPulse.png',
-      tags: ['React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand', 'Chart.js', 'React Query', 'Express', 'Node.js', 'JWT', 'Yahoo Finance API', 'Twelve Data'],
+      tags: ['React 19', 'Zustand', 'TanStack Query', 'Vite', 'Tailwind CSS', 'Express 5', 'MongoDB', 'Vercel AI SDK', 'Google Gemini 2.5 Flash', 'Chart.js', 'Twelve Data API'],
       liveUrl: 'https://market-pulse-two.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
       highlights: [
-        'Real-time Stock Charting & Analytics',
-        'Advanced Portfolio Management',
-        'Customizable Watchlist System',
-        'Light/Dark Mode Interface',
-        'Responsive Mobile Design',
-        'Global State Management',
-        'Optimized Data Fetching',
-        'Interactive Data Visualizations'
+        'Gemini AI assistant with 3 tools',
+        'Streaming inline tool-call chips',
+        'Single Vercel Function deploy',
+        'LRU cache extends quota ~10×',
+        'OKLCH light/dark theming'
       ],
       detailedContent: {
-        overview: 'Market Pulse is a comprehensive stock market analytics platform that provides users with real-time market data, advanced charting capabilities, portfolio tracking, and customizable watchlists. Built with modern web technologies, it offers a seamless experience across all devices with both light and dark mode interfaces.',
+        overview: 'Real-time stock-tracking SPA with watchlists, live-price portfolio, technical-indicator charts, and a Gemini-powered AI assistant grounded in the user\'s actual portfolio data via tool-calling.',
         features: [
-          'Real-time Stock Charting with multiple timeframes (1D, 1M, 1Y, ALL)',
-          'Advanced Analytics Dashboard with key market metrics',
-          'Portfolio Management with performance tracking',
-          'Customizable Watchlist with real-time price updates',
-          'Interactive Charts with zoom, pan, and technical indicators',
-          'Toggle Metrics: Open, Close, High, Low, Volume data',
-          'Start/End Date Range Selector for historical analysis',
-          'Light/Dark Mode with persistent theme preferences',
-          'Responsive Design optimized for mobile and desktop',
-          'Global State Management with Zustand for optimal performance',
-          'Optimized Data Fetching with React Query and rate limiting',
-          'JWT Authentication for secure user sessions',
-          'Real-time price updates and market alerts',
-          'Export functionality for portfolio and watchlist data',
-          'Advanced filtering and sorting capabilities',
-          'Cross-platform compatibility and accessibility features'
+          'AI assistant on Vercel AI SDK + Gemini 2.5 Flash with 3 tools (getPortfolioSummary, getStockQuote, searchSymbol); streaming responses with tool-call chips surfaced inline so agent actions are inspectable.',
+          'React 19 SPA + Express 5 deployed as a single Vercel Function via custom path rewrite; server-side LRU cache with namespace TTLs (60s quotes / 5min charts / 1h search) extended free Twelve Data quota ~10×.',
+          'OKLCH-based amber accent unified across light/dark modes; cache hit-rate exposed at /api/stock/_cache-stats; sub-second cold start on Vercel Fluid Compute.'
         ],
         techStack: [
-          'React.js 18 with TypeScript',
-          'Vite for lightning-fast development',
-          'Tailwind CSS for responsive styling',
-          'Zustand for global state management',
-          'Chart.js for interactive data visualizations',
-          'React Query for efficient data fetching',
-          'Express.js backend with Node.js',
-          'JWT for secure authentication',
-          'Yahoo Finance API for real-time data',
-          'Twelve Data for additional market insights',
-          'Vercel for frontend deployment',
-          'Railway for backend hosting'
+          'React 19',
+          'Zustand',
+          'TanStack Query',
+          'Vite',
+          'Tailwind CSS',
+          'Express 5',
+          'MongoDB',
+          'Vercel AI SDK',
+          'Google Gemini 2.5 Flash',
+          'Chart.js',
+          'Twelve Data API'
         ],
         highlights: [
-          'Real-time Stock Charting with multiple timeframes',
-          'Advanced Portfolio Management System',
-          'Customizable Watchlist with real-time updates',
-          'Light/Dark Mode with seamless theme switching',
-          'Responsive Design for all device sizes',
-          'Global State Management with Zustand',
-          'Optimized Data Fetching with React Query',
-          'Interactive Data Visualizations with Chart.js',
-          'Secure Authentication with JWT',
-          'Real-time Market Data Integration'
+          'AI assistant on Vercel AI SDK + Gemini 2.5 Flash with 3 tools (getPortfolioSummary, getStockQuote, searchSymbol); streaming responses with tool-call chips surfaced inline so agent actions are inspectable.',
+          'React 19 SPA + Express 5 deployed as a single Vercel Function via custom path rewrite; server-side LRU cache with namespace TTLs (60s quotes / 5min charts / 1h search) extended free Twelve Data quota ~10×.',
+          'OKLCH-based amber accent unified across light/dark modes; cache hit-rate exposed at /api/stock/_cache-stats; sub-second cold start on Vercel Fluid Compute.'
         ]
       },
       media: [
@@ -474,6 +358,56 @@ const ProjectsSection = () => {
         { type: 'image', url: marketPulsePortfolio1Dark, alt: 'Portfolio 1 (Dark)' },
         { type: 'image', url: marketPulsePortfolio2Light, alt: 'Portfolio 2 (Light)' },
         { type: 'image', url: marketPulsePortfolio2Dark, alt: 'Portfolio 2 (Dark)' }
+      ]
+    },
+    {
+      id: 'stayfinder',
+      title: 'StayFinder',
+      subtitle: 'Editorial Property Booking Marketplace',
+      description: 'Full-stack property booking platform — listings, search/filter, calendar-aware bookings, Stripe Checkout with signed webhooks. Functionally Airbnb-shaped; visually a magazine.',
+      image: '/StayFinder.png',
+      tags: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui', 'TanStack Query', 'Express', 'MongoDB', 'Stripe', 'Cloudinary', 'Framer Motion'],
+      liveUrl: 'https://stayfinder-eta.vercel.app/',
+      githubUrl: 'https://github.com/Abhishek1334/stayfinder',
+      highlights: [
+        'End-to-end Stripe Checkout',
+        'Signed, idempotent webhooks',
+        'Race-safe Mongoose bookings',
+        'Role-based guest/host/admin dashboards',
+        'Editorial shadcn/ui design system'
+      ],
+      detailedContent: {
+        overview: 'Full-stack property booking platform — listings, search/filter, calendar-aware bookings, Stripe Checkout with signed webhooks. Functionally Airbnb-shaped; visually a magazine.',
+        features: [
+          'End-to-end Stripe Checkout: webhook route registered with express.raw() before body parsers so signed payloads verify; idempotent on session.id to survive Stripe retries; race-safe booking via Mongoose transactions with date-overlap detection.',
+          'Role-based dashboards (guest/host/admin); auto-promotes guest to host on first listing; API hardened with Helmet, compression, per-route rate limiting, httpOnly cookie JWT, TypeScript throughout.',
+          '10-component editorial design system on shadcn/ui primitives — Fraunces serif headings, OKLCH color tokens, prefers-reduced-motion-aware animations.'
+        ],
+        techStack: [
+          'React 18 + TypeScript',
+          'Vite',
+          'Tailwind CSS',
+          'shadcn/ui',
+          'TanStack Query',
+          'Express + TypeScript',
+          'MongoDB',
+          'Stripe',
+          'Cloudinary',
+          'Framer Motion'
+        ],
+        highlights: [
+          'End-to-end Stripe Checkout: webhook route registered with express.raw() before body parsers so signed payloads verify; idempotent on session.id to survive Stripe retries; race-safe booking via Mongoose transactions with date-overlap detection.',
+          'Role-based dashboards (guest/host/admin); auto-promotes guest to host on first listing; API hardened with Helmet, compression, per-route rate limiting, httpOnly cookie JWT, TypeScript throughout.',
+          '10-component editorial design system on shadcn/ui primitives — Fraunces serif headings, OKLCH color tokens, prefers-reduced-motion-aware animations.'
+        ]
+      },
+      media: [
+        { type: 'image', url: stayFinderHomepage, alt: 'StayFinder Homepage' },
+        { type: 'image', url: stayFinderDashboard, alt: 'Dashboard' },
+        { type: 'image', url: stayFinderMyListings, alt: 'My Listings' },
+        { type: 'image', url: stayFinderExplore, alt: 'Explore Properties' },
+        { type: 'image', url: stayFinderCreateListings, alt: 'Create Listings' },
+        { type: 'image', url: stayFinderMyBookings, alt: 'My Bookings' }
       ]
     }
   ];

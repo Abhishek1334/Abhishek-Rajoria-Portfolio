@@ -208,13 +208,13 @@ const Index = () => {
                 <span className="text-gradient-primary">Abhishek Rajoria</span>
             </motion.div>
             <p className="text-sm sm:text-base text-foreground-muted mb-6">
-              Full Stack Developer • Building Digital Solutions Since 2020
+              Full Stack Developer • Next.js App Router, React Native & AI-powered SPAs
             </p>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8">
               {[
                   { name: 'GitHub', url: 'https://github.com/Abhishek1334' },
-                  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/abhishekrajoria/' },
-                  { name: 'Email', url: 'mailto:abhishekrajoria24@gmail.com' }
+                  { name: 'LinkedIn', url: 'https://linkedin.com/in/AbhishekRajoria' },
+                  { name: 'Email', url: 'mailto:AbhishekRajoria24@gmail.com' }
                 ].map((social, index) => (
                 <motion.a
                     key={social.name}
@@ -233,7 +233,7 @@ const Index = () => {
               ))}
             </div>
               <p className="text-xs text-foreground-muted">
-                © 2024 Abhishek Rajoria. All rights reserved.
+                © 2026 Abhishek Rajoria. All rights reserved.
               </p>
           </div>
         </div>

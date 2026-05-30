@@ -28,31 +28,31 @@ const AboutSection = () => {
   const skillCategories = [
     {
       icon: Globe,
-      title: 'Frontend Mastery',
-      skills: ['React.js', 'TailwindCSS', 'React Query', 'Redux Toolkit', 'Chart.js', 'Zustand'],
+      title: 'Frontend & Mobile',
+      skills: ['Next.js', 'React 19', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'React Native'],
       color: 'text-amber-500',
-      description: 'Crafting responsive, dynamic UIs'
+      description: 'Web & mobile interfaces'
     },
     {
       icon: Server,
-      title: 'Backend Wizardry',
-      skills: ['Node.js', 'Express.js', 'REST API', 'GraphQL', 'JWT', 'Bcrypt.js'],
+      title: 'Backend & Auth',
+      skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT', 'OTP', 'Bcrypt.js'],
       color: 'text-purple-500',
-      description: 'Building secure, scalable APIs'
+      description: 'APIs, auth & payments'
     },
     {
       icon: Database,
-      title: 'Database Sorcery',
-      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Prisma', 'Mongoose'],
+      title: 'Databases',
+      skills: ['PostgreSQL', 'MongoDB', 'Mongoose', 'MySQL'],
       color: 'text-blue-500',
-      description: 'Optimizing data architecture'
+      description: 'Relational & document data'
     },
     {
       icon: Cloud,
-      title: 'DevOps Arsenal',
-      skills: ['Docker', 'Git & GitHub', 'Vercel', 'Railway', 'Cloudinary', 'Firebase'],
+      title: 'DevOps & Tooling',
+      skills: ['Docker', 'Git & GitHub', 'Vercel', 'AWS Amplify', 'Vitest', 'Playwright'],
       color: 'text-green-500',
-      description: 'Streamlining deployment flows'
+      description: 'Deploy, test & ship'
     }
   ];
 
@@ -117,18 +117,18 @@ const AboutSection = () => {
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
                     <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-gradient-purple" />
                     <h3 className="text-xl sm:text-2xl font-heading font-bold text-gradient-purple">
-                      Full Stack Developer & Problem Solver
+                      Full Stack Developer with production experience in Next.js App Router, React Native, and AI-powered SPAs
                     </h3>
                   </div>
                   <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4 sm:mb-6 font-body">
-                    I'm a <span className="text-amber-500 font-semibold">dedicated full stack developer</span> who 
-                    specializes in creating robust MERN stack applications that drive business value. 
-                    My strength lies in translating complex requirements into clean, maintainable code that <em className="text-purple-400">performs exceptionally</em>.
+                    I build and ship <span className="text-amber-500 font-semibold">production-grade web and mobile applications</span> —
+                    from React Native apps to Stripe payment flows to AI assistants with tool-calling.
+                    Currently <em className="text-purple-400">open to full-stack and frontend roles</em>.
                   </p>
                   <p className="text-base sm:text-lg text-foreground-muted leading-relaxed mb-4 font-body">
-                    From <span className="text-gradient-amber font-medium">IoT integrations and sensor data processing</span> to 
-                    <span className="text-gradient-purple font-medium"> real-time analytics and data visualization</span>—
-                    I excel at bridging the gap between innovative ideas and production-ready solutions.
+                    At <span className="text-gradient-amber font-medium">PRNK Infotech</span> I shipped frontends across 5+ products in
+                    <span className="text-gradient-purple font-medium"> Next.js 15/16 + React 19 + TypeScript</span>,
+                    owned auth and payments end-to-end, and drove quality with Vitest and Playwright.
                   </p>
                   <div className="flex items-center gap-2 mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-amber-500/10 to-purple-500/10 rounded-lg border border-amber-500/20">
                     <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
@@ -153,7 +153,7 @@ const AboutSection = () => {
                   <div className="flex justify-between items-center p-3 bg-background-secondary/5 rounded-lg">
                     <div>
                       <span className="text-sm sm:text-base text-foreground font-body font-medium">Bachelor of Computer Applications</span>
-                      <div className="text-xs sm:text-sm text-foreground-muted font-body">VIPS Delhi • 2022-2025 • Completed</div>
+                      <div className="text-xs sm:text-sm text-foreground-muted font-body">VIPS Delhi • 2022–2025 • Completed</div>
                     </div>
                     <div className="text-right">
                       <span className="text-base sm:text-lg text-foreground font-heading font-bold">8.0</span>

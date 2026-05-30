@@ -11,7 +11,7 @@ const socialLinks = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    link: 'https://linkedin.com/in/Abhishekrajoria',
+    link: 'https://linkedin.com/in/AbhishekRajoria',
     color: 'hover:text-blue-500'
   },
   {

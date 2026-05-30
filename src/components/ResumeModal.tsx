@@ -13,10 +13,10 @@ const ResumeModal = memo(({ isOpen, onClose }: ResumeModalProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Convert Google Drive view link to embed link
-  const resumeEmbedUrl = 'https://drive.google.com/file/d/1W87w3PvNuLaTXddWFEFo9Rc8eTn_UCw9/preview';
-  const resumeDownloadUrl = 'https://drive.google.com/uc?export=download&id=1W87w3PvNuLaTXddWFEFo9Rc8eTn_UCw9';
-  const resumeViewUrl = 'https://drive.google.com/file/d/1W87w3PvNuLaTXddWFEFo9Rc8eTn_UCw9/view?usp=sharing';
+  // Resume served locally from the public/ folder
+  const resumeEmbedUrl = '/resume.pdf';
+  const resumeDownloadUrl = '/resume.pdf';
+  const resumeViewUrl = '/resume.pdf';
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -58,24 +58,23 @@ const ResumeModal = memo(({ isOpen, onClose }: ResumeModalProps) => {
                   <div className="hidden sm:flex items-center gap-2">
                     <a
                       href={resumeDownloadUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      download="Abhishek-Rajoria-Resume.pdf"
                       className="btn-primary px-4 py-2 text-sm"
                       title="Download Resume"
                     >
                       <Download className="w-4 h-4 mr-2" />
                       Download
                     </a>
-                    
+
                     <a
                       href={resumeViewUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-ghost px-4 py-2 text-sm"
-                      title="Open in Google Drive"
+                      title="Open in New Tab"
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Open in Drive
+                      Open in New Tab
                     </a>
                     
                     <button
@@ -127,14 +126,13 @@ const ResumeModal = memo(({ isOpen, onClose }: ResumeModalProps) => {
                 <div className="flex flex-col gap-3 bg-black/80 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                   <a
                     href={resumeDownloadUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    download="Abhishek-Rajoria-Resume.pdf"
                     className="btn-primary w-full text-center py-3"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     Download Resume
                   </a>
-                  
+
                   <a
                     href={resumeViewUrl}
                     target="_blank"
@@ -142,7 +140,7 @@ const ResumeModal = memo(({ isOpen, onClose }: ResumeModalProps) => {
                     className="btn-ghost w-full text-center py-3"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
-                    Open in Google Drive
+                    Open in New Tab
                   </a>
                 </div>
               </div>
