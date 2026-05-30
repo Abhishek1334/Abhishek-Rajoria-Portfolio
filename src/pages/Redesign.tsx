@@ -133,15 +133,53 @@ function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; 
   );
 }
 
+// staggered, word-by-word headline reveal
+type Word = string | { em: string };
+function WordsReveal({ words }: { words: Word[] }) {
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setShown(true), 80);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <>
+      {words.map((w, i) => {
+        const cls = `ed-word ${shown ? 'is-in' : ''}`;
+        const delay = { transitionDelay: `${i * 52}ms` };
+        return (
+          <span key={i}>
+            {typeof w === 'string' ? (
+              <span className={cls} style={delay}>{w}</span>
+            ) : (
+              <em className={cls} style={delay}>{w.em}</em>
+            )}
+            {i < words.length - 1 ? ' ' : ''}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
+const headlineWords: Word[] = ['I', 'build', 'and', { em: 'ship' }, 'production', 'web', 'and', 'mobile', 'products.'];
+
+const tickerItems = [
+  'Next.js', 'React 19', 'React Native', 'TypeScript', 'Node.js', 'Express',
+  'Stripe', 'Razorpay', 'Vercel AI SDK', 'Gemini', 'PostgreSQL', 'MongoDB',
+  'TanStack Query', 'Zustand', 'Vitest', 'Playwright', 'Tailwind CSS', 'shadcn/ui', 'Expo',
+];
+
 const nav = [
-  { label: 'Work', href: '#work' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Work', href: '#work', id: 'work' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 const Redesign = () => {
   const [open, setOpen] = useState<Set<string>>(() => new Set(['01']));
+  const [progress, setProgress] = useState(0);
+  const [active, setActive] = useState<string>('');
   const toggle = (n: string) =>
     setOpen((prev) => {
       const next = new Set(prev);
@@ -150,8 +188,43 @@ const Redesign = () => {
       return next;
     });
 
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const el = document.documentElement;
+        const max = el.scrollHeight - el.clientHeight;
+        setProgress(max > 0 ? (el.scrollTop / max) * 100 : 0);
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    nav.forEach((n) => {
+      const el = document.getElementById(n.id);
+      if (el) obs.observe(el);
+    });
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <div className="editorial">
+      <div className="ed-progress" style={{ width: `${progress}%` }} aria-hidden />
       {/* Nav */}
       <header
         className="sticky top-0 z-40"
@@ -163,7 +236,7 @@ const Redesign = () => {
           </a>
           <nav className="hidden md:flex items-center" style={{ gap: 28 }}>
             {nav.map((n) => (
-              <a key={n.href} href={n.href} className="ed-mono" style={{ fontSize: '0.82rem', color: 'var(--ink-soft)' }}>
+              <a key={n.href} href={n.href} className={`ed-mono ed-navlink ${active === n.id ? 'is-active' : ''}`} style={{ fontSize: '0.82rem' }}>
                 {n.label}
               </a>
             ))}
@@ -184,11 +257,9 @@ const Redesign = () => {
             <Reveal>
               <p className="ed-label" style={{ marginBottom: 24 }}>Full-stack engineer · New Delhi</p>
             </Reveal>
-            <Reveal delay={80}>
-              <h1 className="ed-display" style={{ fontSize: 'clamp(2.7rem, 7.4vw, 5.4rem)', maxWidth: '19ch' }}>
-                I build and <em>ship</em> production web and mobile products.
-              </h1>
-            </Reveal>
+            <h1 className="ed-display" style={{ fontSize: 'clamp(2.7rem, 7.4vw, 5.4rem)', maxWidth: '19ch' }}>
+              <WordsReveal words={headlineWords} />
+            </h1>
 
             <div className="ed-hero-deck">
               <Reveal delay={150}>
@@ -242,7 +313,20 @@ const Redesign = () => {
           </div>
         </section>
 
-        <hr className="ed-rule" />
+        {/* Press strip */}
+        <div className="ed-ticker" aria-hidden>
+          <div className="ed-ticker-track">
+            {[0, 1].map((seg) => (
+              <div className="ed-ticker-seg" key={seg}>
+                {tickerItems.map((t, i) => (
+                  <span className="it" key={`${seg}-${i}`}>
+                    <span className="dot">·</span>{t}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Work */}
         <section id="work" className="ed-section" style={{ scrollMarginTop: 64 }}>
@@ -452,11 +536,14 @@ const Redesign = () => {
           </div>
         </section>
 
-        {/* Footer */}
+        {/* Colophon */}
         <footer style={{ borderTop: '1px solid var(--line)' }}>
-          <div className="ed-shell flex flex-wrap items-center justify-between" style={{ paddingBlock: 28, gap: 12 }}>
-            <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>© 2026 Abhishek Rajoria</span>
-            <span className="ed-mono" style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>New Delhi, India</span>
+          <div className="ed-shell ed-colophon" style={{ paddingBlock: 26 }}>
+            <span className="ed-mono" style={{ fontSize: '0.76rem', color: 'var(--muted)' }}>© 2026 Abhishek Rajoria · New Delhi, India</span>
+            <span className="ed-mono" style={{ fontSize: '0.76rem', color: 'var(--muted)' }}>
+              Set in Fraunces &amp; JetBrains Mono · Built with React, Vite &amp; Tailwind
+            </span>
+            <a href="#top" className="ed-link ed-mono" style={{ fontSize: '0.76rem' }}>Back to top ↑</a>
           </div>
         </footer>
       </main>
