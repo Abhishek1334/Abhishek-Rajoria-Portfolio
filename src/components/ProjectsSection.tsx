@@ -11,16 +11,15 @@ import festifyHomepage from '../Media/Festify/festify-homepage.png';
 import festifyLoginpage from '../Media/Festify/festify-loginpage.png';
 import festifySignuppage from '../Media/Festify/festify-signuppage.png';
 import festifyEventspage from '../Media/Festify/festify-eventspage.png';
-import festifyEventsdetailpage from '../Media/Festify/festify-eventsdetailpage.png';
 import festifyEventidpage from '../Media/Festify/festify-eventidpage.png';
 import festifyCreateeventpage from '../Media/Festify/festify-createeventpage.png';
-import festifyCheckinpanelpage from '../Media/Festify/festify-checkinpanelpage.png';
 import festifyUserprofile from '../Media/Festify/festify-userprofile.png';
-import festifyUserprofile2 from '../Media/Festify/festify-userprofile-2.png';
 
 // MarketPulse imports - Only use images that exist in src/Media/MarketPulse
 import marketPulseHomepageLight from '../Media/MarketPulse/Homepage_Light.png';
 import marketPulseHomepageDark from '../Media/MarketPulse/Homapage_Dark.png';
+import marketPulseAssistantLight from '../Media/MarketPulse/Assistant_Light.png';
+import marketPulseAssistantDark from '../Media/MarketPulse/Assistant_Dark.png';
 import marketPulseLoginLight from '../Media/MarketPulse/Login_Light.png';
 import marketPulseLoginDark from '../Media/MarketPulse/Login_Dark.png';
 import marketPulseSignupLight from '../Media/MarketPulse/SignUp_Light.png';
@@ -38,17 +37,15 @@ import marketPulsePortfolio1Dark from '../Media/MarketPulse/Portfolio1_Dark.png'
 import marketPulsePortfolio2Light from '../Media/MarketPulse/Portfolio2_Light.png';
 import marketPulsePortfolio2Dark from '../Media/MarketPulse/Portfolio2_Dark.png';
 
-import stayFinderHomepage from '../Media/StayFinder/stayfinder-homepage.png';
-import stayFinderDashboard from '../Media/StayFinder/stayfinder-dashboard.png';
-import stayFinderMyListings from '../Media/StayFinder/stayfinder-mylistings.png';
-import stayFinderExplore from '../Media/StayFinder/stayfinder-explore.png';
-import stayFinderCreateListings from '../Media/StayFinder/stayfinder-createListings.png';
-import stayFinderMyBookings from '../Media/StayFinder/stayfinder-mybookings.png';
-
-// New main project images from root Media folder
-import marketPulseMain from '../Media/MarketPulse.png';
-import stayFinderMain from '../Media/StayFinder.png';
-import festifyMain from '../Media/Festify.png';
+import stayFinderHomeHero from '../Media/StayFinder/01-home-hero.png';
+import stayFinderHomeFull from '../Media/StayFinder/02-home-full.png';
+import stayFinderListings from '../Media/StayFinder/03-listings.png';
+import stayFinderListingDetail from '../Media/StayFinder/04-listing-detail.png';
+import stayFinderLogin from '../Media/StayFinder/05-login.png';
+import stayFinderRegister from '../Media/StayFinder/06-register.png';
+import stayFinderBookings from '../Media/StayFinder/07-bookings.png';
+import stayFinderDashboard from '../Media/StayFinder/08-dashboard.png';
+import stayFinderCreateListing from '../Media/StayFinder/09-create-listing.png';
 
 interface Project {
   id: string;
@@ -244,7 +241,7 @@ const ProjectsSection = () => {
       title: 'Festify',
       subtitle: 'IoT-Enabled Event Ticketing Platform',
       description: 'Full-stack event platform with dual-mode check-in — ESP8266 + RC522 RFID hardware and an html5-qrcode browser scanner feeding the same Express controller. Solo build, deployed end-to-end.',
-      image: '/Festify.png',
+      image: festifyEventspage,
       tags: ['React 19', 'Vite', 'Tailwind CSS', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Cloudinary', 'TanStack Query', 'ESP8266/RC522', 'html5-qrcode'],
       liveUrl: 'https://festify-tau.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/festify',
@@ -286,12 +283,9 @@ const ProjectsSection = () => {
         { type: 'image', url: festifyLoginpage, alt: 'Login Page' },
         { type: 'image', url: festifySignuppage, alt: 'Signup Page' },
         { type: 'image', url: festifyEventspage, alt: 'Events Page' },
-        { type: 'image', url: festifyEventsdetailpage, alt: 'Event Details' },
         { type: 'image', url: festifyEventidpage, alt: 'Single Event (Event ID)' },
         { type: 'image', url: festifyCreateeventpage, alt: 'Create Event' },
-        { type: 'image', url: festifyCheckinpanelpage, alt: 'Check-in Panel' },
-        { type: 'image', url: festifyUserprofile, alt: 'User Profile 1' },
-        { type: 'image', url: festifyUserprofile2, alt: 'User Profile 2' },
+        { type: 'image', url: festifyUserprofile, alt: 'User Profile' },
         { type: 'video', url: 'https://github.com/user-attachments/assets/85308566-21fa-486d-8124-13ad2575e04b', alt: 'Festify Walkthrough' },
         { type: 'video', url: 'https://github.com/user-attachments/assets/c9fe9f42-945a-41ee-9662-485db62ea4b1', alt: 'QR Code Ticket Verification DEMO' },
         { type: 'video', url: 'https://github.com/user-attachments/assets/f9a34c16-8557-4085-854f-82331d2da0bb', alt: 'RFID-Based Ticket Verification using ESP8266 and RFID READER 522 (IoT)' }
@@ -302,7 +296,7 @@ const ProjectsSection = () => {
       title: 'MarketPulse',
       subtitle: 'Stock Analytics SPA with AI Assistant',
       description: 'Real-time stock-tracking SPA with watchlists, live-price portfolio, technical-indicator charts, and a Gemini-powered AI assistant grounded in the user\'s actual portfolio data via tool-calling.',
-      image: '/MarketPulse.png',
+      image: marketPulseHomepageLight,
       tags: ['React 19', 'Zustand', 'TanStack Query', 'Vite', 'Tailwind CSS', 'Express 5', 'MongoDB', 'Vercel AI SDK', 'Google Gemini 2.5 Flash', 'Chart.js', 'Twelve Data API'],
       liveUrl: 'https://market-pulse-two.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
@@ -342,6 +336,8 @@ const ProjectsSection = () => {
       media: [
         { type: 'image', url: marketPulseHomepageLight, alt: 'Homepage (Light Mode)' },
         { type: 'image', url: marketPulseHomepageDark, alt: 'Homepage (Dark Mode)' },
+        { type: 'image', url: marketPulseAssistantLight, alt: 'AI Assistant (Light Mode)' },
+        { type: 'image', url: marketPulseAssistantDark, alt: 'AI Assistant (Dark Mode)' },
         { type: 'image', url: marketPulseLoginLight, alt: 'Login Page (Light Mode)' },
         { type: 'image', url: marketPulseLoginDark, alt: 'Login Page (Dark Mode)' },
         { type: 'image', url: marketPulseSignupLight, alt: 'Signup Page (Light Mode)' },
@@ -365,7 +361,7 @@ const ProjectsSection = () => {
       title: 'StayFinder',
       subtitle: 'Editorial Property Booking Marketplace',
       description: 'Full-stack property booking platform — listings, search/filter, calendar-aware bookings, Stripe Checkout with signed webhooks. Functionally Airbnb-shaped; visually a magazine.',
-      image: '/StayFinder.png',
+      image: stayFinderHomeHero,
       tags: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui', 'TanStack Query', 'Express', 'MongoDB', 'Stripe', 'Cloudinary', 'Framer Motion'],
       liveUrl: 'https://stayfinder-eta.vercel.app/',
       githubUrl: 'https://github.com/Abhishek1334/stayfinder',
@@ -402,12 +398,15 @@ const ProjectsSection = () => {
         ]
       },
       media: [
-        { type: 'image', url: stayFinderHomepage, alt: 'StayFinder Homepage' },
-        { type: 'image', url: stayFinderDashboard, alt: 'Dashboard' },
-        { type: 'image', url: stayFinderMyListings, alt: 'My Listings' },
-        { type: 'image', url: stayFinderExplore, alt: 'Explore Properties' },
-        { type: 'image', url: stayFinderCreateListings, alt: 'Create Listings' },
-        { type: 'image', url: stayFinderMyBookings, alt: 'My Bookings' }
+        { type: 'image', url: stayFinderHomeHero, alt: 'Home — Hero' },
+        { type: 'image', url: stayFinderHomeFull, alt: 'Homepage' },
+        { type: 'image', url: stayFinderListings, alt: 'Listings' },
+        { type: 'image', url: stayFinderListingDetail, alt: 'Listing Detail' },
+        { type: 'image', url: stayFinderLogin, alt: 'Login' },
+        { type: 'image', url: stayFinderRegister, alt: 'Register' },
+        { type: 'image', url: stayFinderBookings, alt: 'My Bookings' },
+        { type: 'image', url: stayFinderDashboard, alt: 'Host Dashboard' },
+        { type: 'image', url: stayFinderCreateListing, alt: 'Create Listing' }
       ]
     }
   ];
