@@ -203,6 +203,7 @@ const Redesign = () => {
       else next.add(n);
       return next;
     });
+  const openOne = (n: string) => setOpen((prev) => new Set(prev).add(n));
 
   useEffect(() => {
     let raf = 0;
@@ -298,12 +299,21 @@ const Redesign = () => {
                 </div>
               </Reveal>
               <Reveal delay={220}>
-                <div>
-                  <BrowserShot href="https://market-pulse-two.vercel.app/" src={marketPulseShot} alt="MarketPulse, featured project" eager />
-                  <div className="ed-hero-cap">
-                    <span className="ed-eyebrow">Featured</span>
-                    <span>MarketPulse, stock analytics with an AI assistant</span>
+                <div className="ed-hero-index">
+                  <div className="ed-hero-index-h">
+                    <span className="ed-label">Selected work</span>
+                    <span className="ed-mono" style={{ fontSize: '0.72rem', color: 'var(--muted)' }}>03</span>
                   </div>
+                  {projects.map((p) => (
+                    <a key={p.n} href={`#w-${p.n}`} className="ed-hero-index-row" onClick={() => openOne(p.n)}>
+                      <span className="n">{p.n}</span>
+                      <span>
+                        <span className="t">{p.title}</span>
+                        <span className="d">{p.tagline}</span>
+                      </span>
+                      <span className="m">{p.meta} ↘</span>
+                    </a>
+                  ))}
                 </div>
               </Reveal>
             </div>
@@ -359,7 +369,7 @@ const Redesign = () => {
                 {projects.map((p) => {
                   const isOpen = open.has(p.n);
                   return (
-                    <div className="ed-acc" key={p.n}>
+                    <div className="ed-acc" id={`w-${p.n}`} key={p.n} style={{ scrollMarginTop: 80 }}>
                       <button className="ed-acc-head" aria-expanded={isOpen} onClick={() => toggle(p.n)}>
                         <span className="ed-acc-num">{p.n}</span>
                         <span className="ed-acc-title">{p.title}</span>
