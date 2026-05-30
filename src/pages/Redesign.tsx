@@ -182,34 +182,49 @@ const Redesign = () => {
         <section className="ed-section" style={{ paddingTop: 92 }}>
           <div className="ed-shell">
             <Reveal>
-              <p className="ed-label" style={{ marginBottom: 28 }}>Full-stack engineer · New Delhi</p>
+              <p className="ed-label" style={{ marginBottom: 24 }}>Full-stack engineer · New Delhi</p>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="ed-display" style={{ fontSize: 'clamp(2.6rem, 7vw, 5.2rem)', maxWidth: '16ch' }}>
+              <h1 className="ed-display" style={{ fontSize: 'clamp(2.7rem, 7.4vw, 5.4rem)', maxWidth: '19ch' }}>
                 I build and <em>ship</em> production web and mobile products.
               </h1>
             </Reveal>
-            <Reveal delay={160}>
-              <p className="ed-measure" style={{ marginTop: 32, fontSize: '1.2rem', color: 'var(--ink-soft)' }}>
-                I work across Next.js App Router, React Native, and AI-powered apps, from Stripe payment flows to
-                assistants with tool-calling. I take features from requirements to deployed product.
-              </p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="flex flex-wrap items-center" style={{ gap: 14, marginTop: 40 }}>
-                <a href="#work" className="ed-btn ed-btn-primary">
-                  View work <ArrowDown size={14} />
-                </a>
-                <a href={`mailto:${EMAIL}`} className="ed-btn ed-btn-ghost">
-                  Get in touch
-                </a>
-                <span className="flex items-center ed-mono" style={{ gap: 9, fontSize: '0.8rem', color: 'var(--ink-soft)', marginLeft: 6 }}>
-                  <span className="ed-dot" /> Open to full-stack &amp; frontend roles
-                </span>
-              </div>
-            </Reveal>
-            <Reveal delay={320}>
-              <div className="ed-spec" style={{ marginTop: 56, maxWidth: 720 }}>
+
+            <div className="ed-hero-deck">
+              <Reveal delay={150}>
+                <div>
+                  <p className="ed-lead" style={{ maxWidth: '40ch', fontSize: '1.14rem' }}>
+                    I work across Next.js App Router, React Native, and AI-powered apps, from Stripe payment flows to
+                    assistants with tool-calling. I take features from requirements to deployed product.
+                  </p>
+                  <div className="flex flex-wrap items-center" style={{ gap: 14, marginTop: 30 }}>
+                    <a href="#work" className="ed-btn ed-btn-primary">
+                      View work <ArrowDown size={14} />
+                    </a>
+                    <a href={`mailto:${EMAIL}`} className="ed-btn ed-btn-ghost">
+                      Get in touch
+                    </a>
+                  </div>
+                  <span className="flex items-center ed-mono" style={{ gap: 9, fontSize: '0.8rem', color: 'var(--ink-soft)', marginTop: 22 }}>
+                    <span className="ed-dot" /> Open to full-stack &amp; frontend roles
+                  </span>
+                </div>
+              </Reveal>
+              <Reveal delay={220}>
+                <div>
+                  <a href="https://market-pulse-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="ed-frame ed-shot" style={{ display: 'block' }}>
+                    <img src={marketPulseShot} alt="MarketPulse, featured project" loading="eager" decoding="async" />
+                  </a>
+                  <div className="ed-hero-cap">
+                    <span className="ed-eyebrow">Featured</span>
+                    <span>MarketPulse — stock analytics with an AI assistant</span>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+
+            <Reveal delay={300}>
+              <div className="ed-spec" style={{ marginTop: 52 }}>
                 <div>
                   <span className="k">Based in</span>
                   <span className="v">New Delhi, India</span>
@@ -258,20 +273,22 @@ const Redesign = () => {
                         <div className="ed-acc-panel">
                           <div className="ed-acc-panel-inner">
                             <div>
-                              <p className="ed-serif" style={{ fontSize: '1.16rem', fontStyle: 'italic', color: 'var(--ink-soft)' }}>
+                              <p className="ed-serif" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: 'var(--accent)' }}>
                                 {p.tagline}
                               </p>
-                              <p style={{ marginTop: 14, color: 'var(--ink-soft)', maxWidth: '46ch' }}>{p.blurb}</p>
-                              <ul style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                              <p className="ed-lead" style={{ marginTop: 12, maxWidth: '46ch' }}>{p.blurb}</p>
+                              <p className="ed-eyebrow" style={{ marginTop: 24, marginBottom: 12 }}>Highlights</p>
+                              <ul style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                                 {p.points.map((pt, k) => (
-                                  <li key={k} className="flex" style={{ gap: 12, color: 'var(--ink)', fontSize: '0.95rem', lineHeight: 1.55 }}>
+                                  <li key={k} className="flex" style={{ gap: 12, color: 'var(--ink-soft)', fontSize: '0.92rem', lineHeight: 1.55 }}>
                                     <span aria-hidden style={{ color: 'var(--accent)' }}>–</span>
                                     <span style={{ maxWidth: '44ch' }}>{pt}</span>
                                   </li>
                                 ))}
                               </ul>
-                              <p className="ed-tag" style={{ marginTop: 18 }}>{p.tech}</p>
-                              <div className="flex items-center" style={{ gap: 22, marginTop: 22 }}>
+                              <p className="ed-eyebrow" style={{ marginTop: 24, marginBottom: 10 }}>Stack</p>
+                              <p className="ed-tag">{p.tech}</p>
+                              <div className="flex items-center" style={{ gap: 22, marginTop: 24 }}>
                                 <a href={p.live} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Live ↗</a>
                                 <a href={p.code} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Code ↗</a>
                               </div>
