@@ -5,7 +5,7 @@ const socialLinks = [
   {
     icon: Github,
     label: 'GitHub',
-    link: 'https://github.com/Abhishek1334',
+    link: 'https://github.com/AbhishekRajoria',
     color: 'hover:text-white'
   },
   {

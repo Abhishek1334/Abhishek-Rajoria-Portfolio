@@ -8,7 +8,7 @@ import festifyShot from '../Media/Festify/festify-eventspage.png';
 
 const EMAIL = 'AbhishekRajoria24@gmail.com';
 const PHONE = '+91 9319054781';
-const GITHUB = 'https://github.com/Abhishek1334';
+const GITHUB = 'https://github.com/AbhishekRajoria';
 const LINKEDIN = 'https://linkedin.com/in/AbhishekRajoria';
 
 type Project = {
@@ -39,7 +39,7 @@ const projects: Project[] = [
     ],
     tech: 'React 19 · Vercel AI SDK · Gemini · Express 5 · Zustand · TanStack Query',
     live: 'https://market-pulse-two.vercel.app/',
-    code: 'https://github.com/Abhishek1334/MarketPulse',
+    code: 'https://github.com/AbhishekRajoria/MarketPulse',
     shot: marketPulseShot,
     alt: 'MarketPulse homepage',
   },
@@ -56,7 +56,7 @@ const projects: Project[] = [
     ],
     tech: 'React 18 · TypeScript · Express · MongoDB · Stripe · shadcn/ui',
     live: 'https://stayfinder-eta.vercel.app/',
-    code: 'https://github.com/Abhishek1334/stayfinder',
+    code: 'https://github.com/AbhishekRajoria/stayfinder',
     shot: stayFinderShot,
     alt: 'StayFinder home hero',
   },
@@ -73,7 +73,7 @@ const projects: Project[] = [
     ],
     tech: 'React 19 · Vite · Express · MongoDB · ESP8266 / RC522 · html5-qrcode',
     live: 'https://festify-tau.vercel.app/',
-    code: 'https://github.com/Abhishek1334/festify',
+    code: 'https://github.com/AbhishekRajoria/festify',
     shot: festifyShot,
     alt: 'Festify events page',
   },
@@ -536,7 +536,7 @@ const Redesign = () => {
                 {[
                   { k: 'Email', v: EMAIL, href: `mailto:${EMAIL}` },
                   { k: 'Phone', v: PHONE, href: `tel:${PHONE.replace(/\s/g, '')}` },
-                  { k: 'GitHub', v: 'github.com/Abhishek1334', href: GITHUB },
+                  { k: 'GitHub', v: 'github.com/AbhishekRajoria', href: GITHUB },
                   { k: 'LinkedIn', v: 'in/AbhishekRajoria', href: LINKEDIN },
                 ].map((c) => (
                   <a

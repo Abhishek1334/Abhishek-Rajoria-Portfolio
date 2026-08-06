@@ -212,7 +212,7 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8">
               {[
-                  { name: 'GitHub', url: 'https://github.com/Abhishek1334' },
+                  { name: 'GitHub', url: 'https://github.com/AbhishekRajoria' },
                   { name: 'LinkedIn', url: 'https://linkedin.com/in/AbhishekRajoria' },
                   { name: 'Email', url: 'mailto:AbhishekRajoria24@gmail.com' }
                 ].map((social, index) => (

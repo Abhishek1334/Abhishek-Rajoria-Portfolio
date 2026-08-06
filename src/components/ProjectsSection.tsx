@@ -244,7 +244,7 @@ const ProjectsSection = () => {
       image: festifyEventspage,
       tags: ['React 19', 'Vite', 'Tailwind CSS', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Cloudinary', 'TanStack Query', 'ESP8266/RC522', 'html5-qrcode'],
       liveUrl: 'https://festify-tau.vercel.app/',
-      githubUrl: 'https://github.com/Abhishek1334/festify',
+      githubUrl: 'https://github.com/AbhishekRajoria/festify',
       highlights: [
         'Dual-mode QR + RFID check-in',
         'httpOnly cookie + Bearer auth',
@@ -299,7 +299,7 @@ const ProjectsSection = () => {
       image: marketPulseHomepageLight,
       tags: ['React 19', 'Zustand', 'TanStack Query', 'Vite', 'Tailwind CSS', 'Express 5', 'MongoDB', 'Vercel AI SDK', 'Google Gemini 2.5 Flash', 'Chart.js', 'Twelve Data API'],
       liveUrl: 'https://market-pulse-two.vercel.app/',
-      githubUrl: 'https://github.com/Abhishek1334/MarketPulse',
+      githubUrl: 'https://github.com/AbhishekRajoria/MarketPulse',
       highlights: [
         'Gemini AI assistant with 3 tools',
         'Streaming inline tool-call chips',
@@ -364,7 +364,7 @@ const ProjectsSection = () => {
       image: stayFinderHomeHero,
       tags: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui', 'TanStack Query', 'Express', 'MongoDB', 'Stripe', 'Cloudinary', 'Framer Motion'],
       liveUrl: 'https://stayfinder-eta.vercel.app/',
-      githubUrl: 'https://github.com/Abhishek1334/stayfinder',
+      githubUrl: 'https://github.com/AbhishekRajoria/stayfinder',
       highlights: [
         'End-to-end Stripe Checkout',
         'Signed, idempotent webhooks',
