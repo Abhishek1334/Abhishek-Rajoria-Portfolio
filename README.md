@@ -76,7 +76,7 @@ A modern, high-performance portfolio website showcasing full-stack development e
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/Abhishek1334/Abhishek-Rajoria-Portfolio.git
+git clone https://github.com/AbhishekRajoria/Abhishek-Rajoria-Portfolio.git
 cd Abhishek-Rajoria-Portfolio
 ```
 
@@ -235,7 +235,7 @@ A cutting-edge stock market analytics platform that provides real-time market da
 
 **Tech Stack:** React.js 18, TypeScript, Vite, Tailwind CSS, Zustand, Chart.js, React Query, Express.js, Node.js, JWT, Yahoo Finance API
 
-**Live Demo:** [Market Pulse](https://market-pulse-two.vercel.app/) | **GitHub:** [Repository](https://github.com/Abhishek1334/MarketPulse)
+**Live Demo:** [Market Pulse](https://market-pulse-two.vercel.app/) | **GitHub:** [Repository](https://github.com/AbhishekRajoria/MarketPulse)
 
 ### **StayFinder** 🏠
 **Airbnb-Inspired Property Booking Platform**
@@ -253,7 +253,7 @@ A full-stack web application inspired by Airbnb, allowing users to list, search,
 
 **Tech Stack:** React, TypeScript, Redux Toolkit, Tailwind CSS, Node.js, Express, MongoDB, JWT, Stripe, Vite
 
-**Live Demo:** [StayFinder](https://stayfinder-eta.vercel.app/) | **GitHub:** [Repository](https://github.com/Abhishek1334/StayFinder)
+**Live Demo:** [StayFinder](https://stayfinder-eta.vercel.app/) | **GitHub:** [Repository](https://github.com/AbhishekRajoria/StayFinder)
 
 ### **Festify** 🎉
 **Local Event Aggregator App**
@@ -272,7 +272,7 @@ A local event aggregator platform where users can discover, create, RSVP, and ma
 
 **Tech Stack:** React.js, Vite, Context API, Tailwind CSS, Node.js, Express.js, MongoDB, JWT, Bcrypt.js, Multer, Cloudinary, qrcode.react, Html5Qrcode
 
-**Live Demo:** [Festify](https://festify-tau.vercel.app/) | **GitHub:** [Repository](https://github.com/Abhishek1334/Festify)
+**Live Demo:** [Festify](https://festify-tau.vercel.app/) | **GitHub:** [Repository](https://github.com/AbhishekRajoria/Festify)
 
 ## 🚀 Deployment
 
@@ -330,7 +330,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 🌐 Portfolio: [Abhishek-Rajoria.vercel.app](https://abhishek-rajoria.vercel.app)
 - 📧 Email: [AbhishekRajoria24@gmail.com](mailto:AbhishekRajoria24@gmail.com)
 - 💼 LinkedIn: [linkedin.com/in/AbhishekRajoria](https://linkedin.com/in/AbhishekRajoria)
-- 🐱 GitHub: [@Abhishek1334](https://github.com/Abhishek1334)
+- 🐱 GitHub: [@AbhishekRajoria](https://github.com/AbhishekRajoria)
 - 📱 Phone: +91 9319054781
 
 ## 🎓 Education & Certifications
