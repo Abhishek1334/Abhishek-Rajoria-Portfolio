@@ -47,7 +47,7 @@ const projects: Project[] = [
     n: '02',
     title: 'StayFinder',
     tagline: 'Property booking marketplace with Stripe',
-    meta: '2025–2026',
+    meta: '2025',
     blurb:
       'A full-stack booking platform: listings, search, calendar-aware reservations, and end-to-end payments. Functionally Airbnb-shaped, visually a magazine.',
     points: [
@@ -80,7 +80,7 @@ const projects: Project[] = [
 ];
 
 const experience = {
-  company: 'PRNK Infotech',
+  company: 'Algobeat (formerly PRNK Infotech)',
   period: 'Aug 2025 – May 2026',
   months: '10 mos',
   roles: [
@@ -97,15 +97,15 @@ const experience = {
 
 const skills: [string, string][] = [
   ['Languages', 'TypeScript, JavaScript'],
-  ['Frontend', 'Next.js, React 19, Vite, Tailwind CSS, shadcn/ui, Radix UI, Framer Motion, React Konva, Recharts'],
-  ['Mobile', 'React Native, Expo, Expo Router, NativeWind'],
+  ['Frontend', 'Next.js (App Router) 15/16, React 19, Vite, Tailwind CSS, shadcn/ui, Radix UI, Framer Motion, Recharts'],
+  ['Mobile', 'React Native, Expo, NativeWind'],
   ['State & Data', 'TanStack Query, Zustand, Redux Toolkit, Axios, React Hook Form'],
-  ['Backend & APIs', 'Node.js, Express.js, REST, JWT, Session, OTP, API-Key auth, CSRF, Bcrypt.js'],
-  ['Databases', 'PostgreSQL, MongoDB, Mongoose, MySQL'],
-  ['Testing & QA', 'Vitest, Playwright, React Testing Library'],
-  ['Payments', 'Stripe, Razorpay'],
-  ['DevOps', 'Git, GitHub, Vercel, AWS Amplify, Docker, Railway'],
-  ['Tools', 'Postman, Cloudinary, ESLint, Prettier'],
+  ['Backend & APIs', 'Node.js, Express.js, REST APIs, JWT, Session, OTP, API-Key auth, CSRF, Bcrypt.js'],
+  ['Databases', 'PostgreSQL, MongoDB, Mongoose'],
+  ['Testing & QA', 'Vitest, React Testing Library'],
+  ['Payments', 'Stripe'],
+  ['DevOps', 'Git, GitHub, Vercel, Railway'],
+  ['Tools', 'Postman, Cloudinary'],
 ];
 
 function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
