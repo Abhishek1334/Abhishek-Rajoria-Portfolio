@@ -14,9 +14,9 @@ const ResumeModal = memo(({ isOpen, onClose }: ResumeModalProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Resume served locally from the public/ folder
-  const resumeEmbedUrl = '/resume.pdf';
-  const resumeDownloadUrl = '/resume.pdf';
-  const resumeViewUrl = '/resume.pdf';
+  const resumeEmbedUrl = '/Abhishek-Rajoria-Resume.pdf';
+  const resumeDownloadUrl = '/Abhishek-Rajoria-Resume.pdf';
+  const resumeViewUrl = '/Abhishek-Rajoria-Resume.pdf';
 
   const handleLoad = () => {
     setIsLoading(false);

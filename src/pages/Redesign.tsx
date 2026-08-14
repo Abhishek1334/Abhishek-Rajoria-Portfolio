@@ -257,11 +257,11 @@ const Redesign = () => {
                 {n.label}
               </a>
             ))}
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="ed-btn ed-btn-ghost" style={{ padding: '0.5rem 0.9rem' }}>
+            <a href="/Abhishek-Rajoria-Resume.pdf" target="_blank" rel="noopener noreferrer" className="ed-btn ed-btn-ghost" style={{ padding: '0.5rem 0.9rem' }}>
               Résumé <ArrowUpRight size={14} />
             </a>
           </nav>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="ed-btn ed-btn-ghost md:hidden" style={{ padding: '0.45rem 0.8rem' }}>
+          <a href="/Abhishek-Rajoria-Resume.pdf" target="_blank" rel="noopener noreferrer" className="ed-btn ed-btn-ghost md:hidden" style={{ padding: '0.45rem 0.8rem' }}>
             Résumé <ArrowUpRight size={14} />
           </a>
         </div>
@@ -330,7 +330,7 @@ const Redesign = () => {
                 </div>
                 <div>
                   <span className="k">Currently</span>
-                  <span className="v">Software Developer, PRNK Infotech</span>
+                  <span className="v">Open to full-stack &amp; frontend roles</span>
                 </div>
               </div>
             </Reveal>
