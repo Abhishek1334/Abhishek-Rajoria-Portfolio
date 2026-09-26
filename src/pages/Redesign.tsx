@@ -29,6 +29,23 @@ type Project = {
 const projects: Project[] = [
   {
     n: '01',
+    title: 'PulseKit',
+    tagline: 'Notification infrastructure with an SDK',
+    meta: '2026',
+    blurb:
+      'A developer notification platform: one SDK call fans out to email, Slack, and in-app channels with retries, rate limiting, and a real-time dashboard. Live in production with a published npm package.',
+    points: [
+      'Single BullMQ queue with internal per-channel fan-out — isolated try/catch per channel, exponential-backoff retries, and an append-only Postgres audit of every delivery attempt.',
+      'Published pulsekit-sdk on npm; Lua rate limiter (fail-open on Redis outage), dual API-key + signed-cookie auth, and a WebSocket feed patching dashboard rows live — 38/38 integration tests over real Postgres + Redis.',
+    ],
+    tech: 'Next.js 16 · Express 5 · PostgreSQL · Redis · BullMQ · Resend · TypeScript',
+    live: 'https://get-pulsekit.vercel.app/',
+    code: 'https://github.com/AbhishekRajoria/PulseKit',
+    shot: pulseKitShot,
+    alt: 'PulseKit dashboard',
+  },
+  {
+    n: '02',
     title: 'MarketPulse',
     tagline: 'Stock analytics SPA with an AI assistant',
     meta: '2025–2026',
@@ -45,7 +62,7 @@ const projects: Project[] = [
     alt: 'MarketPulse homepage',
   },
   {
-    n: '02',
+    n: '03',
     title: 'StayFinder',
     tagline: 'Property booking marketplace with Stripe',
     meta: '2025',
@@ -62,7 +79,7 @@ const projects: Project[] = [
     alt: 'StayFinder home hero',
   },
   {
-    n: '03',
+    n: '04',
     title: 'Festify',
     tagline: 'IoT-enabled event ticketing platform',
     meta: '2025',
@@ -77,23 +94,6 @@ const projects: Project[] = [
     code: 'https://github.com/AbhishekRajoria/festify',
     shot: festifyShot,
     alt: 'Festify events page',
-  },
-  {
-    n: '04',
-    title: 'PulseKit',
-    tagline: 'Developer monitoring and alerting platform',
-    meta: '2026',
-    blurb:
-      'A developer monitoring platform with Redis sliding-window rate limiting, BullMQ job queues, PostgreSQL append-only delivery logs, and a Next.js App Router dashboard. In progress.',
-    points: [
-      'Redis sliding-window rate limiter with BullMQ job queue for reliable alert delivery.',
-      'PostgreSQL append-only delivery logs with a Next.js App Router dashboard for real-time visibility.',
-    ],
-    tech: 'Next.js · Redis · BullMQ · PostgreSQL · TypeScript',
-    live: '',
-    code: 'https://github.com/AbhishekRajoria/PulseKit',
-    shot: pulseKitShot,
-    alt: 'PulseKit dashboard',
   },
 ];
 
@@ -118,12 +118,12 @@ const skills: [string, string][] = [
   ['Frontend', 'Next.js (App Router) 15/16, React 19, Vite, Tailwind CSS, shadcn/ui, Radix UI, Framer Motion, Recharts'],
   ['Mobile', 'React Native, Expo, NativeWind'],
   ['State & Data', 'TanStack Query, Zustand, Redux Toolkit, Axios, React Hook Form'],
-  ['Backend & APIs', 'Node.js, Express.js, REST APIs, JWT, Session, OTP, API-Key auth, CSRF, Bcrypt.js'],
-  ['Databases', 'PostgreSQL, MongoDB, Mongoose'],
-  ['Testing & QA', 'Vitest, React Testing Library'],
-  ['Payments', 'Stripe'],
-  ['DevOps', 'Git, GitHub, Vercel, Railway'],
-  ['Tools', 'Postman, Cloudinary'],
+  ['Backend & APIs', 'Node.js, Express.js, REST APIs, BullMQ, WebSockets, JWT, Session, OTP, API-Key auth, CSRF, Bcrypt.js'],
+  ['Databases', 'PostgreSQL, Redis, MongoDB, Mongoose'],
+  ['Testing & QA', 'Vitest, Supertest, React Testing Library'],
+  ['Payments', 'Stripe, Resend'],
+  ['DevOps', 'Git, GitHub, Vercel, Railway, Neon, Upstash'],
+  ['Tools', 'Postman, Cloudinary, tsup'],
 ];
 
 function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
@@ -199,7 +199,7 @@ function BrowserShot({ href, src, alt, eager = false }: { href: string; src: str
 
 const tickerItems = [
   'Next.js', 'React 19', 'React Native', 'TypeScript', 'Node.js', 'Express',
-  'Stripe', 'Razorpay', 'Vercel AI SDK', 'Gemini', 'PostgreSQL', 'MongoDB',
+  'Stripe', 'Razorpay', 'Resend', 'Vercel AI SDK', 'Gemini', 'PostgreSQL', 'MongoDB', 'Redis', 'BullMQ',
   'TanStack Query', 'Zustand', 'Vitest', 'Playwright', 'Tailwind CSS', 'shadcn/ui', 'Expo',
 ];
 
@@ -419,7 +419,7 @@ const Redesign = () => {
                                 <a href={p.code} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Code ↗</a>
                               </div>
                             </div>
-                            <BrowserShot href={p.live} src={p.shot} alt={p.alt} />
+                            <BrowserShot href={p.live || p.code} src={p.shot} alt={p.alt} />
                           </div>
                         </div>
                       )}
