@@ -4,8 +4,8 @@ import '../styles/editorial.css';
 
 import marketPulseShot from '../Media/MarketPulse/Homepage_Light.png';
 import stayFinderShot from '../Media/StayFinder/01-home-hero.png';
-import festifyShot from '../Media/Festify/festify-eventspage.png';
-import pulseKitShot from '../Media/PulseKit/dashboard.png';
+import festifyShot from '../Media/Festify/Homepage-preview.png';
+import pulseKitShot from '../Media/PulseKit/08-events.png';
 
 const EMAIL = 'AbhishekRajoria24@gmail.com';
 const PHONE = '+91 9319054781';
@@ -22,6 +22,7 @@ type Project = {
   tech: string;
   live: string;
   code: string;
+  npm?: string;
   shot: string;
   alt: string;
 };
@@ -41,8 +42,9 @@ const projects: Project[] = [
     tech: 'Next.js 16 · Express 5 · PostgreSQL · Redis · BullMQ · Resend · TypeScript',
     live: 'https://get-pulsekit.vercel.app/',
     code: 'https://github.com/AbhishekRajoria/PulseKit',
+    npm: 'https://www.npmjs.com/package/pulsekit-sdk',
     shot: pulseKitShot,
-    alt: 'PulseKit dashboard',
+    alt: 'PulseKit events dashboard',
   },
   {
     n: '02',
@@ -93,7 +95,7 @@ const projects: Project[] = [
     live: 'https://festify-tau.vercel.app/',
     code: 'https://github.com/AbhishekRajoria/festify',
     shot: festifyShot,
-    alt: 'Festify events page',
+    alt: 'Festify homepage',
   },
 ];
 
@@ -417,6 +419,7 @@ const Redesign = () => {
                               <div className="flex items-center" style={{ gap: 22, marginTop: 24 }}>
                                 {p.live && <a href={p.live} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Live ↗</a>}
                                 <a href={p.code} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>Code ↗</a>
+                                {p.npm && <a href={p.npm} target="_blank" rel="noopener noreferrer" className="ed-link ed-mono" style={{ fontSize: '0.85rem' }}>npm ↗</a>}
                               </div>
                             </div>
                             <BrowserShot href={p.live || p.code} src={p.shot} alt={p.alt} />
