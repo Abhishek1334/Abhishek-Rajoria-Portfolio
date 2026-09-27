@@ -40,7 +40,7 @@ const projects: Project[] = [
       'Published pulsekit-sdk on npm; Lua rate limiter (fail-open on Redis outage), dual API-key + signed-cookie auth, and a WebSocket feed patching dashboard rows live — 38/38 integration tests over real Postgres + Redis.',
     ],
     tech: 'Next.js 16 · Express 5 · PostgreSQL · Redis · BullMQ · Resend · TypeScript',
-    live: 'https://get-pulsekit.vercel.app/',
+    live: 'https://getpulsekit.cloud/',
     code: 'https://github.com/AbhishekRajoria/PulseKit',
     npm: 'https://www.npmjs.com/package/pulsekit-sdk',
     shot: pulseKitShot,
