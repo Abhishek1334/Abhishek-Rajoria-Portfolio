@@ -34,12 +34,12 @@ const projects: Project[] = [
     tagline: 'Notification infrastructure with an SDK',
     meta: '2026',
     blurb:
-      'A developer notification platform: one SDK call fans out to email, Slack, and in-app channels with retries, rate limiting, and a real-time dashboard. Live in production with a published npm package.',
+      'Notification infrastructure (Knock/Novu-style) — one SDK call enqueues async multi-channel delivery via BullMQ, with an atomic Lua rate limiter, append-only PostgreSQL audit trail, and a real-time WebSocket dashboard. Live at getpulsekit.cloud · npm install pulsekit-sdk',
     points: [
       'Single BullMQ queue with internal per-channel fan-out — isolated try/catch per channel, exponential-backoff retries, and an append-only Postgres audit of every delivery attempt.',
-      'Published pulsekit-sdk on npm; Lua rate limiter (fail-open on Redis outage), dual API-key + signed-cookie auth, and a WebSocket feed patching dashboard rows live — 38/38 integration tests over real Postgres + Redis.',
+      'Published pulsekit-sdk on npm; Lua rate limiter (fail-open on Redis outage), dual API-key + signed-cookie auth, and a WebSocket live feed patching event rows in real time — 40 integration tests across 6 suites over real Postgres + Redis.',
     ],
-    tech: 'Next.js 16 · Express 5 · PostgreSQL · Redis · BullMQ · Resend · TypeScript',
+    tech: 'Next.js 16 · Express 5 · PostgreSQL · Redis · BullMQ · Lua · Resend · TypeScript',
     live: 'https://getpulsekit.cloud/',
     code: 'https://github.com/AbhishekRajoria/PulseKit',
     npm: 'https://www.npmjs.com/package/pulsekit-sdk',
